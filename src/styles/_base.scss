@@ -111,7 +111,7 @@ body,
   container-type: inline-size;
   padding-inline: var(--container-padding-inline);
   margin-inline: auto;
-  width: min(100%, var(--container-width));
+  width: css-min('100%, var(--container-width)');
   position: relative;
 }
 

@@ -1,4 +1,4 @@
-import IOption from './options.interface'
+import IOption from './option.interface'
 
 export default interface IQuiz {
   name: string
