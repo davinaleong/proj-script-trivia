@@ -1,8 +1,8 @@
 
 
-<?php
-function printMessage($message) {
+    <?php
+        function printMessage($message) {
 
-    print_r($message);
+            print_r($message);
 
-}
+        }

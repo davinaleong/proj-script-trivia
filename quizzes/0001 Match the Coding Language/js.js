@@ -1,5 +1,5 @@
 
 
-function printMessage(message) {
-    console.log(message)
-}
+        function printMessage(message) {
+            console.log(message)
+        }
