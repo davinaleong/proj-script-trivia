@@ -1,0 +1,177 @@
+/// Components
+
+/// Components - Icons
+.icon {
+  --icon-fz: var(--fz-md);
+  --icon-clr: var(--clr-gray-900);
+  --icon-bg-clr: var(--clr-gray-100);
+
+  --icon-size: clamp(2.25rem, 1rem + 2vw, 2.5rem);
+  --icon-border-radius: 50%;
+
+  color: var(--icon-clr);
+  background-color: var(--icon-bg-clr);
+  border-radius: var(--icon-border-radius);
+  width: var(--icon-size);
+  height: var(--icon-size);
+  font-size: var(--icon-fz);
+  display: grid;
+  place-items: center;
+}
+
+.icon-success {
+  --icon-clr: var(--clr-gray-50);
+  --icon-bg-clr: var(--clr-success-800);
+}
+
+.icon-finished {
+  --icon-fz: var(--fz-xxl);
+  --icon-size: clamp(5rem, 1rem + 2vw, 9.375rem);
+}
+
+/// Components - Containers
+.cards-grid {
+  --card-grid-gap: var(--size-v-300);
+
+  container-name: cardGrid;
+  container-type: inline-size;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--card-grid-gap);
+  justify-content: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/// Componenets - Cards
+.card {
+  --card-clr: var(--clr-gray-900);
+  --card-bg-clr: var(--clr-gray-100);
+  --card-img-border: 0.01em solid var(--clr-gray-400);
+
+  --card-hover-clr: var(--clr-gray-50);
+  --card-hover-bg-clr: var(--clr-primary-500);
+  --card-hover-img-border: 0.01em solid var(--clr-primary-500);
+
+  --card-width: 100%;
+  --card-padding: var(--size-v-200);
+  --card-border-radius: var(--size-v-300);
+
+  max-width: var(--card-width);
+  color: var(--card-clr);
+  background-color: var(--card-bg-clr);
+  padding: var(--card-padding);
+  border-radius: var(--card-border-radius);
+  border: none;
+  position: relative;
+  cursor: pointer;
+
+  &:hover,
+  .active,
+  &[data-active='true'] {
+    --card-clr: var(--card-hover-clr);
+    --card-bg-clr: var(--card-hover-bg-clr);
+    --card-img-border: var(--card-hover-img-border);
+  }
+
+  .icon-card {
+    position: absolute;
+    top: var(--card-padding);
+    right: var(--card-padding);
+    z-index: 1;
+    isolation: isolate;
+  }
+
+  &__image {
+    margin-inline: auto;
+    overflow: hidden;
+    border: var(--card-img-border);
+    border-radius: var(--card-border-radius);
+    position: relative;
+  }
+
+  &__overlay {
+    color: var(--clr-gray-50);
+    background-color: var(--clr-gray-900);
+    opacity: 0.5;
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+
+    &__content {
+      transform: rotate(-15deg);
+      transform-origin: center;
+    }
+  }
+
+  &-primary {
+    --card-bg-clr: var(--clr-primary-100);
+    --card-img-border: 0.01em solid var(--clr-primary-100);
+  }
+
+  &-success {
+    --card-bg-clr: var(--clr-success-100);
+    --card-img-border: 0.01em solid var(--clr-success-100);
+  }
+
+  &-danger {
+    --card-bg-clr: var(--clr-danger-100);
+    --card-img-border: 0.01em solid var(--clr-danger-100);
+  }
+}
+
+/// Components - Alerts
+.alert {
+  --alert-clr: var(--clr-gray-900);
+  --alert-bg-clr: var(--clr-gray-100);
+
+  --alert-size: #{breakpoint('sm') * 0.6};
+  --alert-padding: var(--size-v-300);
+  --alert-border-radius: var(--size-v-300);
+  --alert-offset: var(--size-v-400);
+
+  color: var(--alert-clr);
+  background-color: var(--alert-bg-clr);
+  border-radius: var(--alert-border-radius);
+  padding-top: var(--alert-padding);
+  padding-right: var(--alert-padding);
+  padding-bottom: var(--alert-padding);
+  padding-left: var(--alert-padding);
+
+  &-fixed {
+    position: fixed;
+    z-index: 4;
+    isolation: isolate;
+    top: var(--alert-offset);
+    max-width: var(--alert-size);
+  }
+
+  &-primary {
+    --alert-clr: var(--clr-gray-100);
+    --alert-bg-clr: var(--clr-primary-700);
+  }
+
+  &-danger {
+    --alert-clr: var(--clr-gray-100);
+    --alert-bg-clr: var(--clr-danger-800);
+  }
+
+  &-success {
+    --alert-clr: var(--clr-gray-100);
+    --alert-bg-clr: var(--clr-success-800);
+  }
+}
+
+/// Components - Queries
+@container cardGrid (min-width: #{breakpoint("sm")}) {
+  .card {
+    --card-width: 49%;
+  }
+}
+
+@container cardGrid (min-width: #{breakpoint("lg")}) {
+  .card {
+    --card-width: 30%;
+  }
+}

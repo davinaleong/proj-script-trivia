@@ -1,0 +1,16 @@
+/// Fonts
+
+/// Fonts - Inter
+@font-face {
+  font-family: 'Inter';
+  src: url('./../assets/fonts/inter/inter-variable.ttf') format('truetype');
+}
+
+/// Fonts - Indie Flower
+@font-face {
+  font-family: 'Indie Flower';
+  src: url('./../assets/fonts/indie-flower/IndieFlower-Regular.ttf')
+    format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}

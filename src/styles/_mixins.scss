@@ -1,0 +1,221 @@
+/// Mixins
+
+/// Mixins - Spacers
+@mixin margin($direction, $weight) {
+  @if ($direction == 'all') {
+    margin-top: $weight;
+    margin-right: $weight;
+    margin-bottom: $weight;
+    margin-left: $weight;
+  }
+
+  @if ($direction == 'block') {
+    margin-block: $weight;
+  }
+
+  @if ($direction == 'inline') {
+    margin-inline: $weight;
+  }
+
+  @if ($direction == 'x') {
+    margin-right: $weight;
+    margin-left: $weight;
+  }
+
+  @if ($direction == 'y') {
+    margin-top: $weight;
+    margin-bottom: $weight;
+  }
+
+  @if ($direction == 'top') {
+    margin-top: $weight;
+  }
+
+  @if ($direction == 'right') {
+    margin-right: $weight;
+  }
+
+  @if ($direction == 'bottom') {
+    margin-bottom: $weight;
+  }
+
+  @if ($direction == 'left') {
+    margin-left: $weight;
+  }
+}
+
+@mixin padding($direction, $weight) {
+  @if ($direction == 'all') {
+    padding-top: $weight;
+    padding-right: $weight;
+    padding-bottom: $weight;
+    padding-left: $weight;
+  }
+
+  @if ($direction == 'block') {
+    padding-block: $weight;
+  }
+
+  @if ($direction == 'inline') {
+    padding-inline: $weight;
+  }
+
+  @if ($direction == 'x') {
+    padding-right: $weight;
+    padding-left: $weight;
+  }
+
+  @if ($direction == 'y') {
+    padding-top: $weight;
+    padding-bottom: $weight;
+  }
+
+  @if ($direction == 'top') {
+    padding-top: $weight;
+  }
+
+  @if ($direction == 'right') {
+    padding-right: $weight;
+  }
+
+  @if ($direction == 'bottom') {
+    padding-bottom: $weight;
+  }
+
+  @if ($direction == 'left') {
+    padding-left: $weight;
+  }
+}
+
+/// Mixins - Box Shadow
+@mixin box-shadow($direction, $weight, $blur: 1.5) {
+  $x: 0;
+  $y: 0;
+  $this-blur: $weight * $blur;
+
+  @if ($direction == 't') {
+    $x: 0;
+    $y: $weight * -1;
+  }
+
+  @if ($direction == 'tr') {
+    $x: $weight;
+    $y: $weight * -1;
+  }
+
+  @if ($direction == 'r') {
+    $x: $weight;
+    $y: 0;
+  }
+
+  @if ($direction == 'br') {
+    $x: $weight;
+    $y: $weight;
+  }
+
+  @if ($direction == 'b') {
+    $x: 0;
+    $y: $weight;
+  }
+
+  @if ($direction == 'bl') {
+    $x: $weight * -1;
+    $y: $weight;
+  }
+
+  @if ($direction == 'l') {
+    $x: $weight * -1;
+    $y: 0;
+  }
+
+  @if ($direction == 'tl') {
+    $x: $weight * -1;
+    $y: $weight * -1;
+  }
+
+  box-shadow: $x $y $this-blur hsla(0, 0%, 0%, 0.5);
+}
+
+/// Mixins - Border Radius
+@mixin border-radius($direction, $weight) {
+  @if ($direction == 'all') {
+    border-top-left-radius: $weight;
+    border-top-right-radius: $weight;
+    border-bottom-right-radius: $weight;
+    border-bottom-left-radius: $weight;
+  }
+
+  @if ($direction == 'top') {
+    border-top-left-radius: $weight;
+    border-top-right-radius: $weight;
+  }
+
+  @if ($direction == 'right') {
+    border-top-right-radius: $weight;
+    border-bottom-right-radius: $weight;
+  }
+
+  @if ($direction == 'bottom') {
+    border-bottom-right-radius: $weight;
+    border-bottom-left-radius: $weight;
+  }
+
+  @if ($direction == 'left') {
+    border-top-left-radius: $weight;
+    border-bottom-left-radius: $weight;
+  }
+
+  @if ($direction == 'top-left') {
+    border-top-left-radius: $weight;
+  }
+
+  @if ($direction == 'top-right') {
+    border-top-right-radius: $weight;
+  }
+
+  @if ($direction == 'bottom-right') {
+    border-bottom-right-radius: $weight;
+  }
+
+  @if ($direction == 'bottom-left') {
+    border-bottom-left-radius: $weight;
+  }
+}
+
+/// Mixins - Borders
+@mixin border($direction, $weight, $color, $style: solid) {
+  $border: $weight $style $color;
+
+  @if ($direction == 'all') {
+    border-top: $border;
+    border-right: $border;
+    border-bottom: $border;
+    border-left: $border;
+  }
+
+  @if ($direction == 'x') {
+    border-right: $border;
+    border-left: $border;
+  }
+
+  @if ($direction == 'y') {
+    border-top: $border;
+    border-bottom: $border;
+  }
+
+  @if ($direction == 'top') {
+    border-top: $border;
+  }
+
+  @if ($direction == 'right') {
+    border-right: $border;
+  }
+
+  @if ($direction == 'bottom') {
+    border-bottom: $border;
+  }
+
+  @if ($direction == 'left') {
+    border-left: $border;
+  }
+}

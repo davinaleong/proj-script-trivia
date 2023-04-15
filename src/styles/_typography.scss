@@ -1,0 +1,107 @@
+/// Typography
+
+/// Typography - General
+a,
+.a {
+  --anchor-clr: var(--clr-primary-800);
+  --anchor-hover-clr: var(--clr-primary-500);
+
+  color: var(--anchor-clr);
+  text-decoration: none;
+
+  &:hover {
+    color: var(--anchor-hover-clr);
+  }
+
+  &.card {
+    --anchor-clr: var(--clr-gray-900);
+    --anchor-hover-clr: var(--clr-gray-50);
+  }
+
+  @each $key, $value in $colors {
+    &.link-#{$key} {
+      --anchor-clr: color($key, '500');
+      --anchor-hover-clr: color($key, '800');
+    }
+  }
+}
+
+strong,
+.strong {
+  font-weight: var(--fw-bold);
+}
+
+em,
+.em {
+  font-style: var(--fs-italic);
+}
+
+small,
+.small {
+  font-size: 0.8em;
+}
+
+p {
+  word-break: break-word;
+}
+
+/// Typography - Headings
+.heading {
+  --heading-ff: var(--ff-secondary);
+  --heading-fz: var(--fz-body);
+  --heading-fw: var(--fw-regular);
+  --heading-fs: var(--fs-normal);
+  --heading-clr: var(--clr-gray-900);
+  --heading-tt: none;
+  --heading-ls: normal;
+  --heading-lh: normal;
+
+  font-family: var(--heading-ff);
+  font-size: var(--heading-fz);
+  font-weight: var(--heading-fw);
+  font-style: var(--heading-fs);
+  color: var(--heading-clr);
+  text-transform: var(--heading-tt);
+  letter-spacing: var(--heading-ls);
+  line-height: var(--heading-lh);
+}
+
+.heading-hero {
+  --heading-fz: var(--fz-hero-heading);
+  --heading-clr: var(--clr-gray-50);
+}
+
+.heading-section {
+  --heading-ff: var(--ff-primary);
+  --heading-fz: var(--fz-section-heading);
+  --heading-clr: var(--clr-secondary-400);
+  --heading-tt: uppercase;
+}
+
+.heading-sub {
+  --heading-fz: var(--fz-sub-heading);
+}
+
+.heading-year {
+  --heading-clr: var(--clr-gray-50);
+}
+
+.heading-article {
+  --heading-fz: var(--fz-article-heading);
+  --heading-clr: var(--clr-primary-800);
+}
+
+.heading-loader {
+  --heading-ff: var(--ff-primary);
+  --heading-fz: var(--fz-loader-heading);
+}
+
+.heading-modal {
+  --heading-clr: var(--clr-secondary-400);
+  --heading-fz: var(--fz-modal-heading);
+  margin-bottom: var(--size-v-400);
+}
+
+.section-content .heading {
+  --heading-clr: var(--clr-primary-800);
+}

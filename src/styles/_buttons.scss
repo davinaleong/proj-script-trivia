@@ -1,0 +1,152 @@
+/// Buttons
+
+.btn {
+  --btn-clr: var(--clr-gray-900);
+  --btn-bg-clr: var(--clr-gray-400);
+
+  --btn-hover-clr: var(--clr-gray-50);
+  --btn-hover-bg-clr: var(--clr-primary-500);
+
+  --btn-padding: var(--size-v-300);
+  --btn-gap: var(--size-v-300);
+  --btn-border-radius: var(--size-v-200);
+
+  --btn-ff: var(--ff-primary);
+  --btn-fz: var(--fz-reg);
+  --btn-fw: var(--fw-bold);
+  --btn-tt: uppercase;
+  --btn-offset: var(--size-v-400);
+  --btn-opacity: 1;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--btn-gap);
+  color: var(--btn-clr);
+  background-color: var(--btn-bg-clr);
+  font-family: var(--btn-ff);
+  font-size: var(--btn-fz);
+  font-weight: var(--btn-fw);
+  text-transform: var(--btn-tt);
+  padding-top: var(--btn-padding);
+  padding-bottom: var(--btn-padding);
+  padding-left: var(--btn-padding);
+  padding-right: var(--btn-padding);
+  border: none;
+  border-radius: var(--btn-border-radius);
+  opacity: var(--btn-opacity);
+  cursor: pointer;
+
+  &:hover {
+    color: var(--btn-hover-clr);
+    background-color: var(--btn-hover-bg-clr);
+  }
+
+  &[disabled] {
+    --btn-clr: var(--clr-gray-500);
+    --btn-bg-clr: var(--clr-gray-200);
+
+    --btn-hover-clr: var(--clr-gray-500);
+    --btn-hover-bg-clr: var(--clr-gray-200);
+
+    --btn-opacity: 0.8;
+
+    cursor: not-allowed;
+  }
+
+  .active,
+  &[data-active='true'] {
+    --btn-clr: var(--clr-gray-50);
+    --btn-bg-clr: var(--clr-primary-500);
+
+    --btn-hover-clr: var(--clr-gray-50);
+    --btn-hover-bg-clr: var(--clr-primary-300);
+  }
+
+  &-top {
+    top: var(--btn-offset);
+    bottom: auto;
+  }
+
+  &-bottom {
+    top: auto;
+    bottom: var(--btn-offset);
+  }
+
+  &-left {
+    left: var(--btn-offset);
+    right: auto;
+  }
+
+  &-right {
+    left: auto;
+    right: var(--btn-offset);
+  }
+
+  &-no-padding {
+    --btn-padding: 0;
+  }
+
+  &-fixed {
+    position: fixed;
+    z-index: 3;
+    isolation: isolate;
+  }
+
+  &-absolute {
+    position: absolute;
+    z-index: 3;
+    isolation: isolate;
+  }
+
+  &-primary {
+    --btn-clr: var(--clr-gray-50);
+    --btn-bg-clr: var(--clr-primary-700);
+
+    --btn-hover-clr: var(--clr-gray-50);
+    --btn-hover-bg-clr: var(--clr-primary-500);
+  }
+
+  &-danger {
+    --btn-clr: var(--clr-gray-50);
+    --btn-bg-clr: var(--clr-danger-800);
+
+    --btn-hover-clr: var(--clr-gray-50);
+    --btn-hover-bg-clr: var(--clr-danger-300);
+  }
+
+  &-success {
+    --btn-clr: var(--clr-gray-50);
+    --btn-bg-clr: var(--clr-success-800);
+
+    --btn-hover-clr: var(--clr-gray-50);
+    --btn-hover-bg-clr: var(--clr-success-300);
+  }
+
+  &-gray {
+    --btn-clr: var(--clr-gray-900);
+    --btn-bg-clr: var(--clr-gray-400);
+
+    --btn-hover-clr: var(--clr-gray-900);
+    --btn-hover-bg-clr: var(--clr-gray-300);
+  }
+
+  &-full {
+    width: 100%;
+  }
+
+  &-icon {
+    &__label {
+      display: none;
+    }
+  }
+}
+
+/// Buttons - Queries
+@media screen and (min-width: #{breakpoint("lg")}) {
+  .btn-icon {
+    &__label {
+      display: block;
+    }
+  }
+}

@@ -1,0 +1,290 @@
+/// Helpers
+
+/// Helpers - Visually Hidden
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/// Helpers - Sizing
+.viewport-width {
+  max-width: 100vw;
+}
+
+.viewport-height {
+  min-height: 100vh;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.full-height {
+  min-height: 100%;
+}
+
+/// Helpers - Foreground Colors
+@each $key, $value in $colors {
+  @each $tint-key, $tint-value in $value {
+    .text-#{$key}-#{$tint-key} {
+      color: var(--clr-#{$key}-#{$tint-key});
+      fill: var(--clr-#{$key}-#{$tint-key});
+    }
+  }
+}
+
+/// Helpers - Background Colors
+@each $key, $value in $colors {
+  @each $tint-key, $tint-value in $value {
+    .bg-#{$key}-#{$tint-key} {
+      background-color: var(--clr-#{$key}-#{$tint-key});
+    }
+  }
+}
+
+/// Helpers - Border Colors
+@each $key, $value in $colors {
+  @each $tint-key, $tint-value in $value {
+    @each $direction-key, $direction-value in $border-directions {
+      @each $style-key, $style-value in $border-styles {
+        @each $weight-key, $weight-value in $border-f-weights {
+          @if ($direction-key == 'all') {
+            .border-f-#{$style-key}-#{$weight-key}-#{$key}-#{$tint-key} {
+              @include border(
+                $direction-key,
+                $weight-value,
+                $tint-value,
+                $style-value
+              );
+            }
+          } @else {
+            .border-f-#{$direction-value}-#{$style-key}-#{$weight-key}-#{$key}-#{$tint-key} {
+              @include border(
+                $direction-key,
+                $weight-value,
+                $tint-value,
+                $style-value
+              );
+            }
+          }
+        }
+
+        @each $weight-key, $weight-value in $border-v-weights {
+          @if ($direction-key == 'all') {
+            .border-v-#{$style-key}-#{$weight-key}-#{$key}-#{$tint-key} {
+              @include border(
+                $direction-key,
+                $weight-value,
+                $tint-value,
+                $style-value
+              );
+            }
+          } @else {
+            .border-v-#{$direction-value}-#{$style-key}-#{$weight-key}-#{$key}-#{$tint-key} {
+              @include border(
+                $direction-key,
+                $weight-value,
+                $tint-value,
+                $style-value
+              );
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+/// Helpers - Outline Colors
+@each $key, $value in $colors {
+  @each $tint-key, $tint-value in $value {
+    .outline-#{$key}-#{$tint-key} {
+      outline: thin solid var(--clr-#{$key}-#{$tint-key});
+    }
+  }
+}
+
+/// Helpers - Font Families
+@each $key, $value in $font-families {
+  .ff-#{$key} {
+    font-family: var(--ff-#{$key});
+  }
+}
+
+/// Helpers - Font Sizes
+@each $key, $value in $font-sizes {
+  .fz-#{$key} {
+    font-size: var(--fz-#{$key});
+  }
+}
+
+/// Helpers - Font Weights
+@each $key, $value in $font-weights {
+  .fw-#{$key} {
+    font-weight: var(--fw-#{$key});
+  }
+}
+
+/// Helpers - Font Styles
+@each $key, $value in $font-styles {
+  .fs-#{$key} {
+    font-style: var(--fs-#{$key});
+  }
+}
+
+/// Helpers - Text Decorations
+@each $key, $value in $text-decorations {
+  .td-#{$key} {
+    text-decoration: #{$value};
+  }
+}
+
+/// Helpers - Text Alignments
+@each $key, $value in $text-aligns {
+  .ta-#{$key} {
+    text-align: #{$value};
+  }
+}
+
+/// Helpers - Text Transforms
+@each $key, $value in $text-transforms {
+  .tt-#{$key} {
+    text-transform: #{$value};
+  }
+}
+
+/// Helpers - Displays
+@each $key, $value in $displays {
+  .d-#{$key} {
+    display: #{$value};
+  }
+}
+
+/// Helpers - Flex/Grid Alignment
+@each $key, $value in $flex-wraps {
+  .wrap-#{$key} {
+    flex-wrap: $value;
+  }
+}
+
+@each $key, $value in $fixed-spacers {
+  .gap-f-#{$key} {
+    gap: $value;
+  }
+}
+
+@each $key, $value in $variable-spacers {
+  .gap-v-#{$key} {
+    gap: $value;
+  }
+}
+
+@each $key, $value in $grid-flex-align-items {
+  .al-#{$key} {
+    align-items: $value;
+  }
+}
+
+@each $key, $value in $flex-justify-contents {
+  .jc-#{$key} {
+    justify-content: $value;
+  }
+}
+
+@each $key, $value in $grid-justify-items {
+  .ji-#{$key} {
+    justify-items: $value;
+  }
+}
+
+/// Helpers - Fixed Spacers
+@each $key, $value in $spacer-directions {
+  @each $weight-key, $weight-value in $fixed-spacers {
+    @if ($key != 'all') {
+      .m-f-#{$value}-#{$weight-key} {
+        @include margin($key, $weight-value);
+      }
+
+      .p-f-#{$value}-#{$weight-key} {
+        @include padding($key, $weight-value);
+      }
+    } @else {
+      .m-f-#{$weight-key} {
+        @include margin($key, $weight-value);
+      }
+
+      .p-f-#{$weight-key} {
+        @include padding($key, $weight-value);
+      }
+    }
+  }
+
+  @each $weight-key, $weight-value in $variable-spacers {
+    @if ($key != 'all') {
+      .m-v-#{$value}-#{$weight-key} {
+        @include margin($key, $weight-value);
+      }
+
+      .p-v-#{$value}-#{$weight-key} {
+        @include padding($key, $weight-value);
+      }
+    } @else {
+      .m-v-#{$weight-key} {
+        @include margin($key, $weight-value);
+      }
+
+      .p-v-#{$weight-key} {
+        @include padding($key, $weight-value);
+      }
+    }
+  }
+}
+
+/// Helpers - Box Shadows
+@each $key, $value in $box-shadow-directions {
+  @each $weight-key, $weight-value in $box-shadow-f-weights {
+    .shadow-f-#{$value}-f-#{$weight-key} {
+      @include box-shadow($value, $weight-value);
+    }
+  }
+
+  @each $weight-key, $weight-value in $box-shadow-v-weights {
+    .shadow-v-#{$value}-#{$weight-key} {
+      @include box-shadow($value, $weight-value);
+    }
+  }
+}
+
+/// Helpers - Border Radius
+@each $key, $value in $border-radius-directions {
+  @each $weight-key, $weight-value in $fixed-spacers {
+    @if ($key == 'all') {
+      .br-f-#{$weight-key} {
+        @include border-radius($key, $weight-value);
+      }
+    } @else {
+      .br-f-#{$value}-f-#{$weight-key} {
+        @include border-radius($key, $weight-value);
+      }
+    }
+  }
+
+  @each $weight-key, $weight-value in $variable-spacers {
+    @if ($key == 'all') {
+      .br-v-#{$weight-key} {
+        @include border-radius($key, $weight-value);
+      }
+    } @else {
+      .br-v-#{$value}-f-#{$weight-key} {
+        @include border-radius($key, $weight-value);
+      }
+    }
+  }
+}
