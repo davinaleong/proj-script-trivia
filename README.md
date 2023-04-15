@@ -1,14 +1,8 @@
 # React Webpack, SCSS & Typescript Boilerplate
 
-## About
+Fun coding quizzes for non-programmers.
 
-This is my webpack boilerplate for React which includes SCSS, typescript, linting and formatting.
-
-## Stopped At
-
-https://www.youtube.com/watch?v=25kFcF54GNk&list=PLC3y8-rFHvwiWPS2RO3BKotLRfgg_8WEo&index=3
-
-## How to
+## Getting Started
 
 1. Install dependencies
 
