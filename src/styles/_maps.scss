@@ -151,13 +151,13 @@ $font-families: (
 /// Fonts - Font Sizes
 $font-sizes: (
   'base': 16px,
-  'md': clamp(1rem, 1rem + 2vw, 1.25rem),
+  'md': css-clamp('1rem, 1rem + 2vw, 1.25rem'),
   // 16px / 20px
-  'lg': clamp(1.5rem, 1rem + 2vw, 2.25rem),
+  'lg': css-clamp('1.5rem, 1rem + 2vw, 2.25rem'),
   // 24px / 36px
-  'xl': clamp(2.5rem, 1rem + 2vw, 4rem),
+  'xl': css-clamp('2.5rem, 1rem + 2vw, 4rem'),
   // 48px / 64px
-  'xxl': clamp(3.125rem, 1rem + 2.5vw, 5.875rem),
+  'xxl': css-clamp('3.125rem, 1rem + 2.5vw, 5.875rem'),
   // 48px / 64px
 );
 
