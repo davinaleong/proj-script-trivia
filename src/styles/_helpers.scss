@@ -54,49 +54,31 @@
   @each $tint-key, $tint-value in $value {
     @each $direction-key, $direction-value in $border-directions {
       @each $style-key, $style-value in $border-styles {
+
         @each $weight-key, $weight-value in $border-f-weights {
-          @if ($direction-key == 'all') {
+          @if ($direction-key == "all") {
             .border-f-#{$style-key}-#{$weight-key}-#{$key}-#{$tint-key} {
-              @include border(
-                $direction-key,
-                $weight-value,
-                $tint-value,
-                $style-value
-              );
+              @include border($direction-key, $weight-value, $tint-value, $style-value);
             }
           } @else {
             .border-f-#{$direction-value}-#{$style-key}-#{$weight-key}-#{$key}-#{$tint-key} {
-              @include border(
-                $direction-key,
-                $weight-value,
-                $tint-value,
-                $style-value
-              );
+              @include border($direction-key, $weight-value, $tint-value, $style-value);
             }
           }
         }
 
         @each $weight-key, $weight-value in $border-v-weights {
-          @if ($direction-key == 'all') {
+          @if ($direction-key == "all") {
             .border-v-#{$style-key}-#{$weight-key}-#{$key}-#{$tint-key} {
-              @include border(
-                $direction-key,
-                $weight-value,
-                $tint-value,
-                $style-value
-              );
+              @include border($direction-key, $weight-value, $tint-value, $style-value);
             }
           } @else {
             .border-v-#{$direction-value}-#{$style-key}-#{$weight-key}-#{$key}-#{$tint-key} {
-              @include border(
-                $direction-key,
-                $weight-value,
-                $tint-value,
-                $style-value
-              );
+              @include border($direction-key, $weight-value, $tint-value, $style-value);
             }
           }
         }
+
       }
     }
   }
@@ -207,7 +189,7 @@
 /// Helpers - Fixed Spacers
 @each $key, $value in $spacer-directions {
   @each $weight-key, $weight-value in $fixed-spacers {
-    @if ($key != 'all') {
+    @if ($key != "all") {
       .m-f-#{$value}-#{$weight-key} {
         @include margin($key, $weight-value);
       }
@@ -227,7 +209,7 @@
   }
 
   @each $weight-key, $weight-value in $variable-spacers {
-    @if ($key != 'all') {
+    @if ($key != "all") {
       .m-v-#{$value}-#{$weight-key} {
         @include margin($key, $weight-value);
       }
@@ -265,7 +247,7 @@
 /// Helpers - Border Radius
 @each $key, $value in $border-radius-directions {
   @each $weight-key, $weight-value in $fixed-spacers {
-    @if ($key == 'all') {
+    @if ($key == "all") {
       .br-f-#{$weight-key} {
         @include border-radius($key, $weight-value);
       }
@@ -277,7 +259,7 @@
   }
 
   @each $weight-key, $weight-value in $variable-spacers {
-    @if ($key == 'all') {
+    @if ($key == "all") {
       .br-v-#{$weight-key} {
         @include border-radius($key, $weight-value);
       }

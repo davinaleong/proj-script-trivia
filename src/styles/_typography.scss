@@ -20,8 +20,8 @@ a,
 
   @each $key, $value in $colors {
     &.link-#{$key} {
-      --anchor-clr: color($key, '500');
-      --anchor-hover-clr: color($key, '800');
+      --anchor-clr: color($key, "500");
+      --anchor-hover-clr: color($key, "800");
     }
   }
 }

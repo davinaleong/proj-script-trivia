@@ -57,7 +57,7 @@
   --card-padding: var(--size-v-200);
   --card-border-radius: var(--size-v-300);
 
-  max-width: var(--card-width);
+  width: var(--card-width);
   color: var(--card-clr);
   background-color: var(--card-bg-clr);
   padding: var(--card-padding);
@@ -68,7 +68,7 @@
 
   &:hover,
   .active,
-  &[data-active='true'] {
+  &[data-active="true"] {
     --card-clr: var(--card-hover-clr);
     --card-bg-clr: var(--card-hover-bg-clr);
     --card-img-border: var(--card-hover-img-border);
@@ -126,7 +126,7 @@
   --alert-clr: var(--clr-gray-900);
   --alert-bg-clr: var(--clr-gray-100);
 
-  --alert-size: #{breakpoint('sm') * 0.6};
+  --alert-size: #{breakpoint("sm") * 0.6};
   --alert-padding: var(--size-v-300);
   --alert-border-radius: var(--size-v-300);
   --alert-offset: var(--size-v-400);
@@ -166,12 +166,12 @@
 /// Components - Queries
 @container cardGrid (min-width: #{breakpoint("sm")}) {
   .card {
-    --card-width: 49%;
+    --card-width: calc((100% - (var(--card-grid-gap) * 1)) / 2);
   }
 }
 
-@container cardGrid (min-width: #{breakpoint("lg")}) {
+@container quizBody (min-width: #{breakpoint("xs")}) {
   .card {
-    --card-width: 30%;
+    --card-width: calc((100% - (var(--card-grid-gap) * 1)) / 2);
   }
 }

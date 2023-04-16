@@ -64,7 +64,7 @@ body,
     align-items: center;
     justify-content: center;
   }
-
+  
   &-grid {
     display: grid;
     place-items: center;
@@ -85,7 +85,7 @@ body,
     align-items: center;
     justify-content: center;
   }
-
+  
   &-grid {
     display: grid;
     place-items: center;
@@ -111,13 +111,15 @@ body,
   container-type: inline-size;
   padding-inline: var(--container-padding-inline);
   margin-inline: auto;
-  width: css-min('100%, var(--container-width)');
+  width: min(100%, var(--container-width));
   position: relative;
 }
 
 .container-no-padding {
   --container-padding-inline: var(--size-v-0);
 }
+
+
 
 img {
   cursor: pointer;
