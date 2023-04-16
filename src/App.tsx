@@ -4,6 +4,7 @@ import { ReactElement, useState } from 'react'
 // import { Helmet } from 'react-helmet'
 
 import IApp from './interfaces/app.interface'
+import CompletedMessagesData from './data/completed-messages.data'
 import { HomeView } from './views/home.view'
 import { QuizView } from './views/quiz.view'
 import { CompletedView } from './views/completed.view'
@@ -26,7 +27,12 @@ export const App = ({ stepsData }: IApp) => {
       break
 
     case stepsData.completed:
-      view = <CompletedView />
+      view = (
+        <CompletedView
+          completed={false}
+          completedMessagesData={CompletedMessagesData}
+        />
+      )
       break
 
     case stepsData.contact:

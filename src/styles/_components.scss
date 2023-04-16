@@ -7,6 +7,7 @@
   --icon-bg-clr: var(--clr-gray-100);
 
   --icon-size: clamp(2.25rem, 1rem + 2vw, 2.5rem);
+  --icon-padding: var(--size-v-200);
   --icon-border-radius: 50%;
 
   color: var(--icon-clr);
@@ -15,8 +16,17 @@
   width: var(--icon-size);
   height: var(--icon-size);
   font-size: var(--icon-fz);
+  padding-top: var(--icon-padding);
+  padding-right: var(--icon-padding);
+  padding-bottom: var(--icon-padding);
+  padding-left: var(--icon-padding);
   display: grid;
   place-items: center;
+
+  svg {
+    display: block;
+    height: auto;
+  }
 }
 
 .icon-success {
@@ -68,7 +78,7 @@
 
   &:hover,
   .active,
-  &[data-active="true"] {
+  &[data-active='true'] {
     --card-clr: var(--card-hover-clr);
     --card-bg-clr: var(--card-hover-bg-clr);
     --card-img-border: var(--card-hover-img-border);
@@ -126,7 +136,7 @@
   --alert-clr: var(--clr-gray-900);
   --alert-bg-clr: var(--clr-gray-100);
 
-  --alert-size: #{breakpoint("sm") * 0.6};
+  --alert-size: #{breakpoint('sm') * 0.6};
   --alert-padding: var(--size-v-300);
   --alert-border-radius: var(--size-v-300);
   --alert-offset: var(--size-v-400);
