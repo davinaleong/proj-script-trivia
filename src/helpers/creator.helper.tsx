@@ -4,9 +4,10 @@ import IQuiz from '../interfaces/quiz.interface'
 const quiz = (
   name: string,
   image: HTMLImageElement,
-  options: Array<IOption>
+  options: Array<IOption>,
+  completed: boolean
 ): IQuiz => {
-  return { name, image, options }
+  return { name, image, options, completed }
 }
 
 const option = (
@@ -22,6 +23,7 @@ const quizWithOptions = (
 
   name: string,
   image: HTMLImageElement,
+  completed: boolean,
 
   optionAName: string,
   optionAKey: string,
@@ -46,7 +48,7 @@ const quizWithOptions = (
 
   const options: Array<IOption> = [optionA, optionB, optionC, optionD]
 
-  const thisQuiz: IQuiz = quiz(name, image, options)
+  const thisQuiz: IQuiz = quiz(name, image, options, completed)
 
   quizzes.push(thisQuiz)
 
