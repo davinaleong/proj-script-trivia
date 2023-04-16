@@ -42,13 +42,20 @@ export const App = ({ stepsData }: IApp) => {
 
   return (
     <>
-      <div className="container">
-        <button onClick={() => setStep(stepsData.home)}>HOME | 0</button>
-        <button onClick={() => setStep(stepsData.quiz)}>QUIZ | 1</button>
-        <button onClick={() => setStep(stepsData.completed)}>
-          COMPLETED | 2
+      <div className="container | d-flex ai-center jc-center gap-v-300 p-v-300">
+        <p>Test:</p>
+        <button onClick={() => setStep(stepsData.home)} className="btn">
+          Home | 0
         </button>
-        <button onClick={() => setStep(stepsData.contact)}>CONTACT | 2</button>
+        <button onClick={() => setStep(stepsData.quiz)} className="btn">
+          Quiz | 1
+        </button>
+        <button onClick={() => setStep(stepsData.completed)} className="btn">
+          Completed | 2
+        </button>
+        <button onClick={() => setStep(stepsData.contact)} className="btn">
+          Contact | 2
+        </button>
       </div>
       {view}
     </>
