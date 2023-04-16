@@ -1,8 +1,13 @@
+import './styles/main.scss'
+
 import { useState } from 'react'
+import { Helmet } from 'react-helmet-async'
+
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faEnvelope } from '@fortawesome/free-solid-svg-icons'
+
 import IApp from './interfaces/app.interface'
 import ImageLogo from './assets/images/logo-blue-svg.svg'
-import './styles/main.scss'
-import { Helmet } from 'react-helmet-async'
 
 export const App = ({ stepsData, viewsData }: IApp) => {
   const [step, setStep] = useState<number>(stepsData.completed)
@@ -21,6 +26,10 @@ export const App = ({ stepsData, viewsData }: IApp) => {
           COMPLETED | 2
         </button>
         <button onClick={() => setStep(stepsData.contact)}>CONTACT | 2</button>
+
+        <p>
+          <FontAwesomeIcon icon={faEnvelope} />
+        </p>
       </div>
       {viewsData[step]}
     </>
