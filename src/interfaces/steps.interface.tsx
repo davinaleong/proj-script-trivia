@@ -1,6 +1,6 @@
 export default interface ISteps {
   home: number
   quiz: number
-  finished: number
+  completed: number
   contact: number
 }

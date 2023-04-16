@@ -5,7 +5,7 @@ import './styles/main.scss'
 import { Helmet } from 'react-helmet-async'
 
 export const App = ({ stepsData, viewsData }: IApp) => {
-  const [step, setStep] = useState<number>(stepsData.finished)
+  const [step, setStep] = useState<number>(stepsData.completed)
   // const [step, setStep] = useState<number>(stepsData.home)
   // const [quiz, setQuiz] = useState(null)
 
@@ -17,8 +17,8 @@ export const App = ({ stepsData, viewsData }: IApp) => {
       <div className="container">
         <button onClick={() => setStep(stepsData.home)}>HOME | 0</button>
         <button onClick={() => setStep(stepsData.quiz)}>QUIZ | 1</button>
-        <button onClick={() => setStep(stepsData.finished)}>
-          FINISHED | 2
+        <button onClick={() => setStep(stepsData.completed)}>
+          COMPLETED | 2
         </button>
         <button onClick={() => setStep(stepsData.contact)}>CONTACT | 2</button>
       </div>
