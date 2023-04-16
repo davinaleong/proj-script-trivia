@@ -5,7 +5,8 @@ import './styles/main.scss'
 import { Helmet } from 'react-helmet-async'
 
 export const App = ({ stepsData, viewsData }: IApp) => {
-  const [step, setStep] = useState<number>(stepsData.home)
+  const [step, setStep] = useState<number>(stepsData.finished)
+  // const [step, setStep] = useState<number>(stepsData.home)
   // const [quiz, setQuiz] = useState(null)
 
   return (
