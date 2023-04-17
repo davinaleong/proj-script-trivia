@@ -12,7 +12,7 @@ import { ContactView } from './views/contact.view'
 // import ImageLogo from './assets/images/logo-blue-svg.svg'
 
 export const App = ({ stepsData }: IApp) => {
-  const [step, setStep] = useState<number>(stepsData.completed)
+  const [step, setStep] = useState<number>(stepsData.contact)
   // const [step, setStep] = useState<number>(stepsData.home)
   // const [quiz, setQuiz] = useState(null)
 
