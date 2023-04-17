@@ -57,6 +57,7 @@ export const App = ({ stepsData }: IApp) => {
           Contact | 2
         </button>
       </div>
+
       {view}
     </>
   )
