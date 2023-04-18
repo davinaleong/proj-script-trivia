@@ -1,99 +1,114 @@
 /// Forms
 
 .form {
-    --form-gap: var(--size-v-400);
+  --form-gap: var(--size-v-400);
 
-    --form-group-gap: var(--size-v-100);
+  --form-group-gap: var(--size-v-100);
 
-    --form-label-fw: var(--fw-bold);
+  --form-label-fw: var(--fw-bold);
 
-    --form-field-clr: var(--clr-gray-900);
-    --form-field-bg-clr: var(--clr-gray-100);
-    --form-field-required-clr: var(--clr-danger-500);
-    --form-field-padding: var(--size-v-300);
-    --form-field-border: none;
-    --form-field-border-radius: var(--size-v-200);
+  --form-field-clr: var(--clr-gray-900);
+  --form-field-bg-clr: var(--clr-gray-100);
+  --form-field-required-clr: var(--clr-danger-800);
+  --form-field-padding: var(--size-v-300);
+  --form-field-border: none;
+  --form-field-border-radius: var(--size-v-200);
 
-    gap: var(--form-gap);
-    
-    &-grid {
-        display: grid;
-        grid-template-columns: auto;
-        grid-template-rows: repeat(4, max-content);
-    }
-    
-    &-flex {
-        display: flex;
-        flex-wrap: wrap;
-    }
+  --form-label-error-clr: var(--clr-danger-800);
+  --form-field-error-clr: var(--clr-gray-900);
+  --form-field-error-bg-clr: var(--clr-danger-100);
 
-    &__group {
-        --form-group-width: auto;
+  gap: var(--form-gap);
 
-        display: flex;
-        flex-direction: column;
-        gap: var(--form-group-gap);
-        width: var(--form-group-width);
+  &-grid {
+    display: grid;
+    grid-template-columns: auto;
+    grid-template-rows: repeat(4, max-content);
+  }
 
-        &-third {
-            --form-group-width: 100%;
-        }
+  &-flex {
+    display: flex;
+    flex-wrap: wrap;
+  }
 
-        &-half {
-            --form-group-width: 100%;
-        }
+  &__group {
+    --form-group-width: auto;
 
-        &-full {
-            --form-group-width: 100%;
-        }
+    display: flex;
+    flex-direction: column;
+    gap: var(--form-group-gap);
+    width: var(--form-group-width);
 
-        &-required {
-            .form__label::after {
-                content: "*";
-                color: var(--form-field-required-clr);
-            }
-        }
-
-        &:nth-child(6) {
-            order: 1;
-        }
+    &-third {
+      --form-group-width: 100%;
     }
 
-    &__label {
-        font-weight: var(--form-label-fw);
+    &-half {
+      --form-group-width: 100%;
     }
 
-    &__field {
-        display: block;
-        color: var(--form-field-clr);
-        background-color: var(--form-field-bg-clr);
-        border: var(--form-field-border);
-        border-radius: var(--form-field-border-radius);
-        padding-top: var(--form-field-padding);
-        padding-right: var(--form-field-padding);
-        padding-bottom: var(--form-field-padding);
-        padding-left: var(--form-field-padding);
+    &-full {
+      --form-group-width: 100%;
     }
+
+    &-required {
+      .form__label::after {
+        content: '*';
+        color: var(--form-field-required-clr);
+      }
+    }
+
+    &:nth-child(6) {
+      order: 1;
+    }
+
+    &[data-error='true'] {
+      .form__label {
+        color: var(--form-label-error-clr);
+      }
+
+      .form__field {
+        color: var(--form-field-error-clr);
+        background-color: var(--form-field-error-bg-clr);
+      }
+    }
+  }
+
+  &__label {
+    font-weight: var(--form-label-fw);
+  }
+
+  &__field {
+    display: block;
+    color: var(--form-field-clr);
+    background-color: var(--form-field-bg-clr);
+    border: var(--form-field-border);
+    border-radius: var(--form-field-border-radius);
+    padding-top: var(--form-field-padding);
+    padding-right: var(--form-field-padding);
+    padding-bottom: var(--form-field-padding);
+    padding-left: var(--form-field-padding);
+  }
 }
 
 @container container (min-width: #{breakpoint('md')}) {
-    .form {
-        &__group {
-            &-third {
-                --form-group-width: calc((100% - (var(--form-gap) * 2)) / 3);
-            }
+  .form {
+    &__group {
+      &-third {
+        --form-group-width: calc((100% - (var(--form-gap) * 2)) / 3);
+      }
 
-            &-half {
-                --form-group-width: calc((100% - (var(--form-gap) * 1)) / 2);
-            }
+      &-half {
+        --form-group-width: calc((100% - (var(--form-gap) * 1)) / 2);
+      }
 
-            &-full {
-                --form-group-width: 100%;
-            }
+      &-full {
+        --form-group-width: 100%;
+      }
 
-            &:nth-child(6) {
-                order: 0;
-            }
-        }
+      &:nth-child(6) {
+        order: 0;
+      }
     }
+  }
 }

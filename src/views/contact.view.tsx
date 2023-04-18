@@ -7,9 +7,24 @@ import {
 } from '@fortawesome/free-solid-svg-icons'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
+import IMessageType from '../interfaces/message-type.interface'
+
+const messageTypesUrl = `${process.env.API_URL}misc/messageTypes/${process.env.APP_SLUG}`
+const messageUrl = `${process.env.API_URL}misc/messages/${process.env.APP_SLUG}`
 
 export const ContactView = () => {
-  const [messageTypes, setMessageTypes] = useState<Array<any>>([])
+  const [loading, setLoading] = useState<boolean>(true)
+  const [messageTypes, setMessageTypes] = useState<Array<IMessageType>>([])
+
+  useEffect(function () {
+    async function fetchData() {
+      const response = await axios.get(messageTypesUrl)
+      setMessageTypes(response.data?.messageTypes?.data)
+      setLoading(false)
+    }
+
+    fetchData()
+  }, [])
 
   let formFields: any = (
     <div className="form__group form__group-full">
@@ -17,54 +32,7 @@ export const ContactView = () => {
     </div>
   )
 
-  /*
-  const Component = () => {
-  const [data, setData] = useState();
-
-  useEffect(() => {
-    // fetch data
-    const dataFetch = async () => {
-      const data = await (
-        await fetch(
-          "https://run.mocky.io/v3/b3bcb9d2-d8e9-43c5-bfb7-0062c85be6f9"
-        )
-      ).json();
-
-      // set state when the data received
-      setData(data);
-    };
-
-    dataFetch();
-  }, []);
-
-  return <>...</>
-}
-
-async function getUser() {
-  try {
-    const response = await axios.get('/user?ID=12345');
-    console.log(response);
-  } catch (error) {
-    console.error(error);
-  }
-}
-  */
-
-  useEffect(function () {
-    async function fetchData() {
-      const response = await fetch(
-        `${process.env.API_URL}misc/messageTypes/${process.env.APP_SLUG}`
-      )
-      const data = await response.json()
-
-      console.log(data)
-      setMessageTypes(data.messageTypes?.data)
-    }
-
-    fetchData()
-  }, [])
-
-  if (messageTypes.length < 0) {
+  if (loading) {
     formFields = (
       <>
         <div className="form__group form__group-half form__group-required">
@@ -139,7 +107,7 @@ async function getUser() {
         </div>
 
         <div className="form__group form__group-third form__group">
-          <button type="button" className="btn btn-primary">
+          <button type="button" className="btn">
             Quizzes <FontAwesomeIcon icon={faCode} />
           </button>
         </div>
@@ -151,7 +119,7 @@ async function getUser() {
         </div>
 
         <div className="form__group form__group-third form__group">
-          <button type="reset" className="btn btn-gray">
+          <button type="reset" className="btn">
             Reset <FontAwesomeIcon icon={faRotateLeft} />
           </button>
         </div>
@@ -159,8 +127,41 @@ async function getUser() {
     )
   }
 
-  function onSubmit() {
+  async function handleSubmit(event) {
+    // TODO: Submit message to CMS.
     console.log(`Form submitted.`)
+
+    setLoading(true)
+
+    const form = event.target
+    const formData = new FormData(form)
+
+    const response = await fetch(messageUrl, {
+      method: form.method,
+      body: formData,
+    })
+    const data = await response.json()
+    console.log(data)
+
+    /*
+    export default function MyForm() {
+  function handleSubmit(e) {
+    // Prevent the browser from reloading the page
+    e.preventDefault();
+
+    // Read the form data
+    const form = e.target;
+    const formData = new FormData(form);
+
+    // You can pass formData as a fetch body directly:
+    fetch('/some-api', { method: form.method, body: formData });
+
+    // Or you can work with it as a plain object:
+    const formJson = Object.fromEntries(formData.entries());
+    console.log(formJson);
+  }
+
+    */
   }
 
   return (
@@ -175,7 +176,7 @@ async function getUser() {
           Contact us and we will get back to you within 5 working days.
         </p>
 
-        <form method="post" className="form form-flex" onSubmit={onSubmit}>
+        <form method="post" className="form form-flex" onSubmit={handleSubmit}>
           {formFields}
         </form>
       </main>
