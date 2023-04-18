@@ -13,8 +13,8 @@ const messageTypesUrl = `${process.env.API_URL}misc/messageTypes/${process.env.A
 const messageUrl = `${process.env.API_URL}misc/messages/${process.env.APP_SLUG}`
 
 export const ContactView = () => {
-  const [loading, setLoading] = useState<boolean>(true)
   const [messageTypes, setMessageTypes] = useState<Array<IMessageType>>([])
+  const [loading, setLoading] = useState<boolean>(true)
 
   useEffect(function () {
     async function fetchData() {
