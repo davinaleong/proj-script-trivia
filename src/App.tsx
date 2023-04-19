@@ -18,34 +18,42 @@ class App extends Component<IAppProps> {
     subjectsData: [],
   }
 
-  async componentDidMount(): any {
+  constructor(props: IAppProps) {
+    super(props)
+  }
+
+  componentDidMount = async () => {
     const response = await axios.get(ApiHelper.subjectsUrl)
     this.setState({
       subjectsData: response.data?.messageTypes?.data,
     })
   }
 
-  setStep(step: number) {
+  setStep = (step: number): void => {
     this.setState({ step })
   }
 
-  setStepToHome() {
-    this.setStep(this.props.stepsData.home)
+  setStepToHome = (): void => {
+    const { stepsData }: IAppProps = this.props
+    this.setStep(stepsData.home)
   }
 
-  setStepToQuiz() {
-    this.setStep(this.props.stepsData.quiz)
+  setStepToQuiz = (): void => {
+    const { stepsData }: IAppProps = this.props
+    this.setStep(stepsData.quiz)
   }
 
-  setStepToCompleted() {
-    this.setStep(this.props.stepsData.completed)
+  setStepToCompleted = (): void => {
+    const { stepsData }: IAppProps = this.props
+    this.setStep(stepsData.completed)
   }
 
-  setStepToContact() {
-    this.setStep(this.props.stepsData.contact)
+  setStepToContact = (): void => {
+    const { stepsData }: IAppProps = this.props
+    this.setStep(stepsData.contact)
   }
 
-  renderView(): ReactElement {
+  renderView = (): ReactElement => {
     const { stepsData, completedMessagesData }: IAppProps = this.props
     const { step, subjectsData }: IAppState = this.state
 
@@ -65,7 +73,12 @@ class App extends Component<IAppProps> {
         )
 
       case stepsData.contact:
-        return <ContactView subjectsData={subjectsData} />
+        return (
+          <ContactView
+            setStepToHome={this.setStepToHome}
+            subjectsData={subjectsData}
+          />
+        )
 
       default:
         return <h1 className="fw-black fz-xl ta-center">View not found.</h1>
@@ -93,7 +106,7 @@ class App extends Component<IAppProps> {
           </button>
         </div>
 
-        {this.renderView(step)}
+        {this.renderView()}
       </>
     )
   }

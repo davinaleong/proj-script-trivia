@@ -102,7 +102,11 @@ class ContactView extends Component<IContactViewProps> {
         </div>
 
         <div className="form__group form__group-third form__group">
-          <button type="button" className="btn">
+          <button
+            type="button"
+            className="btn"
+            onClick={this.props.setStepToHome}
+          >
             Quizzes <FontAwesomeIcon icon={faCode} />
           </button>
         </div>
