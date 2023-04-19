@@ -1,4 +1,4 @@
-interface IMessageType {
+interface ISubject {
   id: number
   name: string
   title: string
@@ -6,4 +6,4 @@ interface IMessageType {
   sort_order: number
 }
 
-export default IMessageType
+export default ISubject
