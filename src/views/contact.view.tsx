@@ -11,16 +11,74 @@ import {
 
 import IContactViewProps from '../interfaces/props/contact.view.props.interface'
 import IContactViewState from '../interfaces/states/contact.view.state.interface'
+import ApiHelper from '../helpers/api.helper'
+import axios from 'axios'
+import StatusesData from '../data/statuses.data'
 
 // const messageUrl = `${process.env.API_URL}misc/messages/${process.env.APP_SLUG}`
 
 class ContactView extends Component<IContactViewProps> {
   state: IContactViewState = {
     loading: false,
+    success: false,
+    errors: [],
   }
 
-  handleSubmit(): void {
+  handleSubmit = async (event) => {
     console.log(`Submitting contact form.`)
+    event.preventDefault()
+
+    this.setState({
+      loading: true,
+      success: false,
+      errors: [],
+    })
+
+    const form = event.target
+    const formData = new FormData(form)
+    const formDataJson: any = {}
+    formData.forEach(function (value, key) {
+      formDataJson[key] = value
+
+      if (key === 'subject') {
+        formDataJson[key] = Number(value)
+      }
+    })
+    formDataJson['last_name'] = ``
+    console.log(formDataJson)
+
+    axios
+      .post(ApiHelper.messagesUrl, formDataJson)
+      .then((response) => {
+        console.log(response)
+        if (response.data && response.data.status === StatusesData.success) {
+          this.setState({
+            loading: false,
+            success: true,
+          })
+        }
+        // TODO: Cancel loading
+      })
+      .catch((errors) => {
+        console.error(errors)
+        // TODO: Cancel loading
+        // TODO: Set errors
+      })
+  }
+
+  renderSuccessAlert(): JSX.Element {
+    const { success }: IContactViewState = this.state
+
+    if (success) {
+      return (
+        <div className="alert alert-success shadow-v-br-300 m-v-b-400">
+          <p>Thank you for your message.</p>
+          <p>We will get back to you within 5 business days.</p>
+        </div>
+      )
+    }
+
+    return <></>
   }
 
   renderFormFields(): JSX.Element {
@@ -97,6 +155,7 @@ class ContactView extends Component<IContactViewProps> {
             name="message"
             id="input-message"
             className="form__field"
+            rows={4}
             required
           ></textarea>
         </div>
@@ -132,7 +191,7 @@ class ContactView extends Component<IContactViewProps> {
 
     subjectsData.map(function (subject, index) {
       subjectsJsx.push(
-        <option key={`s${index}`} value={subject.value}>
+        <option key={`s${index}`} value={subject.id}>
           {subject.title}
         </option>
       )
@@ -154,11 +213,9 @@ class ContactView extends Component<IContactViewProps> {
             Contact us and we will get back to you within 5 working days.
           </p>
 
-          <form
-            method="post"
-            className="form form-flex"
-            onSubmit={this.handleSubmit}
-          >
+          {this.renderSuccessAlert()}
+
+          <form className="form form-flex" onSubmit={this.handleSubmit}>
             {this.renderFormFields()}
           </form>
         </main>
