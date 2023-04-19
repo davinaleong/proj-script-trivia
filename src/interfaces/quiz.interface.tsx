@@ -1,8 +1,10 @@
 import IOption from './option.interface'
 
-export default interface IQuiz {
+interface IQuiz {
   name: string
   image: HTMLImageElement
   options: Array<IOption>
   completed: boolean
 }
+
+export default IQuiz

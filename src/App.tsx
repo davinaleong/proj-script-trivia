@@ -5,10 +5,10 @@ import { ReactElement, useState } from 'react'
 
 import IApp from './interfaces/app.interface'
 import CompletedMessagesData from './data/completed-messages.data'
-import { HomeView } from './views/home.view'
-import { QuizView } from './views/quiz.view'
-import { CompletedView } from './views/completed.view'
-import { ContactView } from './views/contact.view'
+import HomeView from './views/home.view'
+import QuizView from './views/quiz.view'
+import CompletedView from './views/completed.view'
+import ContactView from './views/contact.view'
 // import ImageLogo from './assets/images/logo-blue-svg.svg'
 
 export const App = ({ stepsData }: IApp) => {
