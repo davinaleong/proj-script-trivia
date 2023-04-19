@@ -1,6 +1,6 @@
-interface ICompletedView {
+interface ICompletedProps {
   completed: boolean
   completedMessagesData: Array<string>
 }
 
-export default ICompletedView
+export default ICompletedProps

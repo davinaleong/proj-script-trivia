@@ -4,12 +4,11 @@ import React, { Component, ReactElement } from 'react'
 // import { Helmet } from 'react-helmet'
 
 import IAppProps from './interfaces/props/app.props.interface'
-import CompletedMessagesData from './data/completed-messages.data'
+import IAppState from './interfaces/states/app.state.interface'
 import HomeView from './views/home.view'
 import QuizView from './views/quiz.view'
 import CompletedView from './views/completed.view'
 import ContactView from './views/contact.view'
-import IAppState from './interfaces/states/app.state.interface'
 
 class App extends Component<IAppProps> {
   state: IAppState = {

@@ -1,9 +1,9 @@
 import { ReactElement } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCheck, faRotateLeft } from '@fortawesome/free-solid-svg-icons'
-import ICompletedView from '../interfaces/views/completed.view.interface'
+import ICompletedProps from '../interfaces/props/completed.props.interface'
 
-function CompletedView({ completed, completedMessagesData }: ICompletedView) {
+function CompletedView({ completed, completedMessagesData }: ICompletedProps) {
   let subView: ReactElement = (
     <p className="fw-bold m-v-b-400">
       <a href="./index" className="btn btn-success">
