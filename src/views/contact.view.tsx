@@ -14,18 +14,16 @@ import IContactViewState from '../interfaces/states/contact.view.state.interface
 import ApiHelper from '../helpers/api.helper'
 import axios from 'axios'
 import StatusesData from '../data/statuses.data'
-
-// const messageUrl = `${process.env.API_URL}misc/messages/${process.env.APP_SLUG}`
+import ErrorsData from '../data/errors.data'
 
 class ContactView extends Component<IContactViewProps> {
   state: IContactViewState = {
     loading: false,
     success: false,
-    errors: [],
+    errors: ErrorsData,
   }
 
   handleSubmit = async (event) => {
-    console.log(`Submitting contact form.`)
     event.preventDefault()
 
     this.setState({
@@ -45,24 +43,24 @@ class ContactView extends Component<IContactViewProps> {
       }
     })
     formDataJson['last_name'] = ``
-    console.log(formDataJson)
 
     axios
       .post(ApiHelper.messagesUrl, formDataJson)
       .then((response) => {
-        console.log(response)
         if (response.data && response.data.status === StatusesData.success) {
           this.setState({
             loading: false,
             success: true,
+            errors: ErrorsData,
           })
         }
-        // TODO: Cancel loading
       })
       .catch((errors) => {
-        console.error(errors)
-        // TODO: Cancel loading
-        // TODO: Set errors
+        this.setState({
+          loading: false,
+          success: false,
+          errors: errors.response.data.errors,
+        })
       })
   }
 
@@ -81,8 +79,39 @@ class ContactView extends Component<IContactViewProps> {
     return <></>
   }
 
+  renderDangerAlert(): JSX.Element {
+    const { errors }: IContactViewState = this.state
+
+    const errorKeys = Object.keys(errors)
+    const errorsJsx: Array<JSX.Element> = []
+
+    errorKeys.forEach(function (errorKey, keyIndex: number) {
+      errors[errorKey].forEach(function (error: string, index: number) {
+        if (errorKey === 'first_name') {
+          errorsJsx.push(
+            <li key={`e${keyIndex}${index}`}>
+              {error.replace('first name', 'name')}
+            </li>
+          )
+        } else {
+          errorsJsx.push(<li key={`e${keyIndex}${index}`}>{error}</li>)
+        }
+      })
+    })
+
+    if (errorsJsx.length > 0) {
+      return (
+        <div className="alert alert-danger shadow-v-br-300 m-v-b-400">
+          <ul className="m-v-l-400">{errorsJsx}</ul>
+        </div>
+      )
+    }
+
+    return <></>
+  }
+
   renderFormFields(): JSX.Element {
-    const { loading }: IContactViewState = this.state
+    const { loading, errors }: IContactViewState = this.state
 
     if (loading) {
       return (
@@ -92,9 +121,21 @@ class ContactView extends Component<IContactViewProps> {
       )
     }
 
+    const hasSubjectError: string =
+      errors.subject && errors.subject.length > 0 ? 'true' : 'false'
+    const hasFirstNameError: string =
+      errors.first_name && errors.first_name.length > 0 ? 'true' : 'false'
+    const hasEmailError: string =
+      errors.email && errors.email.length > 0 ? 'true' : 'false'
+    const hasMessageError: string =
+      errors.message && errors.message.length > 0 ? 'true' : 'false'
+
     return (
       <>
-        <div className="form__group form__group-half form__group-required">
+        <div
+          className="form__group form__group-half form__group-required"
+          data-error={hasFirstNameError}
+        >
           <label htmlFor="input-first_name" className="form__label">
             Name
           </label>
@@ -119,7 +160,10 @@ class ContactView extends Component<IContactViewProps> {
           />
         </div>
 
-        <div className="form__group form__group-half form__group-required">
+        <div
+          className="form__group form__group-half form__group-required"
+          data-error={hasEmailError}
+        >
           <label htmlFor="input-email" className="form__label">
             Email
           </label>
@@ -132,7 +176,10 @@ class ContactView extends Component<IContactViewProps> {
           />
         </div>
 
-        <div className="form__group form__group-full form__group-required">
+        <div
+          className="form__group form__group-full form__group-required"
+          data-error={hasSubjectError}
+        >
           <label htmlFor="input-subject" className="form__label">
             Subject
           </label>
@@ -147,7 +194,10 @@ class ContactView extends Component<IContactViewProps> {
           </select>
         </div>
 
-        <div className="form__group form__group-full form__group-required">
+        <div
+          className="form__group form__group-full form__group-required"
+          data-error={hasMessageError}
+        >
           <label htmlFor="input-message" className="form__label">
             Message
           </label>
@@ -213,6 +263,7 @@ class ContactView extends Component<IContactViewProps> {
             Contact us and we will get back to you within 5 working days.
           </p>
 
+          {this.renderDangerAlert()}
           {this.renderSuccessAlert()}
 
           <form className="form form-flex" onSubmit={this.handleSubmit}>

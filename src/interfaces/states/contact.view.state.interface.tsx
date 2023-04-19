@@ -1,7 +1,7 @@
 interface IContactViewState {
   loading: boolean
   success: boolean
-  errors: Array<any>
+  errors: any
 }
 
 export default IContactViewState
