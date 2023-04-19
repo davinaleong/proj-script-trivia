@@ -33,3 +33,12 @@ npm run lint
 ```
 npm run format
 ```
+
+## TODO
+
+### A. Contact Form
+
+1. Form buttons
+1. Submit form to CMS
+1. Form validation
+1. Reset form
