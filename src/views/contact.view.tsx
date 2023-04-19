@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+// import axios from 'axios'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
@@ -7,33 +8,24 @@ import {
   faRotateLeft,
   faCircleNotch,
 } from '@fortawesome/free-solid-svg-icons'
-import { useEffect, useState } from 'react'
-import axios from 'axios'
-import ISubject from '../interfaces/subject.interface'
+
+import IContactViewProps from '../interfaces/props/contact.view.props.interface'
 import IContactViewState from '../interfaces/states/contact.view.state.interface'
 
-const subjectsUrl = `${process.env.API_URL}misc/messageTypes/${process.env.APP_SLUG}`
-const messageUrl = `${process.env.API_URL}misc/messages/${process.env.APP_SLUG}`
+// const messageUrl = `${process.env.API_URL}misc/messages/${process.env.APP_SLUG}`
 
-class ContactView extends Component {
+class ContactView extends Component<IContactViewProps> {
   state: IContactViewState = {
-    loading: true,
-    subjects: [],
-  }
-
-  async componentDidMount(): any {
-    const response = await axios.get(subjectsUrl)
-    this.setState({
-      loading: false,
-      subjects: response.data?.messageTypes?.data,
-    })
+    loading: false,
   }
 
   handleSubmit(): void {
     console.log(`Submitting contact form.`)
   }
 
-  renderFormFields(loading: boolean, subjects: Array<ISubject>): JSX.Element {
+  renderFormFields(): JSX.Element {
+    const { loading }: IContactViewState = this.state
+
     if (loading) {
       return (
         <div className="form__group form__group-full">
@@ -93,7 +85,7 @@ class ContactView extends Component {
             required
           >
             <option value="">-- Select --</option>
-            {this.renderSubjectOptions(subjects)}
+            {this.renderSubjectOptions()}
           </select>
         </div>
 
@@ -130,23 +122,22 @@ class ContactView extends Component {
     )
   }
 
-  renderSubjectOptions(subjects: Array<ISubject>): Array<JSX.Element> {
-    const messageTypeJsx: Array<JSX.Element> = []
+  renderSubjectOptions(): Array<JSX.Element> {
+    const { subjectsData }: IContactViewProps = this.props
+    const subjectsJsx: Array<JSX.Element> = []
 
-    subjects.map(function (messageType, index) {
-      messageTypeJsx.push(
-        <option key={`mt${index}`} value={messageType.value}>
-          {messageType.title}
+    subjectsData.map(function (subject, index) {
+      subjectsJsx.push(
+        <option key={`s${index}`} value={subject.value}>
+          {subject.title}
         </option>
       )
     })
 
-    return messageTypeJsx
+    return subjectsJsx
   }
 
   render() {
-    const { loading, subjects }: IContactViewState = this.state
-
     return (
       <div className="body-grid">
         <main className="main container p-v-y-400">
@@ -164,7 +155,7 @@ class ContactView extends Component {
             className="form form-flex"
             onSubmit={this.handleSubmit}
           >
-            {this.renderFormFields(loading, subjects)}
+            {this.renderFormFields()}
           </form>
         </main>
       </div>

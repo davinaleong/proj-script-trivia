@@ -2,6 +2,7 @@ import './styles/main.scss'
 
 import React, { Component, ReactElement } from 'react'
 // import { Helmet } from 'react-helmet'
+import axios from 'axios'
 
 import IAppProps from './interfaces/props/app.props.interface'
 import IAppState from './interfaces/states/app.state.interface'
@@ -10,9 +11,19 @@ import QuizView from './views/quiz.view'
 import CompletedView from './views/completed.view'
 import ContactView from './views/contact.view'
 
+const subjectsUrl = `${process.env.API_URL}misc/messageTypes/${process.env.APP_SLUG}`
+
 class App extends Component<IAppProps> {
   state: IAppState = {
     step: this.props.stepsData.contact,
+    subjectsData: [],
+  }
+
+  async componentDidMount(): any {
+    const response = await axios.get(subjectsUrl)
+    this.setState({
+      subjectsData: response.data?.messageTypes?.data,
+    })
   }
 
   setStep(step: number) {
@@ -35,8 +46,9 @@ class App extends Component<IAppProps> {
     this.setStep(this.props.stepsData.contact)
   }
 
-  renderView(step: number): ReactElement {
+  renderView(): ReactElement {
     const { stepsData, completedMessagesData }: IAppProps = this.props
+    const { step, subjectsData }: IAppState = this.state
 
     switch (step) {
       case stepsData.home:
@@ -54,7 +66,7 @@ class App extends Component<IAppProps> {
         )
 
       case stepsData.contact:
-        return <ContactView />
+        return <ContactView subjectsData={subjectsData} />
 
       default:
         return <h1 className="fw-black fz-xl ta-center">View not found.</h1>
