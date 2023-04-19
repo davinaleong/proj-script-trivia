@@ -6,12 +6,11 @@ import axios from 'axios'
 
 import IAppProps from './interfaces/props/app.props.interface'
 import IAppState from './interfaces/states/app.state.interface'
+import ApiHelper from './helpers/api.helper'
 import HomeView from './views/home.view'
 import QuizView from './views/quiz.view'
 import CompletedView from './views/completed.view'
 import ContactView from './views/contact.view'
-
-const subjectsUrl = `${process.env.API_URL}misc/messageTypes/${process.env.APP_SLUG}`
 
 class App extends Component<IAppProps> {
   state: IAppState = {
@@ -20,7 +19,7 @@ class App extends Component<IAppProps> {
   }
 
   async componentDidMount(): any {
-    const response = await axios.get(subjectsUrl)
+    const response = await axios.get(ApiHelper.subjectsUrl)
     this.setState({
       subjectsData: response.data?.messageTypes?.data,
     })

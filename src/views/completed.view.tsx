@@ -1,7 +1,7 @@
 import { ReactElement } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCheck, faRotateLeft } from '@fortawesome/free-solid-svg-icons'
-import ICompletedProps from '../interfaces/props/completed.props.interface'
+import ICompletedProps from '../interfaces/props/completed.view.props.interface'
 
 function CompletedView({ completed, completedMessagesData }: ICompletedProps) {
   let subView: ReactElement = (
