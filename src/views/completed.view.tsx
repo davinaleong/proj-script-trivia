@@ -1,6 +1,10 @@
 import { ReactElement } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCheck, faRotateLeft } from '@fortawesome/free-solid-svg-icons'
+import {
+  faCheck,
+  faCode,
+  faRotateLeft,
+} from '@fortawesome/free-solid-svg-icons'
 import ICompletedProps from '../interfaces/props/completed.view.props.interface'
 
 function CompletedView({
@@ -24,7 +28,7 @@ function CompletedView({
         className="btn btn-success"
         onClick={() => handleHomeClick()}
       >
-        Try another quiz <FontAwesomeIcon icon={faRotateLeft} />
+        Try another quiz <FontAwesomeIcon icon={faCode} />
       </button>
     </p>
   )
