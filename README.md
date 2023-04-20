@@ -42,7 +42,4 @@ npm run format
 
 ### A. Contact Form
 
-1. Card component
-1. Home page
-1. Set quiz completed
-1. Set selected quiz
+1. Completed view buttons
