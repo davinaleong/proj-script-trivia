@@ -34,6 +34,10 @@ npm run lint
 npm run format
 ```
 
+## File Stats
+
+44 scripts + 15 styles = 59 total
+
 ## TODO
 
 ### A. Contact Form
