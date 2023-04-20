@@ -7,10 +7,10 @@ function QuizComponent({
   index,
   quiz,
   overlay,
-  setQuizInfo,
+  handleQuizClick,
 }: IQuizComponentProps) {
   const handleClick = (): void => {
-    setQuizInfo(index)
+    handleQuizClick(index)
   }
 
   const { name, image, completed }: any = quiz

@@ -14,7 +14,6 @@ import HomeView from './views/home.view'
 import QuizView from './views/quiz.view'
 import CompletedView from './views/completed.view'
 import ContactView from './views/contact.view'
-import QuizComponent from './components/quiz.component'
 import IQuizInfo from './interfaces/quiz.info.interface'
 import CreatorHelper from './helpers/creator.helper'
 
@@ -95,7 +94,7 @@ class App extends Component<IAppProps> {
     this.setState({ quiz })
   }
 
-  setQuizInfo = (quizIndex: number): void => {
+  handleQuizClick = (quizIndex: number): void => {
     const { stepsData }: IAppProps = this.props
     const quizInfo: IQuizInfo = this.getQuizInfoFromQuizzesData(quizIndex)
     this.setState({
@@ -112,7 +111,10 @@ class App extends Component<IAppProps> {
     switch (step) {
       case stepsData.home:
         return (
-          <HomeView quizzesData={quizzesData} setQuizInfo={this.setQuizInfo} />
+          <HomeView
+            quizzesData={quizzesData}
+            handleQuizClick={this.handleQuizClick}
+          />
         )
 
       case stepsData.quiz:
