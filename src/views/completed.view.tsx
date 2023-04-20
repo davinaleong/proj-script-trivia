@@ -3,12 +3,29 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCheck, faRotateLeft } from '@fortawesome/free-solid-svg-icons'
 import ICompletedProps from '../interfaces/props/completed.view.props.interface'
 
-function CompletedView({ completed, completedMessagesData }: ICompletedProps) {
+function CompletedView({
+  completed,
+  completedMessagesData,
+  handleTryAnotherQuizClick,
+  handleResetQuizClick,
+}: ICompletedProps) {
+  const handleHomeClick = () => {
+    handleTryAnotherQuizClick
+  }
+
+  const handleResetClick = () => {
+    handleResetQuizClick
+  }
+
   let subView: ReactElement = (
     <p className="fw-bold m-v-b-400">
-      <a href="./index" className="btn btn-success">
+      <button
+        type="button"
+        className="btn btn-success"
+        onClick={() => handleHomeClick()}
+      >
         Try another quiz <FontAwesomeIcon icon={faRotateLeft} />
-      </a>
+      </button>
     </p>
   )
   if (completed) {
@@ -17,9 +34,13 @@ function CompletedView({ completed, completedMessagesData }: ICompletedProps) {
         <p className="fw-bold m-v-b-400">You have completed all quizzes.</p>
 
         <p className="fw-bold m-v-b-400">
-          <a href="./index" className="btn btn-danger">
+          <button
+            type="button"
+            className="btn btn-danger"
+            onClick={() => handleResetClick()}
+          >
             Reset quizzes <FontAwesomeIcon icon={faRotateLeft} />
-          </a>
+          </button>
         </p>
       </>
     )

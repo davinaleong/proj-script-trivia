@@ -104,6 +104,17 @@ class App extends Component<IAppProps> {
     })
   }
 
+  handleTryAnotherQuizClick = (): void => {
+    this.setStepToHome()
+  }
+
+  handleResetQuizClick = (): void => {
+    const { quizzesData }: IAppState = this.state
+    quizzesData.forEach(function (quiz: IQuiz) {
+      quiz.completed = false
+    })
+  }
+
   renderView = (): ReactElement => {
     const { stepsData, completedMessagesData }: IAppProps = this.props
     const { step, subjectsData, quizzesData }: IAppState = this.state
@@ -125,6 +136,8 @@ class App extends Component<IAppProps> {
           <CompletedView
             completed={false}
             completedMessagesData={completedMessagesData}
+            handleTryAnotherQuizClick={this.handleTryAnotherQuizClick}
+            handleResetQuizClick={this.handleResetQuizClick}
           />
         )
 
@@ -142,8 +155,6 @@ class App extends Component<IAppProps> {
   }
 
   render() {
-    const { quiz }: IAppState = this.state
-
     return (
       <>
         <div className="container | d-flex ai-center jc-center gap-v-300 p-v-300">
