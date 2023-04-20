@@ -19,7 +19,7 @@ import CreatorHelper from './helpers/creator.helper'
 
 class App extends Component<IAppProps> {
   state: IAppState = {
-    step: this.props.stepsData.home,
+    step: this.props.stepsData.completed,
     subjectsData: [],
     quizzesData: this.props.quizzesData,
     quizIndex: 0,
@@ -132,10 +132,14 @@ class App extends Component<IAppProps> {
         return <QuizView />
 
       case stepsData.completed:
+        const completedMessage: string =
+          completedMessagesData[
+            Math.floor(Math.random() * completedMessagesData.length)
+          ]
         return (
           <CompletedView
             completed={false}
-            completedMessagesData={completedMessagesData}
+            completedMessage={completedMessage}
             handleTryAnotherQuizClick={this.handleTryAnotherQuizClick}
             handleResetQuizClick={this.handleResetQuizClick}
           />

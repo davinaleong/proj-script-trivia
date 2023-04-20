@@ -9,7 +9,7 @@ import ICompletedProps from '../interfaces/props/completed.view.props.interface'
 
 function CompletedView({
   completed,
-  completedMessagesData,
+  completedMessage,
   handleTryAnotherQuizClick,
   handleResetQuizClick,
 }: ICompletedProps) {
@@ -49,11 +49,6 @@ function CompletedView({
       </>
     )
   }
-
-  const completedMessage: string =
-    completedMessagesData[
-      Math.floor(Math.random() * completedMessagesData.length)
-    ]
 
   return (
     <div className="body-grid viewport-height bg-success-100">

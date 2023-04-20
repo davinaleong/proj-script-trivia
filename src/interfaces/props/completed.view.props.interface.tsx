@@ -1,6 +1,6 @@
 interface ICompletedProps {
   completed: boolean
-  completedMessagesData: Array<string>
+  completedMessage: string
   handleTryAnotherQuizClick: any
   handleResetQuizClick: any
 }
