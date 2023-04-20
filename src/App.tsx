@@ -15,6 +15,8 @@ import QuizView from './views/quiz.view'
 import CompletedView from './views/completed.view'
 import ContactView from './views/contact.view'
 import QuizComponent from './components/quiz.component'
+import IQuizInfo from './interfaces/quiz.info.interface'
+import CreatorHelper from './helpers/creator.helper'
 
 class App extends Component<IAppProps> {
   state: IAppState = {
@@ -36,9 +38,10 @@ class App extends Component<IAppProps> {
     })
   }
 
-  getQuizFromQuizzesData = (): IQuiz => {
-    const { quizzesData, quizIndex }: IAppState = this.state
-    return quizzesData[quizIndex]
+  getQuizInfoFromQuizzesData = (quizIndex: number): IQuizInfo => {
+    const thisQuizIndex: number = this.correntQuizIndex(quizIndex)
+    const { quizzesData }: IAppState = this.state
+    return CreatorHelper.quizInfo(thisQuizIndex, quizzesData[thisQuizIndex])
   }
 
   correntQuizIndex = (quizIndex: number): number => {
@@ -85,11 +88,21 @@ class App extends Component<IAppProps> {
   }
 
   setQuizIndex = (quizIndex: number): void => {
-    this.setState({ quizIndex: this.correntQuizIndex(quizIndex) })
+    this.setState({ quizIndex })
   }
 
   setQuiz = (quiz: IQuiz | null): void => {
     this.setState({ quiz })
+  }
+
+  setQuizInfo = (quizIndex: number): void => {
+    const { stepsData }: IAppProps = this.props
+    const quizInfo: IQuizInfo = this.getQuizInfoFromQuizzesData(quizIndex)
+    this.setState({
+      step: stepsData.quiz,
+      quizIndex: quizInfo.index,
+      quiz: quizInfo.quiz,
+    })
   }
 
   renderView = (): ReactElement => {
@@ -98,7 +111,9 @@ class App extends Component<IAppProps> {
 
     switch (step) {
       case stepsData.home:
-        return <HomeView quizzesData={quizzesData} />
+        return (
+          <HomeView quizzesData={quizzesData} setQuizInfo={this.setQuizInfo} />
+        )
 
       case stepsData.quiz:
         return <QuizView />

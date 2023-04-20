@@ -4,6 +4,7 @@ interface IQuizComponentProps {
   index: number
   quiz: IQuiz | null
   overlay: string | null
+  setQuizInfo: any
 }
 
 export default IQuizComponentProps

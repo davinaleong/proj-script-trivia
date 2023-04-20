@@ -3,7 +3,16 @@ import { faCheck } from '@fortawesome/free-solid-svg-icons'
 
 import IQuizComponentProps from '../interfaces/props/quiz.component.interface'
 
-function QuizComponent({ quiz, overlay }: IQuizComponentProps) {
+function QuizComponent({
+  index,
+  quiz,
+  overlay,
+  setQuizInfo,
+}: IQuizComponentProps) {
+  const handleClick = (): void => {
+    setQuizInfo(index)
+  }
+
   const { name, image, completed }: any = quiz
   let quizOverlay: JSX.Element | null = null
   let quizClassName = `card | ta-center`
@@ -27,7 +36,11 @@ function QuizComponent({ quiz, overlay }: IQuizComponentProps) {
   }
 
   return (
-    <button type="button" className={quizClassName}>
+    <button
+      type="button"
+      className={quizClassName}
+      onClick={() => handleClick()}
+    >
       <div className="card__image | m-v-b-200">
         {quizOverlay}
         <img src={image} alt="Quiz Screenshot" className="m-v-inline-auto" />

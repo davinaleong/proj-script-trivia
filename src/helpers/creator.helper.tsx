@@ -1,4 +1,5 @@
 import IOption from '../interfaces/option.interface'
+import IQuizInfo from '../interfaces/quiz.info.interface'
 import IQuiz from '../interfaces/quiz.interface'
 
 const quiz = (
@@ -55,10 +56,15 @@ const quizWithOptions = (
   return quizzes
 }
 
+const quizInfo = (index: number, quiz: IQuiz): IQuizInfo => {
+  return { index, quiz }
+}
+
 const CreatorHelper = {
   quiz,
   option,
   quizWithOptions,
+  quizInfo,
 }
 
 export default CreatorHelper
