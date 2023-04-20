@@ -105,7 +105,7 @@ body,
 
 .container {
   --container-padding-inline: var(--size-v-400);
-  --container-width: #{breakpoint('lg')};
+  --container-width: #{breakpoint('xxl')};
 
   container-name: container;
   container-type: inline-size;
