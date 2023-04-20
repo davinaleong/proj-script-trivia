@@ -67,9 +67,9 @@ class App extends Component<IAppProps> {
     this.setStep(stepsData.home)
   }
 
-  setStepToQuiz = (quiz: IQuiz): void => {
+  setStepToQuiz = (): void => {
     const { stepsData }: IAppProps = this.props
-    this.setState({ step: stepsData.quiz, quiz })
+    this.setState({ step: stepsData.quiz })
   }
 
   setStepToCompleted = (): void => {
