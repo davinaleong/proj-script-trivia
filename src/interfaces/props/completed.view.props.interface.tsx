@@ -1,8 +1,8 @@
 interface ICompletedProps {
   completed: boolean
   completedMessage: string
-  handleTryAnotherQuizClick: any
-  handleResetQuizClick: any
+  handleContactHomeClick: any
+  handleContactResetClick: any
 }
 
 export default ICompletedProps

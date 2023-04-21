@@ -31,6 +31,8 @@ class App extends Component<IAppProps> {
   }
 
   componentDidMount = async () => {
+    console.log(`fn: componentDidMount`)
+
     const response = await axios.get(ApiHelper.subjectsUrl)
     this.setState({
       subjectsData: response.data?.messageTypes?.data,
@@ -38,12 +40,38 @@ class App extends Component<IAppProps> {
   }
 
   getQuizInfoFromQuizzesData = (quizIndex: number): IQuizInfo => {
+    console.log(`fn: getQuizInfoFromQuizzesData`)
+
     const thisQuizIndex: number = this.correntQuizIndex(quizIndex)
     const { quizzesData }: IAppState = this.state
     return CreatorHelper.quizInfo(thisQuizIndex, quizzesData[thisQuizIndex])
   }
 
+  getCompletedMessage = (): string => {
+    console.log(`fn: getCompletedMessage`)
+
+    const { completedMessagesData }: IAppProps = this.props
+    return completedMessagesData[
+      Math.floor(Math.random() * completedMessagesData.length)
+    ]
+  }
+
+  getCompleted = (): boolean => {
+    console.log(`fn: getCompleted`)
+
+    const { quizzesData }: IAppState = this.state
+    let completedCount = 0
+    quizzesData.forEach(function (quiz: IQuiz) {
+      if (quiz.completed) {
+        completedCount++
+      }
+    })
+    return quizzesData.length === completedCount
+  }
+
   correntQuizIndex = (quizIndex: number): number => {
+    console.log(`fn: correntQuizIndex`)
+
     const { quizzesData }: IAppState = this.state
 
     let thisQuizIndex: number = quizIndex
@@ -59,42 +87,60 @@ class App extends Component<IAppProps> {
   }
 
   setStep = (step: number): void => {
+    console.log(`fn: setStep`)
+
     this.setState({ step })
   }
 
   setStepToHome = (): void => {
+    console.log(`fn: setStepToHome`)
+
     const { stepsData }: IAppProps = this.props
     this.setStep(stepsData.home)
   }
 
   setStepToQuiz = (): void => {
+    console.log(`fn: setStepToQuiz`)
+
     const { stepsData }: IAppProps = this.props
     this.setState({ step: stepsData.quiz })
   }
 
   setStepToCompleted = (): void => {
+    console.log(`fn: setStepToCompleted`)
+
     const { stepsData }: IAppProps = this.props
     this.setStep(stepsData.completed)
   }
 
   setStepToContact = (): void => {
+    console.log(`fn: setStepToContact`)
+
     const { stepsData }: IAppProps = this.props
     this.setStep(stepsData.contact)
   }
 
   setQuizzesData = (quizzesData: Array<IQuiz>): void => {
+    console.log(`fn: setQuizzesData`)
+
     this.setState({ quizzesData })
   }
 
   setQuizIndex = (quizIndex: number): void => {
+    console.log(`fn: setQuizIndex`)
+
     this.setState({ quizIndex })
   }
 
   setQuiz = (quiz: IQuiz | null): void => {
+    console.log(`fn: setQuiz`)
+
     this.setState({ quiz })
   }
 
   handleQuizClick = (quizIndex: number): void => {
+    console.log(`fn: handleQuizClick`)
+
     const { stepsData }: IAppProps = this.props
     const quizInfo: IQuizInfo = this.getQuizInfoFromQuizzesData(quizIndex)
     this.setState({
@@ -104,19 +150,27 @@ class App extends Component<IAppProps> {
     })
   }
 
-  handleTryAnotherQuizClick = (): void => {
+  handleContactHomeClick = (): void => {
+    console.log(`fn: handleContactHomeClick`)
     this.setStepToHome()
   }
 
-  handleResetQuizClick = (): void => {
+  handleContactResetClick = (): void => {
+    console.log(`fn: handleContactResetClick`)
+
+    const { stepsData }: IAppProps = this.props
     const { quizzesData }: IAppState = this.state
-    quizzesData.forEach(function (quiz: IQuiz) {
-      quiz.completed = false
+    quizzesData.forEach(function (quiz: IQuiz, index: number) {
+      quizzesData[index].completed = false
+    })
+    this.setState({
+      step: stepsData.home,
+      quizzesData,
     })
   }
 
   renderView = (): ReactElement => {
-    const { stepsData, completedMessagesData }: IAppProps = this.props
+    const { stepsData }: IAppProps = this.props
     const { step, subjectsData, quizzesData }: IAppState = this.state
 
     switch (step) {
@@ -132,16 +186,15 @@ class App extends Component<IAppProps> {
         return <QuizView />
 
       case stepsData.completed:
-        const completedMessage: string =
-          completedMessagesData[
-            Math.floor(Math.random() * completedMessagesData.length)
-          ]
+        const completed: boolean = this.getCompleted()
+        const completedMessage: string = this.getCompletedMessage()
+
         return (
           <CompletedView
-            completed={false}
+            completed={completed}
             completedMessage={completedMessage}
-            handleTryAnotherQuizClick={this.handleTryAnotherQuizClick}
-            handleResetQuizClick={this.handleResetQuizClick}
+            handleContactHomeClick={this.handleContactHomeClick}
+            handleContactResetClick={this.handleContactResetClick}
           />
         )
 

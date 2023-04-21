@@ -7,18 +7,17 @@ import {
 } from '@fortawesome/free-solid-svg-icons'
 import ICompletedProps from '../interfaces/props/completed.view.props.interface'
 
-function CompletedView({
-  completed,
-  completedMessage,
-  handleTryAnotherQuizClick,
-  handleResetQuizClick,
-}: ICompletedProps) {
-  const handleHomeClick = () => {
-    handleTryAnotherQuizClick
+function CompletedView(props: ICompletedProps) {
+  const { completed, completedMessage }: ICompletedProps = props
+
+  const handleHomeClick = (): void => {
+    console.log(`fn: handleHomeClick`)
+    props.handleContactHomeClick()
   }
 
-  const handleResetClick = () => {
-    handleResetQuizClick
+  const handleResetClick = (): void => {
+    console.log(`fn: handleResetClick`)
+    props.handleContactResetClick()
   }
 
   let subView: ReactElement = (

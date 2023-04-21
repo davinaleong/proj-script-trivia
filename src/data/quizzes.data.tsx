@@ -46,7 +46,7 @@ CreatorHelper.quizWithOptions(
 
   `Match the Coding Language`,
   Image0002,
-  false,
+  true,
 
   `CSS`,
   `css`,
@@ -77,7 +77,7 @@ CreatorHelper.quizWithOptions(
 
   `Match the CSS Property`,
   Image0003,
-  false,
+  true,
 
   `CSS`,
   `css`,
