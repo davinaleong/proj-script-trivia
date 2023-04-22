@@ -252,7 +252,7 @@ class ContactView extends Component<IContactViewProps> {
 
   render() {
     return (
-      <div className="body-grid">
+      <div className="body-grid viewport-height">
         <main className="main container p-v-y-400">
           <h1 className="ff-secondary fz-xl ta-center m-v-b-300">
             Contact Script Trivia
