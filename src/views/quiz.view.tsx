@@ -11,6 +11,7 @@ import {
 import IQuizViewProps from '../interfaces/props/quiz.view.props.interface'
 import IQuizViewState from '../interfaces/states/quiz.view.state.interface'
 import IOption from '../interfaces/option.interface'
+import ShuffleHelper from '../helpers/shuffle.helper'
 
 class QuizView extends Component<IQuizViewProps> {
   state: IQuizViewState = {
@@ -73,6 +74,8 @@ class QuizView extends Component<IQuizViewProps> {
   render() {
     const { quiz }: IQuizViewProps = this.props
     const { name, options }: any = quiz
+    const shuffledOptions = ShuffleHelper(options)
+    console.log(options, shuffledOptions)
 
     return (
       <div className="body body-quiz">
@@ -107,7 +110,7 @@ class QuizView extends Component<IQuizViewProps> {
               <h1 className="ff-secondary fz-xl ta-center m-v-b-400">{name}</h1>
 
               <div className="cards-grid | m-v-b-400">
-                {options.map(({ image }: IOption, index: number) => {
+                {shuffledOptions.map(({ image }: IOption, index: number) => {
                   let letter = ``
                   switch (index) {
                     case 0:
