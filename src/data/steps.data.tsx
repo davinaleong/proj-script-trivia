@@ -1,6 +1,6 @@
-import ISteps from '../interfaces/steps.interface'
+import IStepsData from '../interfaces/data/steps.data.interface'
 
-const StepsData: ISteps = {
+const StepsData: IStepsData = {
   home: 0,
   quiz: 1,
   completed: 2,

@@ -1,8 +1,8 @@
-interface ISteps {
+interface IStepsData {
   home: number
   quiz: number
   completed: number
   contact: number
 }
 
-export default ISteps
+export default IStepsData

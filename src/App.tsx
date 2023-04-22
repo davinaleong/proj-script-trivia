@@ -19,7 +19,7 @@ import CreatorHelper from './helpers/creator.helper'
 
 class App extends Component<IAppProps> {
   state: IAppState = {
-    step: this.props.stepsData.completed,
+    step: this.props.stepsData.quiz,
     subjectsData: [],
     quizzesData: this.props.quizzesData,
     quizIndex: 0,
@@ -150,6 +150,18 @@ class App extends Component<IAppProps> {
     })
   }
 
+  handleQuizHomeClick = (): void => {
+    this.setStepToHome()
+  }
+
+  handleQuizContactClick = (): void => {
+    this.setStepToContact()
+  }
+
+  handleQuizSubmit = (): void => {
+    this.setStepToCompleted
+  }
+
   handleContactHomeClick = (): void => {
     console.log(`fn: handleContactHomeClick`)
     this.setStepToHome()
@@ -170,8 +182,9 @@ class App extends Component<IAppProps> {
   }
 
   renderView = (): ReactElement => {
-    const { stepsData }: IAppProps = this.props
-    const { step, subjectsData, quizzesData }: IAppState = this.state
+    const { stepsData, optionsData }: IAppProps = this.props
+    const { step, subjectsData, quizzesData, quizIndex, quiz }: IAppState =
+      this.state
 
     switch (step) {
       case stepsData.home:
@@ -183,7 +196,16 @@ class App extends Component<IAppProps> {
         )
 
       case stepsData.quiz:
-        return <QuizView />
+        return (
+          <QuizView
+            quizIndex={quizIndex}
+            quiz={quiz}
+            optionsData={optionsData}
+            handleQuizHomeClick={this.handleQuizHomeClick}
+            handleQuizContactClick={this.handleQuizContactClick}
+            handleQuizSubmit={this.handleQuizSubmit}
+          />
+        )
 
       case stepsData.completed:
         const completed: boolean = this.getCompleted()
