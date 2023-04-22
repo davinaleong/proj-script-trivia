@@ -2,7 +2,7 @@ import IOption from './option.interface'
 
 interface IQuiz {
   name: string
-  image: HTMLImageElement
+  image: any
   options: Array<IOption>
   completed: boolean
 }

@@ -10,6 +10,7 @@ import {
 
 import IQuizViewProps from '../interfaces/props/quiz.view.props.interface'
 import IQuizViewState from '../interfaces/states/quiz.view.state.interface'
+import IOption from '../interfaces/option.interface'
 
 class QuizView extends Component<IQuizViewProps> {
   state: IQuizViewState = {
@@ -25,9 +26,35 @@ class QuizView extends Component<IQuizViewProps> {
     errors: [],
   }
 
+  getBooleanString = (boolean: boolean): string => {
+    return boolean ? 'true' : 'false'
+  }
+
+  getShowHelpModalString = (): string => {
+    const { showHelpModal }: IQuizViewState = this.state
+    return this.getBooleanString(showHelpModal)
+  }
+
+  getShowOptionsModalString = (): string => {
+    const { showOptionsModal }: IQuizViewState = this.state
+    return this.getBooleanString(showOptionsModal)
+  }
+
+  getShowImageModalString = (): string => {
+    const { showImageModal }: IQuizViewState = this.state
+    return this.getBooleanString(showImageModal)
+  }
+
   setShowHelpModal = (showHelpModal: boolean) => {
     this.setState({
       showHelpModal,
+    })
+  }
+
+  setShowImageModal = (imageModalImage: any, showImageModal: boolean) => {
+    this.setState({
+      imageModalImage,
+      showImageModal,
     })
   }
 
@@ -35,15 +62,20 @@ class QuizView extends Component<IQuizViewProps> {
     this.props.handleQuizHomeClick()
   }
 
+  handleOptionClick = (optionLetter: string): void => {
+    console.log(`fn: handleOptionClick(${optionLetter})`)
+  }
+
   handleContactClick = (): void => {
     this.props.handleQuizContactClick()
   }
 
   render() {
-    const { showHelpModal }: IQuizViewState = this.state
+    const { quiz }: IQuizViewProps = this.props
+    const { name, options }: any = quiz
 
     return (
-      <div className="body-quiz">
+      <div className="body body-quiz">
         <button
           type="button"
           className="btn btn-icon btn-fixed btn-top btn-left shadow-v-br-300"
@@ -72,70 +104,44 @@ class QuizView extends Component<IQuizViewProps> {
             </button>
 
             <div className="container">
-              <h1 className="ff-secondary fz-xl ta-center m-v-b-400">
-                Quiz Title
-              </h1>
+              <h1 className="ff-secondary fz-xl ta-center m-v-b-400">{name}</h1>
 
               <div className="cards-grid | m-v-b-400">
-                <button
-                  type="button"
-                  className="card | ta-left"
-                  data-element="btn-option"
-                >
-                  <h2 className="fw-black fz-xl m-v-b-200">A</h2>
+                {options.map(({ image }: IOption, index: number) => {
+                  let letter = ``
+                  switch (index) {
+                    case 0:
+                      letter = `A`
+                      break
 
-                  <div className="card__image">
-                    <img
-                      src="./src/assets/images/option.png"
-                      alt="Option Screenshot"
-                    />
-                  </div>
-                </button>
+                    case 1:
+                      letter = `B`
+                      break
 
-                <button
-                  type="button"
-                  className="card | ta-left"
-                  data-element="btn-option"
-                >
-                  <h2 className="fw-black fz-xl m-v-b-200">B</h2>
+                    case 2:
+                      letter = `C`
+                      break
 
-                  <div className="card__image">
-                    <img
-                      src="./src/assets/images/option.png"
-                      alt="Option Screenshot"
-                    />
-                  </div>
-                </button>
+                    case 3:
+                      letter = `D`
+                      break
+                  }
 
-                <button
-                  type="button"
-                  className="card | ta-left"
-                  data-element="btn-option"
-                >
-                  <h2 className="fw-black fz-xl m-v-b-200">C</h2>
+                  return (
+                    <button
+                      key={`o${index}`}
+                      type="button"
+                      className="card | ta-left"
+                      onClick={() => this.handleOptionClick(letter)}
+                    >
+                      <h2 className="fw-black fz-xl m-v-b-200">{letter}</h2>
 
-                  <div className="card__image">
-                    <img
-                      src="./src/assets/images/option.png"
-                      alt="Option Screenshot"
-                    />
-                  </div>
-                </button>
-
-                <button
-                  type="button"
-                  className="card | ta-left"
-                  data-element="btn-option"
-                >
-                  <h2 className="fw-black fz-xl m-v-b-200">D</h2>
-
-                  <div className="card__image">
-                    <img
-                      src="./src/assets/images/option.png"
-                      alt="Option Screenshot"
-                    />
-                  </div>
-                </button>
+                      <div className="card__image">
+                        <img src={image} alt="Option Screenshot" />
+                      </div>
+                    </button>
+                  )
+                })}
               </div>
 
               <div className="alert alert-danger" data-element="alert">
@@ -215,7 +221,7 @@ class QuizView extends Component<IQuizViewProps> {
         <div
           className="modal"
           data-element="help-modal"
-          data-active={showHelpModal ? 'true' : 'false'}
+          data-active={this.getShowHelpModalString}
         >
           <button
             type="button"
@@ -251,7 +257,11 @@ class QuizView extends Component<IQuizViewProps> {
           </div>
         </div>
 
-        <div className="modal" data-element="options-modal">
+        <div
+          className="modal"
+          data-element="options-modal"
+          data-active={this.getShowOptionsModalString}
+        >
           <button
             type="button"
             className="btn btn-danger btn-icon btn-fixed btn-top btn-right shadow-v-br-300"
@@ -284,7 +294,11 @@ class QuizView extends Component<IQuizViewProps> {
           </div>
         </div>
 
-        <div className="modal" data-element="image-modal">
+        <div
+          className="modal"
+          data-element="image-modal"
+          data-active={this.getShowImageModalString}
+        >
           <button
             type="button"
             className="btn btn-danger btn-icon btn-fixed btn-top btn-right shadow-v-br-300"

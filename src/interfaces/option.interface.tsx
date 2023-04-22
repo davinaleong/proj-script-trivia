@@ -1,6 +1,6 @@
 interface IOption {
   name: string
   key: string
-  image: HTMLImageElement
+  image: any
 }
 export default IOption
