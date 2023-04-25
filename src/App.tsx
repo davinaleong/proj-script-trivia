@@ -9,6 +9,7 @@ import IAppState from './interfaces/states/app.state.interface'
 import IQuiz from './interfaces/quiz.interface'
 
 import ApiHelper from './helpers/api.helper'
+import PrintHelper from './helpers/print.helper'
 
 import HomeView from './views/home.view'
 import QuizView from './views/quiz.view'
@@ -31,24 +32,24 @@ class App extends Component<IAppProps> {
   }
 
   componentDidMount = async () => {
-    console.log(`fn: componentDidMount`)
+    PrintHelper.logFunction(`componentDidMount`)
 
-    const response = await axios.get(ApiHelper.subjectsUrl)
-    this.setState({
-      subjectsData: response.data?.messageTypes?.data,
-    })
+    // const response = await axios.get(ApiHelper.subjectsUrl)
+    // this.setState({
+    //   subjectsData: response.data?.messageTypes?.data,
+    // })
   }
 
   getQuizInfoFromQuizzesData = (quizIndex: number): IQuizInfo => {
-    console.log(`fn: getQuizInfoFromQuizzesData`)
+    PrintHelper.logFunction(`getQuizInfoFromQuizzesData`)
 
-    const thisQuizIndex: number = this.correntQuizIndex(quizIndex)
+    const thisQuizIndex: number = this.correctQuizIndex(quizIndex)
     const { quizzesData }: IAppState = this.state
     return CreatorHelper.quizInfo(thisQuizIndex, quizzesData[thisQuizIndex])
   }
 
   getCompletedMessage = (): string => {
-    console.log(`fn: getCompletedMessage`)
+    PrintHelper.logFunction(`getCompletedMessage`)
 
     const { completedMessagesData }: IAppProps = this.props
     return completedMessagesData[
@@ -57,7 +58,7 @@ class App extends Component<IAppProps> {
   }
 
   getCompleted = (): boolean => {
-    console.log(`fn: getCompleted`)
+    PrintHelper.logFunction(`getCompleted`)
 
     const { quizzesData }: IAppState = this.state
     let completedCount = 0
@@ -69,8 +70,8 @@ class App extends Component<IAppProps> {
     return quizzesData.length === completedCount
   }
 
-  correntQuizIndex = (quizIndex: number): number => {
-    console.log(`fn: correntQuizIndex`)
+  correctQuizIndex = (quizIndex: number): number => {
+    PrintHelper.logFunction(`correctQuizIndex`)
 
     const { quizzesData }: IAppState = this.state
 
@@ -87,59 +88,59 @@ class App extends Component<IAppProps> {
   }
 
   setStep = (step: number): void => {
-    console.log(`fn: setStep`)
+    PrintHelper.logFunction(`setStep`)
 
     this.setState({ step })
   }
 
   setStepToHome = (): void => {
-    console.log(`fn: setStepToHome`)
+    PrintHelper.logFunction(`setStepToHome`)
 
     const { stepsData }: IAppProps = this.props
     this.setStep(stepsData.home)
   }
 
   setStepToQuiz = (): void => {
-    console.log(`fn: setStepToQuiz`)
+    PrintHelper.logFunction(`setStepToQuiz`)
 
     const { stepsData }: IAppProps = this.props
     this.setState({ step: stepsData.quiz })
   }
 
   setStepToCompleted = (): void => {
-    console.log(`fn: setStepToCompleted`)
+    PrintHelper.logFunction(`setStepToCompleted`)
 
     const { stepsData }: IAppProps = this.props
     this.setStep(stepsData.completed)
   }
 
   setStepToContact = (): void => {
-    console.log(`fn: setStepToContact`)
+    PrintHelper.logFunction(`setStepToContact`)
 
     const { stepsData }: IAppProps = this.props
     this.setStep(stepsData.contact)
   }
 
   setQuizzesData = (quizzesData: Array<IQuiz>): void => {
-    console.log(`fn: setQuizzesData`)
+    PrintHelper.logFunction(`setQuizzesData`)
 
     this.setState({ quizzesData })
   }
 
   setQuizIndex = (quizIndex: number): void => {
-    console.log(`fn: setQuizIndex`)
+    PrintHelper.logFunction(`setQuizIndex`)
 
     this.setState({ quizIndex })
   }
 
   setQuiz = (quiz: IQuiz | null): void => {
-    console.log(`fn: setQuiz`)
+    PrintHelper.logFunction(`setQuiz`)
 
     this.setState({ quiz })
   }
 
   handleQuizClick = (quizIndex: number): void => {
-    console.log(`fn: handleQuizClick`)
+    PrintHelper.logFunction(`handleQuizClick`)
 
     const { stepsData }: IAppProps = this.props
     const quizInfo: IQuizInfo = this.getQuizInfoFromQuizzesData(quizIndex)
@@ -151,6 +152,7 @@ class App extends Component<IAppProps> {
   }
 
   handleQuizHomeClick = (): void => {
+    PrintHelper.logFunction(`handleQuizHomeClick`)
     this.setStepToHome()
   }
 
@@ -163,12 +165,12 @@ class App extends Component<IAppProps> {
   }
 
   handleContactHomeClick = (): void => {
-    console.log(`fn: handleContactHomeClick`)
+    PrintHelper.logFunction(`handleContactHomeClick`)
     this.setStepToHome()
   }
 
   handleContactResetClick = (): void => {
-    console.log(`fn: handleContactResetClick`)
+    PrintHelper.logFunction(`handleContactResetClick`)
 
     const { stepsData }: IAppProps = this.props
     const { quizzesData }: IAppState = this.state
