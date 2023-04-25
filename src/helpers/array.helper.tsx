@@ -1,4 +1,4 @@
-const ShuffleHelper = (array: Array<any>): Array<any> => {
+const shuffle = (array: Array<any>): Array<any> => {
   let currentIndex: number = array.length
   let randomIndex = 0
 
@@ -18,4 +18,8 @@ const ShuffleHelper = (array: Array<any>): Array<any> => {
   return array
 }
 
-export default ShuffleHelper
+const ArrayHelper = {
+  shuffle,
+}
+
+export default ArrayHelper

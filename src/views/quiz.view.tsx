@@ -11,7 +11,7 @@ import {
 import IQuizViewProps from '../interfaces/props/quiz.view.props.interface'
 import IQuizViewState from '../interfaces/states/quiz.view.state.interface'
 import IOption from '../interfaces/option.interface'
-import ShuffleHelper from '../helpers/shuffle.helper'
+import ArrayHelper from '../helpers/array.helper'
 
 class QuizView extends Component<IQuizViewProps> {
   state: IQuizViewState = {
@@ -74,7 +74,7 @@ class QuizView extends Component<IQuizViewProps> {
   render() {
     const { quiz }: IQuizViewProps = this.props
     const { name, options }: any = quiz
-    const shuffledOptions = ShuffleHelper(options)
+    const shuffledOptions = ArrayHelper.shuffle(options)
     console.log(options, shuffledOptions)
 
     return (
