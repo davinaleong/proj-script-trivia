@@ -157,10 +157,12 @@ class App extends Component<IAppProps> {
   }
 
   handleQuizContactClick = (): void => {
+    PrintHelper.logFunction(`handleQuizContactClick`)
     this.setStepToContact()
   }
 
   handleQuizSubmit = (): void => {
+    PrintHelper.logFunction(`handleQuizSubmit`)
     this.setStepToCompleted
   }
 
@@ -184,6 +186,8 @@ class App extends Component<IAppProps> {
   }
 
   renderView = (): ReactElement => {
+    PrintHelper.logFunction(`renderView`)
+
     const { stepsData, optionsData }: IAppProps = this.props
     const { step, subjectsData, quizzesData, quizIndex, quiz }: IAppState =
       this.state
