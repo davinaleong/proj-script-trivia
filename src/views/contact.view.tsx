@@ -15,6 +15,7 @@ import ApiHelper from '../helpers/api.helper'
 import axios from 'axios'
 import StatusesData from '../data/statuses.data'
 import ErrorsData from '../data/errors.data'
+import PrintHelper from '../helpers/print.helper'
 
 class ContactView extends Component<IContactViewProps> {
   state: IContactViewState = {
@@ -24,6 +25,8 @@ class ContactView extends Component<IContactViewProps> {
   }
 
   handleSubmit = async (event) => {
+    PrintHelper.logFunction(`handleSubmit`)
+
     event.preventDefault()
 
     this.setState({

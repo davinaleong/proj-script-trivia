@@ -6,17 +6,18 @@ import {
   faRotateLeft,
 } from '@fortawesome/free-solid-svg-icons'
 import ICompletedProps from '../interfaces/props/completed.view.props.interface'
+import PrintHelper from '../helpers/print.helper'
 
 function CompletedView(props: ICompletedProps) {
   const { completed, completedMessage }: ICompletedProps = props
 
   const handleHomeClick = (): void => {
-    console.log(`fn: handleHomeClick`)
+    PrintHelper.logFunction(`handleHomeClick`)
     props.handleContactHomeClick()
   }
 
   const handleResetClick = (): void => {
-    console.log(`fn: handleResetClick`)
+    PrintHelper.logFunction(`handleResetClick`)
     props.handleContactResetClick()
   }
 

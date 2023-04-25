@@ -12,6 +12,7 @@ import IQuizViewProps from '../interfaces/props/quiz.view.props.interface'
 import IQuizViewState from '../interfaces/states/quiz.view.state.interface'
 import IOption from '../interfaces/option.interface'
 import ArrayHelper from '../helpers/array.helper'
+import PrintHelper from '../helpers/print.helper'
 
 class QuizView extends Component<IQuizViewProps> {
   state: IQuizViewState = {
@@ -28,31 +29,43 @@ class QuizView extends Component<IQuizViewProps> {
   }
 
   getBooleanString = (boolean: boolean): string => {
+    PrintHelper.logFunctionWithParams(`getBooleanString`, `boolean: ${boolean}`)
     return boolean ? 'true' : 'false'
   }
 
   getShowHelpModalString = (): string => {
+    PrintHelper.logFunction(`getShowHelpModalString`)
     const { showHelpModal }: IQuizViewState = this.state
     return this.getBooleanString(showHelpModal)
   }
 
   getShowOptionsModalString = (): string => {
+    PrintHelper.logFunction(`getShowOptionsModalString`)
     const { showOptionsModal }: IQuizViewState = this.state
     return this.getBooleanString(showOptionsModal)
   }
 
   getShowImageModalString = (): string => {
+    PrintHelper.logFunction(`getShowImageModalString`)
     const { showImageModal }: IQuizViewState = this.state
     return this.getBooleanString(showImageModal)
   }
 
   setShowHelpModal = (showHelpModal: boolean) => {
+    PrintHelper.logFunctionWithParams(
+      `setShowHelpModal`,
+      `showHelpModal: ${showHelpModal}`
+    )
     this.setState({
       showHelpModal,
     })
   }
 
   setShowImageModal = (imageModalImage: any, showImageModal: boolean) => {
+    PrintHelper.logFunctionWithParams(
+      `setShowHelpModal`,
+      `showImageModal: ${showImageModal}`
+    )
     this.setState({
       imageModalImage,
       showImageModal,
@@ -60,14 +73,20 @@ class QuizView extends Component<IQuizViewProps> {
   }
 
   handleHomeClick = (): void => {
+    PrintHelper.logFunction(`handleHomeClick`)
     this.props.handleQuizHomeClick()
   }
 
   handleOptionClick = (optionLetter: string): void => {
+    PrintHelper.logFunctionWithParams(
+      `handleOptionClick`,
+      `optionLetter: ${optionLetter}`
+    )
     console.log(`fn: handleOptionClick(${optionLetter})`)
   }
 
   handleContactClick = (): void => {
+    PrintHelper.logFunction(`handleContactClick`)
     this.props.handleQuizContactClick()
   }
 
