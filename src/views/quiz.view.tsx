@@ -1,4 +1,4 @@
-import { Component } from 'react'
+import { Component, ReactNode } from 'react'
 import _ from 'lodash'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
@@ -15,6 +15,7 @@ import IOption from '../interfaces/option.interface'
 // import ArrayHelper from '../helpers/array.helper'
 import PrintHelper from '../helpers/print.helper'
 import AlertComponent from '../components/alert.component'
+import OptionComponent from '../components/option.component'
 
 class QuizView extends Component<IQuizViewProps> {
   state: IQuizViewState = {
@@ -92,15 +93,37 @@ class QuizView extends Component<IQuizViewProps> {
   }
 
   renderAlert = (): JSX.Element => {
+    PrintHelper.logFunction(`renderAlert`)
     const { errors }: IQuizViewState = this.state
     return <AlertComponent className="alert-danger" errors={errors} />
   }
 
+  renderOptions = (): Array<ReactNode> => {
+    PrintHelper.logFunction(`renderOptions`)
+
+    const { quiz, optionsData }: IQuizViewProps = this.props
+    const { options }: any = quiz
+    const shuffledOptions = _.shuffle(options)
+    const optionsJsx: Array<ReactNode> = []
+
+    shuffledOptions.map((option: IOption, index: number): void => {
+      optionsJsx.push(
+        <OptionComponent
+          key={`o${index}`}
+          optionIndex={index}
+          option={option}
+          optionsData={optionsData}
+          handleOptionClick={this.handleOptionClick}
+        />
+      )
+    })
+
+    return optionsJsx
+  }
+
   render() {
     const { quiz }: IQuizViewProps = this.props
-    const { name, options }: any = quiz
-    const shuffledOptions = _.shuffle(options)
-    console.log(options, shuffledOptions)
+    const { name }: any = quiz
 
     return (
       <div className="body body-quiz">
@@ -136,43 +159,7 @@ class QuizView extends Component<IQuizViewProps> {
 
               {this.renderAlert()}
 
-              <div className="cards-grid | m-v-b-400">
-                {shuffledOptions.map(({ image }: IOption, index: number) => {
-                  let letter = ``
-                  switch (index) {
-                    case 0:
-                      letter = `A`
-                      break
-
-                    case 1:
-                      letter = `B`
-                      break
-
-                    case 2:
-                      letter = `C`
-                      break
-
-                    case 3:
-                      letter = `D`
-                      break
-                  }
-
-                  return (
-                    <button
-                      key={`o${index}`}
-                      type="button"
-                      className="card | ta-left"
-                      onClick={() => this.handleOptionClick(letter)}
-                    >
-                      <h2 className="fw-black fz-xl m-v-b-200">{letter}</h2>
-
-                      <div className="card__image">
-                        <img src={image} alt="Option Screenshot" />
-                      </div>
-                    </button>
-                  )
-                })}
-              </div>
+              <div className="cards-grid | m-v-b-400">{this.renderOptions}</div>
             </div>
           </main>
           <aside className="quiz__aside bg-gray-100 p-v-300">
