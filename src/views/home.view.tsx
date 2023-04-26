@@ -11,7 +11,7 @@ function HomeView({ quizzesData, handleQuizClick }: IHomeViewProps) {
           <p className="fz-lg">Pick your quiz!</p>
         </header>
         <div className="cards-grid">
-          {quizzesData.map(function (quiz: IQuiz, index: number) {
+          {quizzesData.map(function (quiz: IQuiz, index: number): JSX.Element {
             return (
               <QuizComponent
                 key={`q${index}`}

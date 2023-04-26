@@ -14,6 +14,7 @@ import IQuizViewState from '../interfaces/states/quiz.view.state.interface'
 import IOption from '../interfaces/option.interface'
 // import ArrayHelper from '../helpers/array.helper'
 import PrintHelper from '../helpers/print.helper'
+import AlertComponent from '../components/alert.component'
 
 class QuizView extends Component<IQuizViewProps> {
   state: IQuizViewState = {
@@ -26,7 +27,7 @@ class QuizView extends Component<IQuizViewProps> {
     optionB: '',
     optionC: '',
     optionD: '',
-    errors: [],
+    errors: ['Error 1', 'Error 2'],
   }
 
   getBooleanString = (boolean: boolean): string => {
@@ -83,12 +84,16 @@ class QuizView extends Component<IQuizViewProps> {
       `handleOptionClick`,
       `optionLetter: ${optionLetter}`
     )
-    console.log(`fn: handleOptionClick(${optionLetter})`)
   }
 
   handleContactClick = (): void => {
     PrintHelper.logFunction(`handleContactClick`)
     this.props.handleQuizContactClick()
+  }
+
+  renderAlert = (): JSX.Element => {
+    const { errors }: IQuizViewState = this.state
+    return <AlertComponent className="alert-danger" errors={errors} />
   }
 
   render() {
@@ -129,13 +134,7 @@ class QuizView extends Component<IQuizViewProps> {
             <div className="container">
               <h1 className="ff-secondary fz-xl ta-center m-v-b-400">{name}</h1>
 
-              <div className="alert alert-danger m-v-b-400">
-                <p>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Deserunt, enim? Facere blanditiis porro quo totam dolorum hic
-                  cum, ex a.
-                </p>
-              </div>
+              {this.renderAlert()}
 
               <div className="cards-grid | m-v-b-400">
                 {shuffledOptions.map(({ image }: IOption, index: number) => {
