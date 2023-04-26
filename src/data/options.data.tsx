@@ -1,10 +1,10 @@
 import IOptionsData from '../interfaces/data/options.data.interface'
 
 const OptionsData: IOptionsData = {
-  a: 'a',
-  b: 'b',
-  c: 'c',
-  d: 'd',
+  0: 'A',
+  1: 'B',
+  2: 'C',
+  3: 'D',
 }
 
 export default OptionsData

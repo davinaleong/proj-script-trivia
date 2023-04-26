@@ -1,8 +1,8 @@
 interface IOptionsData {
-  a: string
-  b: string
-  c: string
-  d: string
+  0: string
+  1: string
+  2: string
+  3: string
 }
 
 export default IOptionsData
