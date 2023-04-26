@@ -1,4 +1,5 @@
 import { Component } from 'react'
+import _ from 'lodash'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
   faChevronLeft,
@@ -11,7 +12,7 @@ import {
 import IQuizViewProps from '../interfaces/props/quiz.view.props.interface'
 import IQuizViewState from '../interfaces/states/quiz.view.state.interface'
 import IOption from '../interfaces/option.interface'
-import ArrayHelper from '../helpers/array.helper'
+// import ArrayHelper from '../helpers/array.helper'
 import PrintHelper from '../helpers/print.helper'
 
 class QuizView extends Component<IQuizViewProps> {
@@ -93,7 +94,7 @@ class QuizView extends Component<IQuizViewProps> {
   render() {
     const { quiz }: IQuizViewProps = this.props
     const { name, options }: any = quiz
-    const shuffledOptions = ArrayHelper.shuffle(options)
+    const shuffledOptions = _.shuffle(options)
     console.log(options, shuffledOptions)
 
     return (
@@ -127,6 +128,14 @@ class QuizView extends Component<IQuizViewProps> {
 
             <div className="container">
               <h1 className="ff-secondary fz-xl ta-center m-v-b-400">{name}</h1>
+
+              <div className="alert alert-danger m-v-b-400">
+                <p>
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                  Deserunt, enim? Facere blanditiis porro quo totam dolorum hic
+                  cum, ex a.
+                </p>
+              </div>
 
               <div className="cards-grid | m-v-b-400">
                 {shuffledOptions.map(({ image }: IOption, index: number) => {
@@ -164,14 +173,6 @@ class QuizView extends Component<IQuizViewProps> {
                     </button>
                   )
                 })}
-              </div>
-
-              <div className="alert alert-danger" data-element="alert">
-                <p>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Deserunt, enim? Facere blanditiis porro quo totam dolorum hic
-                  cum, ex a.
-                </p>
               </div>
             </div>
           </main>
