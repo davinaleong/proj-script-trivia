@@ -85,6 +85,9 @@ class QuizView extends Component<IQuizViewProps> {
       `handleOptionClick`,
       `optionLetter: ${optionLetter}`
     )
+    this.setState({
+      selectedOption: optionLetter,
+    })
   }
 
   handleContactClick = (): void => {
@@ -98,8 +101,8 @@ class QuizView extends Component<IQuizViewProps> {
     return <AlertComponent className="alert-danger" errors={errors} />
   }
 
-  renderOptions = (): Array<ReactNode> => {
-    PrintHelper.logFunction(`renderOptions`)
+  renderOptionsGrid = (): JSX.Element => {
+    PrintHelper.logFunction(`renderOptionsGrid`)
 
     const { quiz, optionsData }: IQuizViewProps = this.props
     const { options }: any = quiz
@@ -118,7 +121,7 @@ class QuizView extends Component<IQuizViewProps> {
       )
     })
 
-    return optionsJsx
+    return <div className="cards-grid | m-v-b-400">{optionsJsx}</div>
   }
 
   render() {
@@ -159,7 +162,7 @@ class QuizView extends Component<IQuizViewProps> {
 
               {this.renderAlert()}
 
-              <div className="cards-grid | m-v-b-400">{this.renderOptions}</div>
+              {this.renderOptionsGrid()}
             </div>
           </main>
           <aside className="quiz__aside bg-gray-100 p-v-300">
