@@ -16,6 +16,7 @@ import IOption from '../interfaces/option.interface'
 import PrintHelper from '../helpers/print.helper'
 import AlertComponent from '../components/alert.component'
 import OptionComponent from '../components/option.component'
+import ModalComponent from '../components/modal.component'
 
 class QuizView extends Component<IQuizViewProps> {
   state: IQuizViewState = {
@@ -52,6 +53,20 @@ class QuizView extends Component<IQuizViewProps> {
     PrintHelper.logFunction(`getShowImageModalString`)
     const { showImageModal }: IQuizViewState = this.state
     return this.getBooleanString(showImageModal)
+  }
+
+  showHelpModal = () => {
+    PrintHelper.logFunction(`showHelpModal`)
+    this.setState({
+      showHelpModal: true,
+    })
+  }
+
+  hideHelpModal = () => {
+    PrintHelper.logFunction(`hideHelpModal`)
+    this.setState({
+      showHelpModal: false,
+    })
   }
 
   setShowHelpModal = (showHelpModal: boolean) => {
@@ -104,10 +119,9 @@ class QuizView extends Component<IQuizViewProps> {
 
     const { quiz, optionsData }: IQuizViewProps = this.props
     const { options }: any = quiz
-    const shuffledOptions = _.shuffle(options)
     const optionsJsx: Array<ReactNode> = []
 
-    shuffledOptions.map((option: IOption, index: number): void => {
+    options.map((option: IOption, index: number): void => {
       optionsJsx.push(
         <OptionComponent
           key={`o${index}`}
@@ -124,6 +138,7 @@ class QuizView extends Component<IQuizViewProps> {
 
   render() {
     const { quiz }: IQuizViewProps = this.props
+    const { showHelpModal }: IQuizViewState = this.state
     const { name }: any = quiz
 
     return (
@@ -228,7 +243,33 @@ class QuizView extends Component<IQuizViewProps> {
           </aside>
         </div>
 
-        <div
+        <ModalComponent active={true}>
+          <div className="container | br-v-300 bg-primary-200 p-v-400 shadow-v-br-300">
+            <h2 className="ff-secondary fz-xl ta-center m-v-b-300">
+              Quiz Guide
+            </h2>
+
+            <ol className="p-v-l-400 m-v-b-500">
+              <li>
+                Tap/click on the answer button next to the option. This will
+                show an options popup.
+              </li>
+              <li>Tap/click on the option to choose it as the answer.</li>
+            </ol>
+
+            <h3 className="fw-bold fz-md m-v-b-300">Notes:</h3>
+
+            <ul className="p-v-l-400">
+              <li>Answers are unique&ndash;means no duplicate answers.</li>
+              <li>
+                Do <a href="./contact.html">contact us</a> if you face any
+                technical issues.
+              </li>
+            </ul>
+          </div>
+        </ModalComponent>
+
+        {/* <div
           className="modal"
           data-element="help-modal"
           data-active={this.getShowHelpModalString}
@@ -265,7 +306,7 @@ class QuizView extends Component<IQuizViewProps> {
               </li>
             </ul>
           </div>
-        </div>
+        </div> */}
 
         <div
           className="modal"

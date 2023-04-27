@@ -2,6 +2,7 @@ import './styles/main.scss'
 
 import React, { Component, ReactElement } from 'react'
 // import { Helmet } from 'react-helmet'
+import _ from 'lodash'
 import axios from 'axios'
 
 import IAppProps from './interfaces/props/app.props.interface'
@@ -45,6 +46,10 @@ class App extends Component<IAppProps> {
 
     const thisQuizIndex: number = this.correctQuizIndex(quizIndex)
     const { quizzesData }: IAppState = this.state
+    quizzesData[thisQuizIndex].options = _.shuffle(
+      quizzesData[thisQuizIndex].options
+    )
+
     return CreatorHelper.quizInfo(thisQuizIndex, quizzesData[thisQuizIndex])
   }
 
