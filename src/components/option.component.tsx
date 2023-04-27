@@ -7,16 +7,19 @@ const OptionComponent = (props: IOptionComponentProps): JSX.Element => {
   const { image }: IOption = option
   const letter = optionsData[optionIndex]
 
-  const handleClick = (letter: string): void => {
-    PrintHelper.logFunctionWithParams(`handleClick`, `letter: ${letter}`)
-    props.handleOptionClick(letter)
+  const handleClick = (): void => {
+    const { option }: IOptionComponentProps = props
+    const { image }: IOption = option
+
+    PrintHelper.logFunction(`handleClick`)
+    props.handleOptionClick(image)
   }
 
   return (
     <button
       type="button"
       className="card | ta-left"
-      onClick={() => handleClick(letter)}
+      onClick={() => handleClick()}
     >
       <h2 className="fw-black fz-xl m-v-b-200">{letter}</h2>
 

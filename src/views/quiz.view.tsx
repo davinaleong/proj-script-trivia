@@ -80,13 +80,11 @@ class QuizView extends Component<IQuizViewProps> {
     this.props.handleQuizHomeClick()
   }
 
-  handleOptionClick = (optionLetter: string): void => {
-    PrintHelper.logFunctionWithParams(
-      `handleOptionClick`,
-      `optionLetter: ${optionLetter}`
-    )
+  handleOptionClick = (imageModalImage: any): void => {
+    PrintHelper.logFunction(`handleOptionClick`)
     this.setState({
-      selectedOption: optionLetter,
+      showImageModal: true,
+      imageModalImage: imageModalImage,
     })
   }
 
