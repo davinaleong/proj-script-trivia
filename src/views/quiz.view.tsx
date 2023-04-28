@@ -15,8 +15,6 @@ import AlertComponent from '../components/alert.component'
 import OptionComponent from '../components/option.component'
 import ModalComponent from '../components/modal.component'
 
-import Image0001 from './../assets/images/quizzes/0001/0001.png'
-
 class QuizView extends Component<IQuizViewProps> {
   state: IQuizViewState = {
     showHelpModal: false,
@@ -260,7 +258,7 @@ class QuizView extends Component<IQuizViewProps> {
         >
           <div className="container">
             <img
-              src={Image0001}
+              src={imageModalImage}
               alt=""
               className="modal__image | m-v-inline-auto shadow-v-br-300"
               data-element="image-modal-img"

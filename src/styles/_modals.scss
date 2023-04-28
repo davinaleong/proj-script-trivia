@@ -2,31 +2,32 @@
 
 /// Modals - Backdrop
 .modal {
-    --modal-padding: var(--size-v-300);
-    --modal-bg-clr: hsla(0, 0%, 0%, 0.5);
+  --modal-padding: var(--size-v-300);
+  --modal-bg-clr: hsla(0, 0%, 0%, 0.5);
 
-    position: fixed;
-    z-index: 5;
-    isolation: isolate;
-    top: 0;
-    left: 0;
-    right: 0;
-    min-height: 100vh;
-    padding-top: var(--modal-padding);
-    padding-right: var(--modal-padding);
-    padding-bottom: var(--modal-padding);
-    padding-left: var(--modal-padding);
-    background-color: var(--modal-bg-clr);
-    display: none;
-    place-items: center;
+  position: fixed;
+  z-index: 5;
+  isolation: isolate;
+  top: 0;
+  left: 0;
+  right: 0;
+  min-height: 100vh;
+  padding-top: var(--modal-padding);
+  padding-right: var(--modal-padding);
+  padding-bottom: var(--modal-padding);
+  padding-left: var(--modal-padding);
+  background-color: var(--modal-bg-clr);
+  display: none;
+  place-items: center;
 
-    &__image {
-        width: 100%;
-        max-height: 100%;
-    }
+  &__image {
+    width: 100%;
+    max-width: #{breakpoint('md')};
+    max-height: 100%;
+  }
 
-    .active, &[data-active="true"] {
-        display: grid;
-    }
+  .active,
+  &[data-active='true'] {
+    display: grid;
+  }
 }
-
