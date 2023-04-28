@@ -7,6 +7,7 @@ interface IAppState {
   quizzesData: Array<IQuiz>
   quizIndex: number
   quiz: IQuiz | null
+  shuffledQuiz: IQuiz | null
 }
 
 export default IAppState

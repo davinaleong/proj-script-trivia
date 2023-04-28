@@ -26,6 +26,7 @@ class App extends Component<IAppProps> {
     quizzesData: this.props.quizzesData,
     quizIndex: 0,
     quiz: this.props.quizzesData[0],
+    shuffledQuiz: this.props.quizzesData[0],
   }
 
   constructor(props: IAppProps) {
@@ -46,9 +47,6 @@ class App extends Component<IAppProps> {
 
     const thisQuizIndex: number = this.correctQuizIndex(quizIndex)
     const { quizzesData }: IAppState = this.state
-    quizzesData[thisQuizIndex].options = _.shuffle(
-      quizzesData[thisQuizIndex].options
-    )
 
     return CreatorHelper.quizInfo(thisQuizIndex, quizzesData[thisQuizIndex])
   }
@@ -148,11 +146,15 @@ class App extends Component<IAppProps> {
     PrintHelper.logFunction(`handleQuizClick`)
 
     const { stepsData }: IAppProps = this.props
-    const quizInfo: IQuizInfo = this.getQuizInfoFromQuizzesData(quizIndex)
+    const { index, quiz, shuffledQuiz }: IQuizInfo =
+      this.getQuizInfoFromQuizzesData(quizIndex)
+
+    console.log(quiz, shuffledQuiz)
     this.setState({
       step: stepsData.quiz,
-      quizIndex: quizInfo.index,
-      quiz: quizInfo.quiz,
+      quizIndex: index,
+      quiz: quiz,
+      shuffledQuiz: shuffledQuiz,
     })
   }
 
@@ -194,8 +196,14 @@ class App extends Component<IAppProps> {
     PrintHelper.logFunction(`renderView`)
 
     const { stepsData, optionsData }: IAppProps = this.props
-    const { step, subjectsData, quizzesData, quizIndex, quiz }: IAppState =
-      this.state
+    const {
+      step,
+      subjectsData,
+      quizzesData,
+      quizIndex,
+      quiz,
+      shuffledQuiz,
+    }: IAppState = this.state
 
     switch (step) {
       case stepsData.home:
@@ -211,6 +219,7 @@ class App extends Component<IAppProps> {
           <QuizView
             quizIndex={quizIndex}
             quiz={quiz}
+            shuffledQuiz={shuffledQuiz}
             optionsData={optionsData}
             handleQuizHomeClick={this.handleQuizHomeClick}
             handleQuizContactClick={this.handleQuizContactClick}

@@ -148,8 +148,8 @@ class QuizView extends Component<IQuizViewProps> {
   renderOptionsGrid = (): JSX.Element => {
     PrintHelper.logFunction(`renderOptionsGrid`)
 
-    const { quiz, optionsData }: IQuizViewProps = this.props
-    const { options }: any = quiz
+    const { shuffledQuiz, optionsData }: IQuizViewProps = this.props
+    const { options }: any = shuffledQuiz
     const optionsJsx: Array<ReactNode> = []
 
     options.map((option: IOption, index: number): void => {
@@ -314,65 +314,24 @@ class QuizView extends Component<IQuizViewProps> {
           </main>
           <aside className="quiz__aside bg-gray-100 p-v-300">
             <div className="answers-grid">
-              <div className="answer | ta-center">
-                <h3 className="fw-black fz-lg">HTML</h3>
+              {quiz?.options.map(({ name }: IOption, index: number) => {
+                return (
+                  <div key={`a${index}`} className="answer | ta-center">
+                    <h3 className="fw-black fz-lg">{name}</h3>
 
-                <div className="d-flex al-center jc-center gap-v-400">
-                  <button
-                    type="button"
-                    className="btn btn-icon"
-                    data-element="btn-answer"
-                  >
-                    <p className="btn-icon__label">Answers</p>
-                    <FontAwesomeIcon icon={faComputerMouse} />
-                  </button>
-                </div>
-              </div>
-
-              <div className="answer | ta-center">
-                <h3 className="fw-black fz-lg">CSS</h3>
-
-                <div className="d-flex al-center jc-center gap-v-400">
-                  <button
-                    type="button"
-                    className="btn btn-icon"
-                    data-element="btn-answer"
-                  >
-                    <p className="btn-icon__label">Answers</p>
-                    <FontAwesomeIcon icon={faComputerMouse} />
-                  </button>
-                </div>
-              </div>
-
-              <div className="answer | ta-center">
-                <h3 className="fw-black fz-lg">JS</h3>
-
-                <div className="d-flex al-center jc-center gap-v-400">
-                  <button
-                    type="button"
-                    className="btn btn-icon"
-                    data-element="btn-answer"
-                  >
-                    <p className="btn-icon__label">Answers</p>
-                    <FontAwesomeIcon icon={faComputerMouse} />
-                  </button>
-                </div>
-              </div>
-
-              <div className="answer | ta-center">
-                <h3 className="fw-black fz-lg">PHP</h3>
-
-                <div className="d-flex al-center jc-center gap-v-400">
-                  <button
-                    type="button"
-                    className="btn btn-icon"
-                    data-element="btn-answer"
-                  >
-                    <p className="btn-icon__label">Answers</p>
-                    <FontAwesomeIcon icon={faComputerMouse} />
-                  </button>
-                </div>
-              </div>
+                    <div className="d-flex al-center jc-center gap-v-400">
+                      <button
+                        type="button"
+                        className="btn btn-icon"
+                        data-element="btn-answer"
+                      >
+                        <p className="btn-icon__label">Answers</p>
+                        <FontAwesomeIcon icon={faComputerMouse} />
+                      </button>
+                    </div>
+                  </div>
+                )
+              })}
             </div>
           </aside>
         </div>

@@ -1,8 +1,9 @@
 import IQuiz from './quiz.interface'
 
 interface IQuizInfo {
-  index: Number
+  index: number
   quiz: IQuiz
+  shuffledQuiz: IQuiz
 }
 
 export default IQuizInfo

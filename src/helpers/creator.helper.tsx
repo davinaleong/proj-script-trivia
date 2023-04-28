@@ -1,3 +1,5 @@
+import _ from 'lodash'
+
 import IOption from '../interfaces/option.interface'
 import IQuizInfo from '../interfaces/quiz.info.interface'
 import IQuiz from '../interfaces/quiz.interface'
@@ -57,7 +59,9 @@ const quizWithOptions = (
 }
 
 const quizInfo = (index: number, quiz: IQuiz): IQuizInfo => {
-  return { index, quiz }
+  const shuffledQuiz: IQuiz = quiz
+  shuffledQuiz.options = _.shuffle(shuffledQuiz.options)
+  return { index, quiz, shuffledQuiz }
 }
 
 const CreatorHelper = {
