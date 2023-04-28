@@ -1,28 +1,27 @@
 import { Component, ReactNode } from 'react'
-import _ from 'lodash'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
   faChevronLeft,
   faQuestion,
   faCheck,
   faComputerMouse,
-  faTimes,
 } from '@fortawesome/free-solid-svg-icons'
 
 import IQuizViewProps from '../interfaces/props/quiz.view.props.interface'
 import IQuizViewState from '../interfaces/states/quiz.view.state.interface'
 import IOption from '../interfaces/option.interface'
-// import ArrayHelper from '../helpers/array.helper'
 import PrintHelper from '../helpers/print.helper'
 import AlertComponent from '../components/alert.component'
 import OptionComponent from '../components/option.component'
 import ModalComponent from '../components/modal.component'
 
+import Image0001 from './../assets/images/quizzes/0001/0001.png'
+
 class QuizView extends Component<IQuizViewProps> {
   state: IQuizViewState = {
     showHelpModal: false,
-    showImageModal: false,
     showOptionsModal: false,
+    showImageModal: false,
     imageModalImage: '',
     selectedOption: '',
     optionA: '',
@@ -62,10 +61,24 @@ class QuizView extends Component<IQuizViewProps> {
     })
   }
 
+  showOptionsModal = () => {
+    PrintHelper.logFunction(`showOptionsModal`)
+    this.setState({
+      showOptionsModal: true,
+    })
+  }
+
   hideHelpModal = () => {
     PrintHelper.logFunction(`hideHelpModal`)
     this.setState({
       showHelpModal: false,
+    })
+  }
+
+  hideOptionsModal = () => {
+    PrintHelper.logFunction(`hideOptionsModal`)
+    this.setState({
+      showOptionsModal: false,
     })
   }
 
@@ -98,7 +111,6 @@ class QuizView extends Component<IQuizViewProps> {
   handleOptionClick = (imageModalImage: any): void => {
     PrintHelper.logFunction(`handleOptionClick`)
     this.setState({
-      showImageModal: true,
       imageModalImage: imageModalImage,
     })
   }
@@ -106,6 +118,27 @@ class QuizView extends Component<IQuizViewProps> {
   handleContactClick = (): void => {
     PrintHelper.logFunction(`handleContactClick`)
     this.props.handleQuizContactClick()
+  }
+
+  handleHelpModalCloseClick = (): void => {
+    PrintHelper.logFunction(`handleHelpModalCloseClick`)
+    this.setState({
+      showHelpModal: true,
+    })
+  }
+
+  handleOptionsModalCloseClick = (): void => {
+    PrintHelper.logFunction(`handleOptionsModalCloseClick`)
+    this.setState({
+      showOptionsModal: true,
+    })
+  }
+
+  handleImageModalCloseClick = (): void => {
+    PrintHelper.logFunction(`handleImageModalCloseClick`)
+    this.setState({
+      imageModalImage: null,
+    })
   }
 
   renderAlert = (): JSX.Element => {
@@ -136,9 +169,112 @@ class QuizView extends Component<IQuizViewProps> {
     return <div className="cards-grid | m-v-b-400">{optionsJsx}</div>
   }
 
+  renderHelpModal = (): JSX.Element => {
+    PrintHelper.logFunction(`renderHelpModal`)
+    const { showHelpModal }: IQuizViewState = this.state
+
+    if (showHelpModal) {
+      return (
+        <ModalComponent
+          active={showHelpModal}
+          handleModalCloseClick={this.handleHelpModalCloseClick}
+        >
+          <div className="container | br-v-300 bg-primary-200 p-v-400 shadow-v-br-300">
+            <h2 className="ff-secondary fz-xl ta-center m-v-b-300">
+              Quiz Guide
+            </h2>
+
+            <ol className="p-v-l-400 m-v-b-500">
+              <li>
+                Tap/click on the answer button next to the option. This will
+                show an options popup.
+              </li>
+              <li>Tap/click on the option to choose it as the answer.</li>
+            </ol>
+
+            <h3 className="fw-bold fz-md m-v-b-300">Notes:</h3>
+
+            <ul className="p-v-l-400">
+              <li>Answers are unique&ndash;means no duplicate answers.</li>
+              <li>
+                Do <a href="./contact.html">contact us</a> if you face any
+                technical issues.
+              </li>
+            </ul>
+          </div>
+        </ModalComponent>
+      )
+    }
+
+    return <></>
+  }
+
+  renderOptionsModal = (): JSX.Element => {
+    PrintHelper.logFunction(`renderOptionsModal`)
+    const { showOptionsModal }: IQuizViewState = this.state
+
+    if (showOptionsModal) {
+      return (
+        <ModalComponent
+          active={showOptionsModal}
+          handleModalCloseClick={this.hideOptionsModal}
+        >
+          <div className="container | br-v-300 bg-gray-50 p-v-400 shadow-v-br-300">
+            <h2 className="fz-xl fw-black ta-center m-v-b-400">Pick Options</h2>
+
+            <div className="d-flex al-center jc-center gap-v-400">
+              <button type="button" className="btn fz-lg fw-black">
+                A
+              </button>
+
+              <button type="button" className="btn fz-lg fw-black">
+                B
+              </button>
+
+              <button type="button" className="btn fz-lg fw-black">
+                C
+              </button>
+
+              <button type="button" className="btn fz-lg fw-black">
+                D
+              </button>
+            </div>
+          </div>
+        </ModalComponent>
+      )
+    }
+
+    return <></>
+  }
+
+  renderImageModal = (): JSX.Element => {
+    PrintHelper.logFunction(`renderImageModal`)
+
+    const { imageModalImage }: IQuizViewState = this.state
+
+    if (imageModalImage) {
+      return (
+        <ModalComponent
+          active={imageModalImage !== null}
+          handleModalCloseClick={this.handleImageModalCloseClick}
+        >
+          <div className="container">
+            <img
+              src={Image0001}
+              alt=""
+              className="modal__image | m-v-inline-auto shadow-v-br-300"
+              data-element="image-modal-img"
+            />
+          </div>
+        </ModalComponent>
+      )
+    }
+
+    return <></>
+  }
+
   render() {
     const { quiz }: IQuizViewProps = this.props
-    const { showHelpModal }: IQuizViewState = this.state
     const { name }: any = quiz
 
     return (
@@ -243,131 +379,9 @@ class QuizView extends Component<IQuizViewProps> {
           </aside>
         </div>
 
-        <ModalComponent active={true}>
-          <div className="container | br-v-300 bg-primary-200 p-v-400 shadow-v-br-300">
-            <h2 className="ff-secondary fz-xl ta-center m-v-b-300">
-              Quiz Guide
-            </h2>
-
-            <ol className="p-v-l-400 m-v-b-500">
-              <li>
-                Tap/click on the answer button next to the option. This will
-                show an options popup.
-              </li>
-              <li>Tap/click on the option to choose it as the answer.</li>
-            </ol>
-
-            <h3 className="fw-bold fz-md m-v-b-300">Notes:</h3>
-
-            <ul className="p-v-l-400">
-              <li>Answers are unique&ndash;means no duplicate answers.</li>
-              <li>
-                Do <a href="./contact.html">contact us</a> if you face any
-                technical issues.
-              </li>
-            </ul>
-          </div>
-        </ModalComponent>
-
-        {/* <div
-          className="modal"
-          data-element="help-modal"
-          data-active={this.getShowHelpModalString}
-        >
-          <button
-            type="button"
-            className="btn btn-danger btn-icon btn-fixed btn-top btn-right shadow-v-br-300"
-            onClick={() => this.setShowHelpModal(false)}
-          >
-            <p className="btn-icon__label">Close Popup</p>
-            <FontAwesomeIcon icon={faTimes} />
-          </button>
-
-          <div className="container | br-v-300 bg-primary-200 p-v-400 shadow-v-br-300">
-            <h2 className="ff-secondary fz-xl ta-center m-v-b-300">
-              Quiz Guide
-            </h2>
-
-            <ol className="p-v-l-400 m-v-b-500">
-              <li>
-                Tap/click on the answer button next to the option. This will
-                show an options popup.
-              </li>
-              <li>Tap/click on the option to choose it as the answer.</li>
-            </ol>
-
-            <h3 className="fw-bold fz-md m-v-b-300">Notes:</h3>
-
-            <ul className="p-v-l-400">
-              <li>Answers are unique&ndash;means no duplicate answers.</li>
-              <li>
-                Do <a href="./contact.html">contact us</a> if you face any
-                technical issues.
-              </li>
-            </ul>
-          </div>
-        </div> */}
-
-        <div
-          className="modal"
-          data-element="options-modal"
-          data-active={this.getShowOptionsModalString}
-        >
-          <button
-            type="button"
-            className="btn btn-danger btn-icon btn-fixed btn-top btn-right shadow-v-br-300"
-            data-element="btn-close-modal"
-          >
-            <p className="btn-icon__label">Close Popup</p>
-            <FontAwesomeIcon icon={faTimes} />
-          </button>
-
-          <div className="container | br-v-300 bg-gray-50 p-v-400 shadow-v-br-300">
-            <h2 className="fz-xl fw-black ta-center m-v-b-400">Pick Options</h2>
-
-            <div className="d-flex al-center jc-center gap-v-400">
-              <button type="button" className="btn fz-lg fw-black">
-                A
-              </button>
-
-              <button type="button" className="btn fz-lg fw-black">
-                B
-              </button>
-
-              <button type="button" className="btn fz-lg fw-black">
-                C
-              </button>
-
-              <button type="button" className="btn fz-lg fw-black">
-                D
-              </button>
-            </div>
-          </div>
-        </div>
-
-        <div
-          className="modal"
-          data-element="image-modal"
-          data-active={this.getShowImageModalString}
-        >
-          <button
-            type="button"
-            className="btn btn-danger btn-icon btn-fixed btn-top btn-right shadow-v-br-300"
-            data-element="btn-close-modal"
-          >
-            <p className="btn-icon__label">Close Popup</p>
-            <FontAwesomeIcon icon={faTimes} />
-          </button>
-
-          <div className="container">
-            <img
-              src=""
-              alt=""
-              className="modal__image | m-v-inline-auto shadow-v-br-300"
-              data-element="image-modal-img"
-            />
-          </div>
-        </div>
+        {this.renderHelpModal()}
+        {this.renderOptionsModal()}
+        {this.renderImageModal()}
       </div>
     )
   }

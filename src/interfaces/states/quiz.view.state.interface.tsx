@@ -1,7 +1,7 @@
 interface IQuizViewState {
   showHelpModal: boolean
-  showImageModal: boolean
   showOptionsModal: boolean
+  showImageModal: boolean
   imageModalImage: string
   selectedOption: string
   optionA: string
