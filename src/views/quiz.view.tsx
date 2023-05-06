@@ -26,7 +26,7 @@ class QuizView extends Component<IQuizViewProps> {
     optionB: '',
     optionC: '',
     optionD: '',
-    errors: ['Error 1', 'Error 2'],
+    errors: [],
   }
 
   getBooleanString = (boolean: boolean): string => {
@@ -142,6 +142,11 @@ class QuizView extends Component<IQuizViewProps> {
   renderAlert = (): JSX.Element => {
     PrintHelper.logFunction(`renderAlert`)
     const { errors }: IQuizViewState = this.state
+
+    if (errors.length <= 0) {
+      return <></>
+    }
+
     return <AlertComponent className="alert-danger" errors={errors} />
   }
 

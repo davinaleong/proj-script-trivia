@@ -42,6 +42,15 @@ class App extends Component<IAppProps> {
     // })
   }
 
+  getQuizFromQuizzesData = (quizIndex: number): IQuiz => {
+    PrintHelper.logFunction(`getQuizInfoFromQuizzesData`)
+
+    const thisQuizIndex: number = this.correctQuizIndex(quizIndex)
+    const { quizzesData }: IAppState = this.state
+
+    return quizzesData[thisQuizIndex]
+  }
+
   getQuizInfoFromQuizzesData = (quizIndex: number): IQuizInfo => {
     PrintHelper.logFunction(`getQuizInfoFromQuizzesData`)
 
@@ -146,15 +155,17 @@ class App extends Component<IAppProps> {
     PrintHelper.logFunction(`handleQuizClick`)
 
     const { stepsData }: IAppProps = this.props
-    const { index, quiz, shuffledQuiz }: IQuizInfo =
-      this.getQuizInfoFromQuizzesData(quizIndex)
+    const theQuizIndex: number = this.correctQuizIndex(quizIndex)
+    const quiz: IQuiz = this.getQuizFromQuizzesData(theQuizIndex)
+    const shuffledQuiz: IQuiz = { ...quiz }
+    shuffledQuiz.options = _.shuffle(quiz.options)
 
     console.log(quiz, shuffledQuiz)
     this.setState({
       step: stepsData.quiz,
-      quizIndex: index,
-      quiz: quiz,
-      shuffledQuiz: shuffledQuiz,
+      quizIndex: theQuizIndex,
+      quiz,
+      shuffledQuiz,
     })
   }
 
