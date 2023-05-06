@@ -42,10 +42,28 @@ class App extends Component<IAppProps> {
     // })
   }
 
+  // #region Getters
+  getCorrectedQuizIndex = (quizIndex: number): number => {
+    PrintHelper.logFunction(`correctQuizIndex`)
+
+    const { quizzesData }: IAppState = this.state
+
+    let thisQuizIndex: number = quizIndex
+    if (thisQuizIndex < 0) {
+      thisQuizIndex = 0
+    }
+
+    if (thisQuizIndex > quizzesData.length - 1) {
+      thisQuizIndex = quizzesData.length - 1
+    }
+
+    return thisQuizIndex
+  }
+
   getQuizFromQuizzesData = (quizIndex: number): IQuiz => {
     PrintHelper.logFunction(`getQuizInfoFromQuizzesData`)
 
-    const thisQuizIndex: number = this.correctQuizIndex(quizIndex)
+    const thisQuizIndex: number = this.getCorrectedQuizIndex(quizIndex)
     const { quizzesData }: IAppState = this.state
 
     return quizzesData[thisQuizIndex]
@@ -54,7 +72,7 @@ class App extends Component<IAppProps> {
   getQuizInfoFromQuizzesData = (quizIndex: number): IQuizInfo => {
     PrintHelper.logFunction(`getQuizInfoFromQuizzesData`)
 
-    const thisQuizIndex: number = this.correctQuizIndex(quizIndex)
+    const thisQuizIndex: number = this.getCorrectedQuizIndex(quizIndex)
     const { quizzesData }: IAppState = this.state
 
     return CreatorHelper.quizInfo(thisQuizIndex, quizzesData[thisQuizIndex])
@@ -81,24 +99,9 @@ class App extends Component<IAppProps> {
     })
     return quizzesData.length === completedCount
   }
+  // #endregion
 
-  correctQuizIndex = (quizIndex: number): number => {
-    PrintHelper.logFunction(`correctQuizIndex`)
-
-    const { quizzesData }: IAppState = this.state
-
-    let thisQuizIndex: number = quizIndex
-    if (thisQuizIndex < 0) {
-      thisQuizIndex = 0
-    }
-
-    if (thisQuizIndex > quizzesData.length - 1) {
-      thisQuizIndex = quizzesData.length - 1
-    }
-
-    return thisQuizIndex
-  }
-
+  // #region Setters
   setStep = (step: number): void => {
     PrintHelper.logFunction(`setStep`)
 
@@ -150,12 +153,14 @@ class App extends Component<IAppProps> {
 
     this.setState({ quiz })
   }
+  // #endregion
 
+  // #region Handlers
   handleQuizClick = (quizIndex: number): void => {
     PrintHelper.logFunction(`handleQuizClick`)
 
     const { stepsData }: IAppProps = this.props
-    const theQuizIndex: number = this.correctQuizIndex(quizIndex)
+    const theQuizIndex: number = this.getCorrectedQuizIndex(quizIndex)
     const quiz: IQuiz = this.getQuizFromQuizzesData(theQuizIndex)
     const shuffledQuiz: IQuiz = { ...quiz }
     shuffledQuiz.options = _.shuffle(quiz.options)
@@ -202,7 +207,9 @@ class App extends Component<IAppProps> {
       quizzesData,
     })
   }
+  // #endregion
 
+  // #region Renderers
   renderView = (): ReactElement => {
     PrintHelper.logFunction(`renderView`)
 
@@ -287,6 +294,7 @@ class App extends Component<IAppProps> {
       </>
     )
   }
+  // #endregion
 }
 
 export default App

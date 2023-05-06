@@ -2,7 +2,10 @@ import QuizComponent from '../components/quiz.component'
 import IHomeViewProps from '../interfaces/props/home.view.interface'
 import IQuiz from '../interfaces/quiz.interface'
 
-function HomeView({ quizzesData, handleQuizClick }: IHomeViewProps) {
+function HomeView({
+  quizzesData,
+  handleQuizClick,
+}: IHomeViewProps): JSX.Element {
   return (
     <div>
       <main className="main container | p-v-y-400">

@@ -8,9 +8,10 @@ import {
 import ICompletedProps from '../interfaces/props/completed.view.props.interface'
 import PrintHelper from '../helpers/print.helper'
 
-function CompletedView(props: ICompletedProps) {
+function CompletedView(props: ICompletedProps): JSX.Element {
   const { completed, completedMessage }: ICompletedProps = props
 
+  // #region Handlers
   const handleHomeClick = (): void => {
     PrintHelper.logFunction(`handleHomeClick`)
     props.handleContactHomeClick()
@@ -20,6 +21,7 @@ function CompletedView(props: ICompletedProps) {
     PrintHelper.logFunction(`handleResetClick`)
     props.handleContactResetClick()
   }
+  // #endregion
 
   let subView: ReactElement = (
     <p className="fw-bold m-v-b-400">

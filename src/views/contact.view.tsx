@@ -24,6 +24,7 @@ class ContactView extends Component<IContactViewProps> {
     errors: ErrorsData,
   }
 
+  // #region Handlers
   handleSubmit = async (event) => {
     PrintHelper.logFunction(`handleSubmit`)
 
@@ -66,7 +67,9 @@ class ContactView extends Component<IContactViewProps> {
         })
       })
   }
+  // #endregion
 
+  // #region Renderers
   renderSuccessAlert(): JSX.Element {
     const { success }: IContactViewState = this.state
 
@@ -276,6 +279,7 @@ class ContactView extends Component<IContactViewProps> {
       </div>
     )
   }
+  // #endregion
 }
 
 export default ContactView

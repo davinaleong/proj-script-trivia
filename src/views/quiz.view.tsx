@@ -29,6 +29,7 @@ class QuizView extends Component<IQuizViewProps> {
     errors: [],
   }
 
+  // #region Getters
   getBooleanString = (boolean: boolean): string => {
     PrintHelper.logFunctionWithParams(`getBooleanString`, `boolean: ${boolean}`)
     return boolean ? 'true' : 'false'
@@ -51,7 +52,9 @@ class QuizView extends Component<IQuizViewProps> {
     const { showImageModal }: IQuizViewState = this.state
     return this.getBooleanString(showImageModal)
   }
+  // #endregion
 
+  // #region State Setters
   showHelpModal = () => {
     PrintHelper.logFunction(`showHelpModal`)
     this.setState({
@@ -100,7 +103,9 @@ class QuizView extends Component<IQuizViewProps> {
       showImageModal,
     })
   }
+  // #endregion
 
+  // #region Handlers
   handleHomeClick = (): void => {
     PrintHelper.logFunction(`handleHomeClick`)
     this.props.handleQuizHomeClick()
@@ -138,7 +143,9 @@ class QuizView extends Component<IQuizViewProps> {
       imageModalImage: null,
     })
   }
+  // #endregion
 
+  // #region Renderers
   renderAlert = (): JSX.Element => {
     PrintHelper.logFunction(`renderAlert`)
     const { errors }: IQuizViewState = this.state
@@ -347,6 +354,7 @@ class QuizView extends Component<IQuizViewProps> {
       </div>
     )
   }
+  // #endregion
 }
 
 export default QuizView
