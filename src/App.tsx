@@ -165,7 +165,7 @@ class App extends Component<IAppProps> {
     const shuffledQuiz: IQuiz = { ...quiz }
     shuffledQuiz.options = _.shuffle(quiz.options)
 
-    console.log(quiz, shuffledQuiz)
+    // console.log(quiz, shuffledQuiz)
     this.setState({
       step: stepsData.quiz,
       quizIndex: theQuizIndex,

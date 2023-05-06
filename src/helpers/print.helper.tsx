@@ -7,7 +7,7 @@ const logFunction = (name: string): void => {
 }
 
 const logFunctionWithParams = (name: string, params: string): void => {
-  log(`fn:${name}(${params})`)
+  log(`fn: ${name}(${params})`)
 }
 
 const error = (message: string): void => {

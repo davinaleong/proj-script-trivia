@@ -126,14 +126,19 @@ class QuizView extends Component<IQuizViewProps> {
   handleHelpModalCloseClick = (): void => {
     PrintHelper.logFunction(`handleHelpModalCloseClick`)
     this.setState({
-      showHelpModal: true,
+      showHelpModal: false,
     })
+  }
+
+  handleHelpModalContactClick = (): void => {
+    PrintHelper.logFunction(`handleHelpModalContactClick`)
+    this.props.handleQuizContactClick()
   }
 
   handleOptionsModalCloseClick = (): void => {
     PrintHelper.logFunction(`handleOptionsModalCloseClick`)
     this.setState({
-      showOptionsModal: true,
+      showOptionsModal: false,
     })
   }
 
@@ -196,8 +201,10 @@ class QuizView extends Component<IQuizViewProps> {
 
             <ol className="p-v-l-400 m-v-b-500">
               <li>
-                Tap/click on the answer button next to the option. This will
-                show an options popup.
+                Tap/click on the answer button next to the option on the left
+                pane.
+                <br />
+                This will show an options popup.
               </li>
               <li>Tap/click on the option to choose it as the answer.</li>
             </ol>
@@ -205,10 +212,17 @@ class QuizView extends Component<IQuizViewProps> {
             <h3 className="fw-bold fz-md m-v-b-300">Notes:</h3>
 
             <ul className="p-v-l-400">
-              <li>Answers are unique&ndash;means no duplicate answers.</li>
+              <li>Answers are unique&ndash;means no duplicated answers.</li>
               <li>
-                Do <a href="./contact.html">contact us</a> if you face any
-                technical issues.
+                Do{' '}
+                <button
+                  type="button"
+                  className="btn btn-link btn-link-primary"
+                  onClick={this.handleHelpModalContactClick}
+                >
+                  contact us
+                </button>{' '}
+                if you face any technical issues.
               </li>
             </ul>
           </div>
