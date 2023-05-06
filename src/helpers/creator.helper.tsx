@@ -26,7 +26,6 @@ const quizWithOptions = (
 
   name: string,
   image: HTMLImageElement,
-  completed: boolean,
 
   optionAName: string,
   optionAKey: string,
@@ -42,7 +41,9 @@ const quizWithOptions = (
 
   optionDName: string,
   optionDKey: string,
-  optionDImage: HTMLImageElement
+  optionDImage: HTMLImageElement,
+
+  completed = false
 ): Array<IQuiz> => {
   const optionA: IOption = option(optionAName, optionAKey, optionAImage)
   const optionB: IOption = option(optionBName, optionBKey, optionBImage)

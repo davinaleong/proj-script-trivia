@@ -23,19 +23,9 @@ function CompletedView(props: ICompletedProps): JSX.Element {
   }
   // #endregion
 
-  let subView: ReactElement = (
-    <p className="fw-bold m-v-b-400">
-      <button
-        type="button"
-        className="btn btn-success"
-        onClick={() => handleHomeClick()}
-      >
-        Try another quiz <FontAwesomeIcon icon={faCode} />
-      </button>
-    </p>
-  )
+  let completedView: ReactElement = <></>
   if (completed) {
-    subView = (
+    completedView = (
       <>
         <p className="fw-bold m-v-b-400">You have completed all quizzes.</p>
 
@@ -63,7 +53,17 @@ function CompletedView(props: ICompletedProps): JSX.Element {
           {completedMessage}
         </h1>
 
-        {subView}
+        <p className="fw-bold m-v-b-400">
+          <button
+            type="button"
+            className="btn btn-success"
+            onClick={() => handleHomeClick()}
+          >
+            Try another quiz <FontAwesomeIcon icon={faCode} />
+          </button>
+        </p>
+
+        {completedView}
       </main>
     </div>
   )
