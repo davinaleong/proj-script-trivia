@@ -14,10 +14,10 @@ const AnswerComponent = (props: IAnswerComponentProps): JSX.Element => {
   }
 
   return (
-    <div className="answer | ta-center">
+    <div className="answer">
       <h3 className="fw-black fz-lg">{name}</h3>
 
-      <div className="d-flex al-center jc-center gap-v-400">
+      <div className="d-flex al-center gap-v-400">
         <button type="button" className="btn btn-icon" onClick={handleClick}>
           <p className="btn-icon__label">
             {label && label !== '' ? label : 'Answers'}
