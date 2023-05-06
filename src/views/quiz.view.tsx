@@ -154,8 +154,42 @@ class QuizView extends Component<IQuizViewProps> {
   }
 
   handleOptionsModalOptionClick = ({ key }: IOption): void => {
-    PrintHelper.logFunction(`handleOptionsModalOptionClick`)
+    PrintHelper.logFunctionWithParams(
+      `handleOptionsModalOptionClick`,
+      `key: ${key}`
+    )
+    const { optionLettersData }: IQuizViewProps = this.props
     const { selectedAnswer }: IQuizViewState = this.state
+
+    switch (selectedAnswer) {
+      case optionLettersData.a:
+        this.setState({
+          answerA: key,
+          showOptionsModal: false,
+        })
+        break
+
+      case optionLettersData.b:
+        this.setState({
+          answerB: key,
+          showOptionsModal: false,
+        })
+        break
+
+      case optionLettersData.c:
+        this.setState({
+          answerC: key,
+          showOptionsModal: false,
+        })
+        break
+
+      case optionLettersData.d:
+        this.setState({
+          answerD: key,
+          showOptionsModal: false,
+        })
+        break
+    }
   }
 
   handleImageModalCloseClick = (): void => {
@@ -270,7 +304,7 @@ class QuizView extends Component<IQuizViewProps> {
 
   renderOptionsModal = (): JSX.Element => {
     PrintHelper.logFunction(`renderOptionsModal`)
-    const { indexToOptionsData, quiz }: IQuizViewProps = this.props
+    const { shuffledQuiz, indexToOptionsData }: IQuizViewProps = this.props
     const { showOptionsModal }: IQuizViewState = this.state
 
     if (showOptionsModal) {
@@ -283,21 +317,19 @@ class QuizView extends Component<IQuizViewProps> {
             <h2 className="fz-xl fw-black ta-center m-v-b-400">Pick Options</h2>
 
             <div className="d-flex al-center jc-center gap-v-400">
-              <button type="button" className="btn fz-lg fw-black">
-                A
-              </button>
-
-              <button type="button" className="btn fz-lg fw-black">
-                B
-              </button>
-
-              <button type="button" className="btn fz-lg fw-black">
-                C
-              </button>
-
-              <button type="button" className="btn fz-lg fw-black">
-                D
-              </button>
+              {shuffledQuiz?.options.map((option: IOption, index: number) => {
+                const letter = indexToOptionsData[index]
+                return (
+                  <button
+                    key={`mo${index}`}
+                    type="button"
+                    className="btn fz-lg fw-black"
+                    onClick={() => this.handleOptionsModalOptionClick(option)}
+                  >
+                    {letter}
+                  </button>
+                )
+              })}
             </div>
           </div>
         </ModalComponent>

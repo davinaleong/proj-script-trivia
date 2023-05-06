@@ -1,4 +1,5 @@
 import IIndexToIndexToOptionsData from '../data/indexToOptions.data.interface'
+import IOptionLettersData from '../data/optionLetters.data.interface'
 import IQuiz from '../quiz.interface'
 
 interface IQuizViewProps {
@@ -6,6 +7,7 @@ interface IQuizViewProps {
   quiz: IQuiz | null
   shuffledQuiz: IQuiz | null
   indexToOptionsData: IIndexToIndexToOptionsData
+  optionLettersData: IOptionLettersData
   handleQuizHomeClick: any
   handleQuizContactClick: any
   handleQuizSubmit: any
