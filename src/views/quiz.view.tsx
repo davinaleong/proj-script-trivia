@@ -14,6 +14,7 @@ import PrintHelper from '../helpers/print.helper'
 import AlertComponent from '../components/alert.component'
 import OptionComponent from '../components/option.component'
 import ModalComponent from '../components/modal.component'
+import AnswerComponent from '../components/answer.component'
 
 class QuizView extends Component<IQuizViewProps> {
   state: IQuizViewState = {
@@ -21,11 +22,11 @@ class QuizView extends Component<IQuizViewProps> {
     showOptionsModal: false,
     showImageModal: false,
     imageModalImage: '',
-    selectedOption: '',
-    optionA: '',
-    optionB: '',
-    optionC: '',
-    optionD: '',
+    selectedAnswer: '',
+    answerA: '',
+    answerB: '',
+    answerC: '',
+    answerD: '',
     errors: [],
   }
 
@@ -118,6 +119,17 @@ class QuizView extends Component<IQuizViewProps> {
     })
   }
 
+  handleAnswerClick = (optionLetter: string): void => {
+    PrintHelper.logFunctionWithParams(
+      `handleOptionClick`,
+      `optionLetter: ${optionLetter}`
+    )
+    this.setState({
+      selectedAnswer: optionLetter,
+      showOptionsModal: true,
+    })
+  }
+
   handleContactClick = (): void => {
     PrintHelper.logFunction(`handleContactClick`)
     this.props.handleQuizContactClick()
@@ -160,6 +172,26 @@ class QuizView extends Component<IQuizViewProps> {
     }
 
     return <AlertComponent className="alert-danger" errors={errors} />
+  }
+
+  renderAnswersGrid = (): JSX.Element => {
+    PrintHelper.logFunction(`renderAnswersGrid`)
+
+    const { optionsData, quiz }: IQuizViewProps = this.props
+
+    return (
+      <div className="answers-grid">
+        {quiz?.options.map((answer: IOption, index: number) => (
+          <AnswerComponent
+            key={`a${index}`}
+            answerIndex={index}
+            answer={answer}
+            optionsData={optionsData}
+            handleAnswerClick={this.handleAnswerClick}
+          />
+        ))}
+      </div>
+    )
   }
 
   renderOptionsGrid = (): JSX.Element => {
@@ -298,7 +330,7 @@ class QuizView extends Component<IQuizViewProps> {
   }
 
   render() {
-    const { quiz }: IQuizViewProps = this.props
+    const { quiz, optionsData }: IQuizViewProps = this.props
     const { name }: any = quiz
 
     return (
@@ -339,26 +371,7 @@ class QuizView extends Component<IQuizViewProps> {
             </div>
           </main>
           <aside className="quiz__aside bg-gray-100 p-v-300">
-            <div className="answers-grid">
-              {quiz?.options.map(({ name }: IOption, index: number) => {
-                return (
-                  <div key={`a${index}`} className="answer | ta-center">
-                    <h3 className="fw-black fz-lg">{name}</h3>
-
-                    <div className="d-flex al-center jc-center gap-v-400">
-                      <button
-                        type="button"
-                        className="btn btn-icon"
-                        data-element="btn-answer"
-                      >
-                        <p className="btn-icon__label">Answers</p>
-                        <FontAwesomeIcon icon={faComputerMouse} />
-                      </button>
-                    </div>
-                  </div>
-                )
-              })}
-            </div>
+            {this.renderAnswersGrid()}
           </aside>
         </div>
 

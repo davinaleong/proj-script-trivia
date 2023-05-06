@@ -3,11 +3,11 @@ interface IQuizViewState {
   showOptionsModal: boolean
   showImageModal: boolean
   imageModalImage: string
-  selectedOption: string
-  optionA: string
-  optionB: string
-  optionC: string
-  optionD: string
+  selectedAnswer: string
+  answerA: string
+  answerB: string
+  answerC: string
+  answerD: string
   errors: Array<string>
 }
 
