@@ -21,11 +21,8 @@ class QuizView extends Component<IQuizViewProps> {
     showOptionsModal: false,
     showImageModal: false,
     imageModalImage: '',
-    selectedAnswer: '',
-    answerA: '',
-    answerB: '',
-    answerC: '',
-    answerD: '',
+    answerIndex: 0,
+    answers: ['', '', '', ''],
     errors: [],
   }
 
@@ -118,13 +115,13 @@ class QuizView extends Component<IQuizViewProps> {
     })
   }
 
-  handleAnswerClick = (optionLetter: string): void => {
+  handleAnswerClick = (answerIndex: number): void => {
     PrintHelper.logFunctionWithParams(
       `handleOptionClick`,
-      `optionLetter: ${optionLetter}`
+      `answerIndex: ${answerIndex}`
     )
     this.setState({
-      selectedAnswer: optionLetter,
+      answerIndex,
       showOptionsModal: true,
     })
   }
@@ -158,38 +155,14 @@ class QuizView extends Component<IQuizViewProps> {
       `handleOptionsModalOptionClick`,
       `key: ${key}`
     )
-    const { optionLettersData }: IQuizViewProps = this.props
-    const { selectedAnswer }: IQuizViewState = this.state
+    const { answerIndex, answers }: IQuizViewState = this.state
 
-    switch (selectedAnswer) {
-      case optionLettersData.a:
-        this.setState({
-          answerA: key,
-          showOptionsModal: false,
-        })
-        break
+    answers[answerIndex] = key
 
-      case optionLettersData.b:
-        this.setState({
-          answerB: key,
-          showOptionsModal: false,
-        })
-        break
-
-      case optionLettersData.c:
-        this.setState({
-          answerC: key,
-          showOptionsModal: false,
-        })
-        break
-
-      case optionLettersData.d:
-        this.setState({
-          answerD: key,
-          showOptionsModal: false,
-        })
-        break
-    }
+    this.setState({
+      answers,
+      showOptionsModal: false,
+    })
   }
 
   handleImageModalCloseClick = (): void => {
@@ -214,19 +187,32 @@ class QuizView extends Component<IQuizViewProps> {
 
   renderAnswersGrid = (): JSX.Element => {
     PrintHelper.logFunction(`renderAnswersGrid`)
-    const { indexToOptionsData, quiz }: IQuizViewProps = this.props
+    const { quiz, shuffledQuiz, indexToOptionsData }: IQuizViewProps =
+      this.props
+    const { answers }: IQuizViewState = this.state
 
     return (
       <div className="answers-grid">
-        {quiz?.options.map((answer: IOption, index: number) => (
-          <AnswerComponent
-            key={`a${index}`}
-            answerIndex={index}
-            answer={answer}
-            indexToOptionsData={indexToOptionsData}
-            handleAnswerClick={this.handleAnswerClick}
-          />
-        ))}
+        {quiz?.options.map((answer: IOption, index: number) => {
+          const answerKey = answers[index]
+          // const label = answerKey !== '' ? 'Filled' : 'Not Filled'
+          let label = 'Not Filled'
+          shuffledQuiz?.options.map(({ key }: IOption, oIndex: number) => {
+            if (answerKey === key) {
+              label = indexToOptionsData[oIndex]
+            }
+          })
+
+          return (
+            <AnswerComponent
+              key={`a${index}`}
+              answerIndex={index}
+              answer={answer}
+              label={label}
+              handleAnswerClick={this.handleAnswerClick}
+            />
+          )
+        })}
       </div>
     )
   }

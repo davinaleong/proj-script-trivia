@@ -5,13 +5,12 @@ import IOption from '../interfaces/option.interface'
 import IAnswerComponentProps from '../interfaces/props/answer.component.props'
 
 const AnswerComponent = (props: IAnswerComponentProps): JSX.Element => {
-  const { answerIndex, answer, indexToOptionsData }: IAnswerComponentProps =
-    props
+  const { answerIndex, answer, label }: IAnswerComponentProps = props
   const { name }: IOption = answer
 
   const handleClick = (): void => {
     PrintHelper.logFunction(`handleClick`)
-    props.handleAnswerClick(indexToOptionsData[answerIndex])
+    props.handleAnswerClick(answerIndex)
   }
 
   return (
@@ -20,7 +19,9 @@ const AnswerComponent = (props: IAnswerComponentProps): JSX.Element => {
 
       <div className="d-flex al-center jc-center gap-v-400">
         <button type="button" className="btn btn-icon" onClick={handleClick}>
-          <p className="btn-icon__label">Answers</p>
+          <p className="btn-icon__label">
+            {label && label !== '' ? label : 'Answers'}
+          </p>
           <FontAwesomeIcon icon={faComputerMouse} />
         </button>
       </div>
