@@ -9,11 +9,13 @@ import QuizzesData from './data/quizzes.data'
 import CompletedMessagesData from './data/completed-messages.data'
 import OptionLettersData from './data/options-letters.data'
 import ConfigData from './data/config.data'
+import EnvVarsData from './data/env-vars.data'
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
 root.render(
   <React.StrictMode>
     <App
+      envVarsData={EnvVarsData}
       configData={ConfigData}
       stepsData={StepsData}
       indexToOptionsData={IndexToOptionsData}

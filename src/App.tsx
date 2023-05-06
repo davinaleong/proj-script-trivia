@@ -36,10 +36,10 @@ class App extends Component<IAppProps> {
   componentDidMount = async () => {
     PrintHelper.logFunction(`componentDidMount`)
 
-    // const response = await axios.get(ApiHelper.subjectsUrl)
-    // this.setState({
-    //   subjectsData: response.data?.messageTypes?.data,
-    // })
+    const response = await axios.get(ApiHelper.subjectsUrl)
+    this.setState({
+      subjectsData: response.data?.messageTypes?.data,
+    })
   }
 
   // #region Getters
@@ -218,7 +218,37 @@ class App extends Component<IAppProps> {
   // #endregion
 
   // #region Renderers
-  renderView = (): ReactElement => {
+  renderTestUi = (): JSX.Element => {
+    PrintHelper.logFunction(`renderTestUi`)
+    const { envVarsData }: IAppProps = this.props
+
+    const showTestUi = process.env.SHOW_TEST_UI
+    console.log('SHOW_TEST_UI', showTestUi)
+
+    if (showTestUi === envVarsData.showTestUiData.yes) {
+      return (
+        <div className="container | d-flex ai-center jc-center gap-v-300 p-v-300">
+          <p>Test:</p>
+          <button onClick={() => this.setStepToHome()} className="btn">
+            Home | 0
+          </button>
+          <button onClick={() => this.setStepToQuiz()} className="btn">
+            Quiz | 1
+          </button>
+          <button onClick={() => this.setStepToCompleted()} className="btn">
+            Completed | 2
+          </button>
+          <button onClick={() => this.setStepToContact()} className="btn">
+            Contact | 2
+          </button>
+        </div>
+      )
+    }
+
+    return <></>
+  }
+
+  renderView = (): JSX.Element => {
     PrintHelper.logFunction(`renderView`)
 
     const {
@@ -294,22 +324,7 @@ class App extends Component<IAppProps> {
   render() {
     return (
       <>
-        <div className="container | d-flex ai-center jc-center gap-v-300 p-v-300">
-          <p>Test:</p>
-          <button onClick={() => this.setStepToHome()} className="btn">
-            Home | 0
-          </button>
-          <button onClick={() => this.setStepToQuiz()} className="btn">
-            Quiz | 1
-          </button>
-          <button onClick={() => this.setStepToCompleted()} className="btn">
-            Completed | 2
-          </button>
-          <button onClick={() => this.setStepToContact()} className="btn">
-            Contact | 2
-          </button>
-        </div>
-
+        {this.renderTestUi()}
         {this.renderView()}
       </>
     )
