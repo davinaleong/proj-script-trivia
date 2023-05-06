@@ -49,6 +49,20 @@ class QuizView extends Component<IQuizViewProps> {
     const { showImageModal }: IQuizViewState = this.state
     return this.getBooleanString(showImageModal)
   }
+
+  getAnswersFilledCount = (): number => {
+    const { answers }: IQuizViewState = this.state
+
+    let answersFilledCount = 0
+
+    answers.forEach((anwser: string) => {
+      if (anwser !== '') {
+        answersFilledCount++
+      }
+    })
+
+    return answersFilledCount
+  }
   // #endregion
 
   // #region State Setters
@@ -131,13 +145,47 @@ class QuizView extends Component<IQuizViewProps> {
     this.props.handleQuizContactClick()
   }
 
+  // handleSubmitClick = (): void => {
+  //   PrintHelper.logFunction(`handleHelpModalCloseClick`)
+
+  //   const { quiz }: IQuizViewProps = this.props
+  //   const { answers, errors }: IQuizViewState = this.state
+
+  //   let answersFilledCount = 0
+  //   answers.forEach((answer: string): void => {
+  //     if (answer !== '') {
+  //       answersFilledCount++
+  //     }
+  //   })
+
+  //   this.setState({
+  //     errors,
+  //   })
+
+  //   if (errors.length > 0) {
+  //     return
+  //   }
+
+  //   this.props.handleQuizSubmitClick()
+  // }
+
   handleSubmitClick = (): void => {
     PrintHelper.logFunction(`handleHelpModalCloseClick`)
 
-    const { quiz }: IQuizViewProps = this.props
+    const { configData, quizIndex, quiz }: IQuizViewProps = this.props
     const { answers, errors }: IQuizViewState = this.state
 
-    this.props.handleQuizSubmitClick()
+    // TODO: All answers filled validation
+    if (this.getAnswersFilledCount() < configData.maxOptions) {
+      errors.push('')
+    }
+
+    // TODO: Verify answers
+    // TODO: If no errors: Go to completed page
+    // TODO: If no errors: Set quiz to completed
+
+    // TODO: Update quiz in App
+    this.props.handleQuizSubmitClick(quizIndex, quiz)
   }
 
   handleHelpModalCloseClick = (): void => {
@@ -187,21 +235,13 @@ class QuizView extends Component<IQuizViewProps> {
     PrintHelper.logFunction(`renderSubmitBtn`)
 
     const { configData }: IQuizViewProps = this.props
-    const { answers }: IQuizViewState = this.state
-
-    let answersFilledCount = 0
-    answers.forEach((answer: string): void => {
-      if (answer !== '') {
-        answersFilledCount++
-      }
-    })
 
     return (
       <button
         type="button"
         className="btn btn-primary btn-icon btn-absolute btn-bottom btn-right shadow-v-br-300"
         onClick={this.handleSubmitClick}
-        disabled={answersFilledCount < configData.maxOptions}
+        disabled={this.getAnswersFilledCount() < configData.maxOptions}
       >
         <p className="btn-icon__label">Submit</p>
         <FontAwesomeIcon icon={faCheck} />

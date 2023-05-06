@@ -14,7 +14,7 @@ import IContactViewState from '../interfaces/states/contact.view.state.interface
 import ApiHelper from '../helpers/api.helper'
 import axios from 'axios'
 import StatusesData from '../data/statuses.data'
-import ErrorsData from '../data/errors.data'
+import ErrorsData from '../data/contact-errors.data'
 import PrintHelper from '../helpers/print.helper'
 
 class ContactView extends Component<IContactViewProps> {

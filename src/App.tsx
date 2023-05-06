@@ -184,9 +184,17 @@ class App extends Component<IAppProps> {
     this.setStepToContact()
   }
 
-  handleQuizSubmitClick = (): void => {
+  handleQuizSubmitClick = (quizIndex: number, quiz: IQuiz): void => {
     PrintHelper.logFunction(`handleQuizSubmitClick`)
-    this.setStepToCompleted()
+
+    const { stepsData }: IAppProps = this.props
+    const { quizzesData }: IAppState = this.state
+    quizzesData[quizIndex] = quiz
+
+    this.setState({
+      quizzesData,
+      step: stepsData.completed,
+    })
   }
 
   handleContactHomeClick = (): void => {
@@ -218,6 +226,7 @@ class App extends Component<IAppProps> {
       stepsData,
       indexToOptionsData,
       optionLettersData,
+      quizErrorsData,
     }: IAppProps = this.props
     const {
       step,
@@ -247,6 +256,7 @@ class App extends Component<IAppProps> {
             shuffledQuiz={shuffledQuiz}
             indexToOptionsData={indexToOptionsData}
             optionLettersData={optionLettersData}
+            quizErrorsData={quizErrorsData}
             handleQuizHomeClick={this.handleQuizHomeClick}
             handleQuizContactClick={this.handleQuizContactClick}
             handleQuizSubmitClick={this.handleQuizSubmitClick}

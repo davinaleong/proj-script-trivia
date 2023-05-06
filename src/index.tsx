@@ -4,6 +4,7 @@ import App from './App'
 
 import StepsData from './data/steps.data'
 import IndexToOptionsData from './data/index-to-options.data'
+import QuizErrorsData from './data/quiz-errors.data'
 import QuizzesData from './data/quizzes.data'
 import CompletedMessagesData from './data/completed-messages.data'
 import OptionLettersData from './data/options-letters.data'
@@ -17,6 +18,7 @@ root.render(
       stepsData={StepsData}
       indexToOptionsData={IndexToOptionsData}
       optionLettersData={OptionLettersData}
+      quizErrorsData={QuizErrorsData}
       quizzesData={QuizzesData}
       completedMessagesData={CompletedMessagesData}
     />

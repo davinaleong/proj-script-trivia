@@ -1,8 +1,8 @@
-const ErrorsData = {
+const ContactErrorsData = {
   subject: [],
   first_name: [],
   email: [],
   message: [],
 }
 
-export default ErrorsData
+export default ContactErrorsData
