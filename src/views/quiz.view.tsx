@@ -183,6 +183,32 @@ class QuizView extends Component<IQuizViewProps> {
   // #endregion
 
   // #region Renderers
+  renderSubmitBtn = (): JSX.Element => {
+    PrintHelper.logFunction(`renderSubmitBtn`)
+
+    const { configData }: IQuizViewProps = this.props
+    const { answers }: IQuizViewState = this.state
+
+    let answersFilledCount = 0
+    answers.forEach((answer: string): void => {
+      if (answer !== '') {
+        answersFilledCount++
+      }
+    })
+
+    return (
+      <button
+        type="button"
+        className="btn btn-primary btn-icon btn-absolute btn-bottom btn-right shadow-v-br-300"
+        onClick={this.handleSubmitClick}
+        disabled={answersFilledCount < configData.maxOptions}
+      >
+        <p className="btn-icon__label">Submit</p>
+        <FontAwesomeIcon icon={faCheck} />
+      </button>
+    )
+  }
+
   renderAlert = (): JSX.Element => {
     PrintHelper.logFunction(`renderAlert`)
     const { errors }: IQuizViewState = this.state
@@ -361,16 +387,8 @@ class QuizView extends Component<IQuizViewProps> {
   }
 
   render() {
-    const { configData, quiz }: IQuizViewProps = this.props
-    const { answers }: IQuizViewState = this.state
+    const { quiz }: IQuizViewProps = this.props
     const { name }: any = quiz
-
-    let answersFilledCount = 0
-    answers.forEach((answer: string): void => {
-      if (answer !== '') {
-        answersFilledCount++
-      }
-    })
 
     return (
       <div className="body body-quiz">
@@ -393,15 +411,7 @@ class QuizView extends Component<IQuizViewProps> {
         </button>
         <div className="quiz">
           <main className="quiz__main main p-v-300">
-            <button
-              type="button"
-              className="btn btn-primary btn-icon btn-absolute btn-bottom btn-right shadow-v-br-300"
-              onClick={this.handleSubmitClick}
-              disabled={answersFilledCount < configData.maxOptions}
-            >
-              <p className="btn-icon__label">Submit</p>
-              <FontAwesomeIcon icon={faCheck} />
-            </button>
+            {this.renderSubmitBtn()}
 
             <div className="container">
               <h1 className="ff-secondary fz-xl ta-center m-v-b-400">{name}</h1>
