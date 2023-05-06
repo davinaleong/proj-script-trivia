@@ -1,4 +1,4 @@
-# React Webpack, SCSS & Typescript Boilerplate
+# Script Trivia
 
 Fun coding quizzes for non-programmers.
 
