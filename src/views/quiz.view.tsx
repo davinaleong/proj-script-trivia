@@ -1,4 +1,5 @@
 import { Component, ReactNode } from 'react'
+import _ from 'lodash'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
   faChevronLeft,
@@ -62,6 +63,12 @@ class QuizView extends Component<IQuizViewProps> {
     })
 
     return answersFilledCount
+  }
+
+  getRandomErrorData = (key: any): string => {
+    const { quizErrorsData }: IQuizViewProps = this.props
+    const errorsData: Array<string> = quizErrorsData[key]
+    return _.sample(errorsData)
   }
   // #endregion
 
@@ -145,46 +152,40 @@ class QuizView extends Component<IQuizViewProps> {
     this.props.handleQuizContactClick()
   }
 
-  // handleSubmitClick = (): void => {
-  //   PrintHelper.logFunction(`handleHelpModalCloseClick`)
-
-  //   const { quiz }: IQuizViewProps = this.props
-  //   const { answers, errors }: IQuizViewState = this.state
-
-  //   let answersFilledCount = 0
-  //   answers.forEach((answer: string): void => {
-  //     if (answer !== '') {
-  //       answersFilledCount++
-  //     }
-  //   })
-
-  //   this.setState({
-  //     errors,
-  //   })
-
-  //   if (errors.length > 0) {
-  //     return
-  //   }
-
-  //   this.props.handleQuizSubmitClick()
-  // }
-
   handleSubmitClick = (): void => {
     PrintHelper.logFunction(`handleHelpModalCloseClick`)
 
-    const { configData, quizIndex, quiz }: IQuizViewProps = this.props
-    const { answers, errors }: IQuizViewState = this.state
+    const { quizIndex, quiz }: IQuizViewProps = this.props
+    if (!quiz) return
+
+    const { answers }: IQuizViewState = this.state
+    let { errors }: IQuizViewState = this.state
+
+    errors = []
 
     // TODO: All answers filled validation
-    if (this.getAnswersFilledCount() < configData.maxOptions) {
-      errors.push('')
+    if (this.getAnswersFilledCount() < quiz.options.length) {
+      errors.push(this.getRandomErrorData('notFilledErrors'))
     }
 
     // TODO: Verify answers
-    // TODO: If no errors: Go to completed page
-    // TODO: If no errors: Set quiz to completed
+    let correctAnswers = 0
+    quiz.options.forEach(({ key }: IOption, index: number) => {
+      if (answers[index] === key) {
+        correctAnswers++
+      }
+    })
+    console.log('correctAnswers', correctAnswers)
 
-    // TODO: Update quiz in App
+    if (correctAnswers < quiz.options.length) {
+      errors.push(this.getRandomErrorData('incorrectAnswerErrors'))
+    }
+
+    this.setState({ errors })
+
+    if (errors.length > 0) return
+
+    quiz.completed = errors.length <= 0
     this.props.handleQuizSubmitClick(quizIndex, quiz)
   }
 
@@ -234,14 +235,14 @@ class QuizView extends Component<IQuizViewProps> {
   renderSubmitBtn = (): JSX.Element => {
     PrintHelper.logFunction(`renderSubmitBtn`)
 
-    const { configData }: IQuizViewProps = this.props
+    const { quiz }: IQuizViewProps = this.props
 
     return (
       <button
         type="button"
         className="btn btn-primary btn-icon btn-absolute btn-bottom btn-right shadow-v-br-300"
+        disabled={this.getAnswersFilledCount() < quiz.options.length}
         onClick={this.handleSubmitClick}
-        disabled={this.getAnswersFilledCount() < configData.maxOptions}
       >
         <p className="btn-icon__label">Submit</p>
         <FontAwesomeIcon icon={faCheck} />
