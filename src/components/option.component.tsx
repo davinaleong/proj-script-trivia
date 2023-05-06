@@ -3,9 +3,10 @@ import IOption from '../interfaces/option.interface'
 import IOptionComponentProps from '../interfaces/props/option.component.props'
 
 const OptionComponent = (props: IOptionComponentProps): JSX.Element => {
-  const { optionIndex, option, optionsData }: IOptionComponentProps = props
+  const { optionIndex, option, indexToOptionsData }: IOptionComponentProps =
+    props
   const { image }: IOption = option
-  const letter = optionsData[optionIndex]
+  const letter = indexToOptionsData[optionIndex]
 
   const handleClick = (): void => {
     const { option }: IOptionComponentProps = props

@@ -1,6 +1,6 @@
 import CompletedMessagesData from './completed-messages.data'
 import ErrorsData from './errors.data'
-import OptionsData from './options.data'
+import IndexToOptionsData from './indexToOptions.data'
 import QuizzesData from './quizzes.data'
 import StatusesData from './statuses.data'
 import StepsData from './steps.data'
@@ -8,7 +8,7 @@ import StepsData from './steps.data'
 const Data = {
   CompletedMessagesData,
   ErrorsData,
-  OptionsData,
+  IndexToOptionsData,
   QuizzesData,
   StatusesData,
   StepsData,

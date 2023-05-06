@@ -4,7 +4,6 @@ import {
   faChevronLeft,
   faQuestion,
   faCheck,
-  faComputerMouse,
 } from '@fortawesome/free-solid-svg-icons'
 
 import IQuizViewProps from '../interfaces/props/quiz.view.props.interface'
@@ -154,6 +153,11 @@ class QuizView extends Component<IQuizViewProps> {
     })
   }
 
+  handleOptionsModalOptionClick = ({ key }: IOption): void => {
+    PrintHelper.logFunction(`handleOptionsModalOptionClick`)
+    const { selectedAnswer }: IQuizViewState = this.state
+  }
+
   handleImageModalCloseClick = (): void => {
     PrintHelper.logFunction(`handleImageModalCloseClick`)
     this.setState({
@@ -176,8 +180,7 @@ class QuizView extends Component<IQuizViewProps> {
 
   renderAnswersGrid = (): JSX.Element => {
     PrintHelper.logFunction(`renderAnswersGrid`)
-
-    const { optionsData, quiz }: IQuizViewProps = this.props
+    const { indexToOptionsData, quiz }: IQuizViewProps = this.props
 
     return (
       <div className="answers-grid">
@@ -186,7 +189,7 @@ class QuizView extends Component<IQuizViewProps> {
             key={`a${index}`}
             answerIndex={index}
             answer={answer}
-            optionsData={optionsData}
+            indexToOptionsData={indexToOptionsData}
             handleAnswerClick={this.handleAnswerClick}
           />
         ))}
@@ -197,7 +200,7 @@ class QuizView extends Component<IQuizViewProps> {
   renderOptionsGrid = (): JSX.Element => {
     PrintHelper.logFunction(`renderOptionsGrid`)
 
-    const { shuffledQuiz, optionsData }: IQuizViewProps = this.props
+    const { shuffledQuiz, indexToOptionsData }: IQuizViewProps = this.props
     const { options }: any = shuffledQuiz
     const optionsJsx: Array<ReactNode> = []
 
@@ -207,7 +210,7 @@ class QuizView extends Component<IQuizViewProps> {
           key={`o${index}`}
           optionIndex={index}
           option={option}
-          optionsData={optionsData}
+          indexToOptionsData={indexToOptionsData}
           handleOptionClick={this.handleOptionClick}
         />
       )
@@ -267,6 +270,7 @@ class QuizView extends Component<IQuizViewProps> {
 
   renderOptionsModal = (): JSX.Element => {
     PrintHelper.logFunction(`renderOptionsModal`)
+    const { indexToOptionsData, quiz }: IQuizViewProps = this.props
     const { showOptionsModal }: IQuizViewState = this.state
 
     if (showOptionsModal) {
@@ -330,7 +334,7 @@ class QuizView extends Component<IQuizViewProps> {
   }
 
   render() {
-    const { quiz, optionsData }: IQuizViewProps = this.props
+    const { quiz }: IQuizViewProps = this.props
     const { name }: any = quiz
 
     return (

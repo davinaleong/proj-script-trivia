@@ -5,12 +5,13 @@ import IOption from '../interfaces/option.interface'
 import IAnswerComponentProps from '../interfaces/props/answer.component.props'
 
 const AnswerComponent = (props: IAnswerComponentProps): JSX.Element => {
-  const { answerIndex, answer, optionsData }: IAnswerComponentProps = props
+  const { answerIndex, answer, indexToOptionsData }: IAnswerComponentProps =
+    props
   const { name }: IOption = answer
 
   const handleClick = (): void => {
     PrintHelper.logFunction(`handleClick`)
-    props.handleAnswerClick(optionsData[answerIndex])
+    props.handleAnswerClick(indexToOptionsData[answerIndex])
   }
 
   return (

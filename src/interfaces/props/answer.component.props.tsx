@@ -3,7 +3,7 @@ import IOption from '../option.interface'
 interface IAnswerComponentProps {
   answerIndex: number
   answer: IOption
-  optionsData: any
+  indexToOptionsData: any
   handleAnswerClick: any
 }
 

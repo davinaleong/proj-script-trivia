@@ -213,7 +213,7 @@ class App extends Component<IAppProps> {
   renderView = (): ReactElement => {
     PrintHelper.logFunction(`renderView`)
 
-    const { stepsData, optionsData }: IAppProps = this.props
+    const { stepsData, indexToOptionsData }: IAppProps = this.props
     const {
       step,
       subjectsData,
@@ -238,7 +238,7 @@ class App extends Component<IAppProps> {
             quizIndex={quizIndex}
             quiz={quiz}
             shuffledQuiz={shuffledQuiz}
-            optionsData={optionsData}
+            indexToOptionsData={indexToOptionsData}
             handleQuizHomeClick={this.handleQuizHomeClick}
             handleQuizContactClick={this.handleQuizContactClick}
             handleQuizSubmit={this.handleQuizSubmit}
