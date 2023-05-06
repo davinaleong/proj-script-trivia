@@ -131,6 +131,15 @@ class QuizView extends Component<IQuizViewProps> {
     this.props.handleQuizContactClick()
   }
 
+  handleSubmitClick = (): void => {
+    PrintHelper.logFunction(`handleHelpModalCloseClick`)
+
+    const { quiz }: IQuizViewProps = this.props
+    const { answers, errors }: IQuizViewState = this.state
+
+    this.props.handleQuizSubmitClick()
+  }
+
   handleHelpModalCloseClick = (): void => {
     PrintHelper.logFunction(`handleHelpModalCloseClick`)
     this.setState({
@@ -379,6 +388,7 @@ class QuizView extends Component<IQuizViewProps> {
             <button
               type="button"
               className="btn btn-primary btn-icon btn-absolute btn-bottom btn-right shadow-v-br-300"
+              onClick={this.handleSubmitClick}
             >
               <p className="btn-icon__label">Submit</p>
               <FontAwesomeIcon icon={faCheck} />

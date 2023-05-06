@@ -10,7 +10,7 @@ interface IQuizViewProps {
   optionLettersData: IOptionLettersData
   handleQuizHomeClick: any
   handleQuizContactClick: any
-  handleQuizSubmit: any
+  handleQuizSubmitClick: any
 }
 
 export default IQuizViewProps

@@ -184,9 +184,9 @@ class App extends Component<IAppProps> {
     this.setStepToContact()
   }
 
-  handleQuizSubmit = (): void => {
-    PrintHelper.logFunction(`handleQuizSubmit`)
-    this.setStepToCompleted
+  handleQuizSubmitClick = (): void => {
+    PrintHelper.logFunction(`handleQuizSubmitClick`)
+    this.setStepToCompleted()
   }
 
   handleContactHomeClick = (): void => {
@@ -243,7 +243,7 @@ class App extends Component<IAppProps> {
             optionLettersData={optionLettersData}
             handleQuizHomeClick={this.handleQuizHomeClick}
             handleQuizContactClick={this.handleQuizContactClick}
-            handleQuizSubmit={this.handleQuizSubmit}
+            handleQuizSubmitClick={this.handleQuizSubmitClick}
           />
         )
 
