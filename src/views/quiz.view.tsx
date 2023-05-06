@@ -361,8 +361,16 @@ class QuizView extends Component<IQuizViewProps> {
   }
 
   render() {
-    const { quiz }: IQuizViewProps = this.props
+    const { configData, quiz }: IQuizViewProps = this.props
+    const { answers }: IQuizViewState = this.state
     const { name }: any = quiz
+
+    let answersFilledCount = 0
+    answers.forEach((answer: string): void => {
+      if (answer !== '') {
+        answersFilledCount++
+      }
+    })
 
     return (
       <div className="body body-quiz">
@@ -389,6 +397,7 @@ class QuizView extends Component<IQuizViewProps> {
               type="button"
               className="btn btn-primary btn-icon btn-absolute btn-bottom btn-right shadow-v-br-300"
               onClick={this.handleSubmitClick}
+              disabled={answersFilledCount < configData.maxOptions}
             >
               <p className="btn-icon__label">Submit</p>
               <FontAwesomeIcon icon={faCheck} />

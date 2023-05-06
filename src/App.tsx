@@ -213,8 +213,12 @@ class App extends Component<IAppProps> {
   renderView = (): ReactElement => {
     PrintHelper.logFunction(`renderView`)
 
-    const { stepsData, indexToOptionsData, optionLettersData }: IAppProps =
-      this.props
+    const {
+      configData,
+      stepsData,
+      indexToOptionsData,
+      optionLettersData,
+    }: IAppProps = this.props
     const {
       step,
       subjectsData,
@@ -228,6 +232,7 @@ class App extends Component<IAppProps> {
       case stepsData.home:
         return (
           <HomeView
+            configData={configData}
             quizzesData={quizzesData}
             handleQuizClick={this.handleQuizClick}
           />
@@ -236,6 +241,7 @@ class App extends Component<IAppProps> {
       case stepsData.quiz:
         return (
           <QuizView
+            configData={configData}
             quizIndex={quizIndex}
             quiz={quiz}
             shuffledQuiz={shuffledQuiz}
@@ -253,6 +259,7 @@ class App extends Component<IAppProps> {
 
         return (
           <CompletedView
+            configData={configData}
             completed={completed}
             completedMessage={completedMessage}
             handleContactHomeClick={this.handleContactHomeClick}
@@ -263,6 +270,7 @@ class App extends Component<IAppProps> {
       case stepsData.contact:
         return (
           <ContactView
+            configData={configData}
             setStepToHome={this.setStepToHome}
             subjectsData={subjectsData}
           />

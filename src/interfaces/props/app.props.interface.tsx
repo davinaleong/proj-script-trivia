@@ -1,10 +1,12 @@
 import IIndexToIndexToOptionsData from '../data/indexToOptions.data.interface'
 import IQuiz from '../quiz.interface'
-import ISteps from '../data/steps.data.interface'
+import IStepsData from '../data/steps.data.interface'
 import IOptionLettersData from '../data/optionLetters.data.interface'
+import IConfigData from '../data/config.data.interface'
 
 interface IAppProps {
-  stepsData: ISteps
+  configData: IConfigData
+  stepsData: IStepsData
   indexToOptionsData: IIndexToIndexToOptionsData
   optionLettersData: IOptionLettersData
   quizzesData: Array<IQuiz>
