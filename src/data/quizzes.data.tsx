@@ -52,16 +52,16 @@ CreatorHelper.quizWithOptions(
   `css`,
   Image0002OptionA,
 
-  `HTML`,
-  `html`,
+  `JSON`,
+  `json`,
   Image0002OptionB,
 
-  `JS`,
-  `js`,
+  `MD`,
+  `md`,
   Image0002OptionC,
 
-  `PHP`,
-  `php`,
+  `SQL`,
+  `sql`,
   Image0002OptionD
 )
 
@@ -79,20 +79,20 @@ CreatorHelper.quizWithOptions(
   Image0003,
   false,
 
-  `CSS`,
-  `css`,
+  `Comment`,
+  `comment`,
   Image0003OptionA,
 
-  `HTML`,
-  `html`,
+  `Property`,
+  `property`,
   Image0003OptionB,
 
-  `JS`,
-  `js`,
+  `Selector`,
+  `selector`,
   Image0003OptionC,
 
-  `PHP`,
-  `php`,
+  `Value`,
+  `value`,
   Image0003OptionD
 )
 

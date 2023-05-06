@@ -436,7 +436,7 @@ class QuizView extends Component<IQuizViewProps> {
         <button
           type="button"
           className="btn btn-icon btn-fixed btn-top btn-left shadow-v-br-300"
-          onClick={() => this.handleHomeClick}
+          onClick={this.handleHomeClick}
         >
           <FontAwesomeIcon icon={faChevronLeft} />
           <p className="btn-icon__label">Back</p>

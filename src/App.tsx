@@ -21,7 +21,7 @@ import CreatorHelper from './helpers/creator.helper'
 
 class App extends Component<IAppProps> {
   state: IAppState = {
-    step: this.props.stepsData.quiz,
+    step: this.props.stepsData.home,
     subjectsData: [],
     quizzesData: this.props.quizzesData,
     quizIndex: 0,
@@ -165,7 +165,7 @@ class App extends Component<IAppProps> {
     const shuffledQuiz: IQuiz = { ...quiz }
     shuffledQuiz.options = _.shuffle(quiz.options)
 
-    // console.log(quiz, shuffledQuiz)
+    console.log(quiz, shuffledQuiz)
     this.setState({
       step: stepsData.quiz,
       quizIndex: theQuizIndex,
