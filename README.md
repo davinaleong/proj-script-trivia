@@ -7,7 +7,7 @@ Fun coding quizzes for non-programmers.
 1. Install dependencies
 
 ```
-cd boilerplate-react-webpack && npm install
+cd proj-script-trivia && npm install
 ```
 
 2. Run development server
