@@ -1,4 +1,5 @@
 const path = require('path')
+const Webpack = require('webpack')
 const Dotenv = require('dotenv-webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 // const CopyPlugin = require('copy-webpack-plugin')
@@ -42,10 +43,15 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, '..', './src/index.html'),
     }),
+    new Webpack.EnvironmentPlugin({
+      NODE_ENV: 'development',
+      SHOW_TEST_UI: 'no',
+      API_URL: '',
+      APP_SLUG: 'script-trivia',
+    }),
     // new CopyPlugin({
     //   patterns: [{ from: './src/assets', to: './dist' }],
     // }),
   ],
   stats: 'errors-only',
-  systemvars: true,
 }
