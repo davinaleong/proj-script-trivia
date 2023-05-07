@@ -366,17 +366,22 @@ class QuizView extends Component<IQuizViewProps> {
 
   renderOptionsModal = (): JSX.Element => {
     PrintHelper.logFunction(`renderOptionsModal`)
-    const { shuffledQuiz, indexToOptionsData }: IQuizViewProps = this.props
-    const { showOptionsModal }: IQuizViewState = this.state
+    const { quiz, shuffledQuiz, indexToOptionsData }: IQuizViewProps =
+      this.props
+    const { showOptionsModal, answerIndex }: IQuizViewState = this.state
 
     if (showOptionsModal) {
+      const { name }: any = quiz?.options[answerIndex]
+
       return (
         <ModalComponent
           active={showOptionsModal}
           handleModalCloseClick={this.hideOptionsModal}
         >
           <div className="container | br-v-300 bg-gray-50 p-v-400 shadow-v-br-300">
-            <h2 className="fz-xl fw-black ta-center m-v-b-400">Pick Options</h2>
+            <h2 className="fz-xl fw-black ta-center m-v-b-400">
+              Pick Option for {name}
+            </h2>
 
             <div className="d-flex al-center jc-center gap-v-400">
               {shuffledQuiz?.options.map((option: IOption, index: number) => {
