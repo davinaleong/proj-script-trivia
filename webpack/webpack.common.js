@@ -39,6 +39,7 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
+      favicon: './src/assets/images/logo-blue-svg.svg',
       template: path.resolve(__dirname, '..', './src/index.html'),
     }),
     new Webpack.EnvironmentPlugin({
