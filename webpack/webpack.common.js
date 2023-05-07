@@ -47,4 +47,5 @@ module.exports = {
     // }),
   ],
   stats: 'errors-only',
+  systemvars: true,
 }
