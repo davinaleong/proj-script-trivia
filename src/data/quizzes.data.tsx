@@ -13,7 +13,7 @@ import Image0001OptionD from './../assets/images/quizzes/0001/php.png'
 CreatorHelper.quizWithOptions(
   QuizzesData,
 
-  `Match the Coding Language`,
+  `Match the Coding Language 001`,
   Image0001,
 
   `CSS`,
@@ -43,7 +43,7 @@ import Image0002OptionD from './../assets/images/quizzes/0002/sql.png'
 CreatorHelper.quizWithOptions(
   QuizzesData,
 
-  `Match the Coding Language`,
+  `Match the Coding Language 002`,
   Image0002,
 
   `CSS`,
