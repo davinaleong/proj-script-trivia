@@ -1,7 +1,8 @@
 import './styles/main.scss'
 
-import React, { Component, ReactElement } from 'react'
-// import { Helmet } from 'react-helmet'
+import React, { Component } from 'react'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCircleNotch } from '@fortawesome/free-solid-svg-icons'
 import _ from 'lodash'
 import axios from 'axios'
 
@@ -21,6 +22,7 @@ import CreatorHelper from './helpers/creator.helper'
 
 class App extends Component<IAppProps> {
   state: IAppState = {
+    loading: true,
     step: this.props.stepsData.home,
     subjectsData: [],
     quizzesData: this.props.quizzesData,
@@ -38,6 +40,7 @@ class App extends Component<IAppProps> {
 
     const response = await axios.get(ApiHelper.subjectsUrl)
     this.setState({
+      loading: false,
       subjectsData: response.data?.messageTypes?.data,
     })
   }
@@ -248,6 +251,30 @@ class App extends Component<IAppProps> {
     return <></>
   }
 
+  renderScreen = (): JSX.Element => {
+    PrintHelper.logFunction(`renderScreen`)
+
+    const { loading }: IAppState = this.state
+
+    if (loading) {
+      return (
+        <div className="ta-center">
+          <p className="fz-xl">
+            <FontAwesomeIcon icon={faCircleNotch} className="fa-spin" />
+          </p>
+          <p className="fz-lg">Loading...</p>
+        </div>
+      )
+    }
+
+    return (
+      <>
+        {this.renderTestUi()}
+        {this.renderView()}
+      </>
+    )
+  }
+
   renderView = (): JSX.Element => {
     PrintHelper.logFunction(`renderView`)
 
@@ -322,12 +349,7 @@ class App extends Component<IAppProps> {
   }
 
   render() {
-    return (
-      <>
-        {this.renderTestUi()}
-        {this.renderView()}
-      </>
-    )
+    return <>{this.renderScreen()}</>
   }
   // #endregion
 }
