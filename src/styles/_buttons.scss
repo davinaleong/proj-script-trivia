@@ -168,13 +168,31 @@
       display: none;
     }
   }
+
+  &-truncate {
+    &__label {
+      white-space: nowrap;
+      overflow-x: hidden;
+      text-overflow: ellipsis;
+      max-width: 20px;
+    }
+  }
 }
 
 /// Buttons - Queries
 @media screen and (min-width: #{breakpoint("lg")}) {
-  .btn-icon {
-    &__label {
-      display: block;
+  .btn {
+    &-icon {
+      &__label {
+        display: block;
+      }
+    }
+
+    &-truncate {
+      &__label {
+        text-overflow: ellipsis;
+        max-width: none;
+      }
     }
   }
 }

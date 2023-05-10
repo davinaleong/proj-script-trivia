@@ -18,8 +18,12 @@ const AnswerComponent = (props: IAnswerComponentProps): JSX.Element => {
       <h3 className="fw-black fz-lg">{name}</h3>
 
       <div className="d-flex al-center gap-v-400">
-        <button type="button" className="btn btn-icon" onClick={handleClick}>
-          <p className="btn-icon__label">
+        <button
+          type="button"
+          className="btn btn-truncate"
+          onClick={handleClick}
+        >
+          <p className="btn-truncate__label">
             {label && label !== '' ? label : 'Answers'}
           </p>
           <FontAwesomeIcon icon={faComputerMouse} />
